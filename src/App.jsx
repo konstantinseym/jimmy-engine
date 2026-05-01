@@ -1,4 +1,5 @@
 import ContactMeSection from "./components/sections/ContactMeSection";
+import Footer from "./components/sections/Footer";
 import LatestPostsSection from "./components/sections/LatestPostsSection";
 import NavBar from "./components/layout/NavBar";
 import Hero from "./components/sections/Hero";
@@ -11,6 +12,7 @@ export default function App() {
         <Hero />
         <LatestPostsSection />
         <ContactMeSection />
+        <Footer />
       </main>
     </>
   );

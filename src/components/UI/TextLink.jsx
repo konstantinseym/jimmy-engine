@@ -1,6 +1,6 @@
-export default function TextLink({ children }) {
+export default function TextLink({ children, href = "#" }) {
   return (
-    <a className="hover:text-palette-green transition" href="#">
+    <a className="hover:text-palette-green transition" href={href}>
       {children}
     </a>
   );
