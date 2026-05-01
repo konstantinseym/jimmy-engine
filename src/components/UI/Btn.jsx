@@ -1,9 +1,10 @@
-export default function Btn({ children }) {
+export default function Btn({ children, onClick, type = "button" }) {
   return (
     <input
       className="bg-palette-green hover:bg-palette-white hover:text-palette-green w-36 cursor-pointer rounded-md py-2 transition"
-      type="button"
+      type={type}
       value={children}
+      onClick={onClick}
     />
   );
 }

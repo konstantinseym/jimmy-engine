@@ -2,6 +2,8 @@ import Btn from "../UI/Btn";
 import PostPreview from "../features/PostPreview";
 import SectionHeader from "../UI/SectionHeader";
 
+const SECTION_TITLE = "Latest posts";
+
 const latestPosts = [
   {
     imageSrc: "/posts/0001.png",
@@ -35,7 +37,7 @@ const latestPosts = [
 export default function LatestPostsSection() {
   return (
     <section className="mx-auto w-full max-w-7xl py-16">
-      <SectionHeader title="Latest posts" />
+      <SectionHeader title={SECTION_TITLE} />
       {latestPosts.map((post) => (
         <PostPreview key={post.index} postData={post} />
       ))}
