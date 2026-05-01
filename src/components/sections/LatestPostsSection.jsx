@@ -13,22 +13,22 @@ const latestPosts = [
       "A practical approach to staying consistent, eliminating noise, and actually getting things done without burnout...",
   },
   {
-    imageSrc: "/posts/0001.png",
-    imageAlt: "Minimalist workspace with laptop and coffee",
-    tags: ["productivity", "mindset"],
-    index: 1,
-    title: "Building Focus in a Distracted World",
+    imageSrc: "/posts/0002.png",
+    imageAlt: "Evening city skyline with glowing lights",
+    tags: ["lifestyle", "urban"],
+    index: 2,
+    title: "Why Cities Feel Different at Night",
     excerpt:
-      "A practical approach to staying consistent, eliminating noise, and actually getting things done without burnout...",
+      "Exploring how the atmosphere of a city transforms after sunset and why nighttime can boost creativity and reflection...",
   },
   {
-    imageSrc: "/posts/0001.png",
-    imageAlt: "Minimalist workspace with laptop and coffee",
-    tags: ["productivity", "mindset"],
-    index: 1,
-    title: "Building Focus in a Distracted World",
+    imageSrc: "/posts/0003.png",
+    imageAlt: "People working together in a modern coworking space",
+    tags: ["work", "collaboration"],
+    index: 3,
+    title: "The Rise of Coworking Culture",
     excerpt:
-      "A practical approach to staying consistent, eliminating noise, and actually getting things done without burnout...",
+      "How shared workspaces are reshaping productivity, networking, and the way we approach modern work environments...",
   },
 ];
 
