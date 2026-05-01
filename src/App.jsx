@@ -1,3 +1,3 @@
 export default function App() {
-  return <p className="text-3xl">blog web app</p>;
+  return <p>blog web app</p>;
 }

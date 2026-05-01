@@ -1,1 +1,23 @@
 @import "tailwindcss";
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-palette-gray text-palette-white
+    }
+}
+
+@theme {
+    --color-palette-white: #ffffff;
+    --color-palette-black: #000000;
+    --color-palette-gray: #191919;
+    --color-palette-green: #118da8;
+    
+    --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+    
+    --ease-default: cubic-bezier(0.22, 1, 0.36, 1);
+    --default-transition-duration: 300ms;
+}
