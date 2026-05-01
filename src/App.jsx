@@ -1,5 +1,11 @@
 import NavBar from "./components/layout/NavBar";
+import Hero from "./components/sections/Hero";
 
 export default function App() {
-  return <NavBar />;
+  return (
+    <>
+      <NavBar />
+      <Hero />
+    </>
+  );
 }
