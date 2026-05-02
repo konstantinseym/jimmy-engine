@@ -1,7 +1,15 @@
+import { useNavigate } from "react-router-dom";
+
 import Btn from "../UI/Btn";
 import TagLabel from "../UI/TagLabel";
 
 export default function PostPreview({ postData }) {
+  const navigate = useNavigate();
+
+  function openPost() {
+    navigate("/post");
+  }
+
   return (
     <article className="bg-palette-darkgray my-8 flex gap-8 rounded-lg p-6">
       <div className="aspect-square w-md">
@@ -21,7 +29,7 @@ export default function PostPreview({ postData }) {
           <h3 className="text-3xl">{postData.title}</h3>
           <p>{postData.excerpt}</p>
         </div>
-        <Btn>Read full</Btn>
+        <Btn onClick={openPost}>Read full</Btn>
       </div>
     </article>
   );

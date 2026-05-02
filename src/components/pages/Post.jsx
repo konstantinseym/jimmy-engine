@@ -1,3 +1,3 @@
 export default function Post() {
-  return;
+  return <p>POST</p>;
 }
