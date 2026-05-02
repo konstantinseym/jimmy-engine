@@ -1,19 +1,13 @@
-import ContactMeSection from "./components/sections/ContactMeSection";
 import Footer from "./components/sections/Footer";
-import LatestPostsSection from "./components/sections/LatestPostsSection";
+import Home from "./components/pages/Home";
 import NavBar from "./components/layout/NavBar";
-import Hero from "./components/sections/Hero";
 
 export default function App() {
   return (
     <>
       <NavBar />
-      <main>
-        <Hero />
-        <LatestPostsSection />
-        <ContactMeSection />
-        <Footer />
-      </main>
+      <Home />
+      <Footer />
     </>
   );
 }
