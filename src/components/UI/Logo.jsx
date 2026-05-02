@@ -1,4 +1,4 @@
-const LOGO_VALUE = "Jimmy's blog";
+const LOGO_VALUE = "Jimmy Engine";
 
 export default function Logo() {
   return (
