@@ -7,7 +7,7 @@ export default function PostPreview({ postData }) {
   const navigate = useNavigate();
 
   function openPost() {
-    navigate("/post");
+    navigate("/posts/" + postData.index);
   }
 
   return (

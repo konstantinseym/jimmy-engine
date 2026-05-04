@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Footer from "./components/layout/Footer";
 import Home from "./components/pages/Home";
-import Post from "./components/pages/Post";
+import Posts from "./components/pages/Posts";
 import NavBar from "./components/layout/NavBar";
 
 export default function App() {
@@ -11,7 +11,7 @@ export default function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/post" element={<Post />} />
+        <Route path="/posts" element={<Posts />} />
       </Routes>
       <Footer />
     </BrowserRouter>

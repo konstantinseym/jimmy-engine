@@ -37,7 +37,7 @@ const latestPosts = [
 export default function LatestPostsSection() {
   return (
     <section className="mx-auto w-full max-w-7xl py-16">
-      <SectionHeader title={SECTION_TITLE} />
+      <SectionHeader>{SECTION_TITLE}</SectionHeader>
       {latestPosts.map((post) => (
         <PostPreview key={post.index} postData={post} />
       ))}

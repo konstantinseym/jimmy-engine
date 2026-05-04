@@ -3,17 +3,17 @@ import TextLink from "../UI/TextLink";
 const NAV_LINKS = [
   {
     id: 1,
-    href: "",
+    href: "#",
     label: "Home",
   },
   {
     id: 2,
-    href: "",
+    href: "#",
     label: "Posts",
   },
   {
     id: 3,
-    href: "",
+    href: "#",
     label: "Contact me",
   },
 ];
@@ -23,7 +23,7 @@ export default function NavLinks() {
     <ul className="flex gap-12">
       {NAV_LINKS.map((link) => (
         <li key={link.id}>
-          <TextLink>{link.label}</TextLink>
+          <TextLink href={link.href}>{link.label}</TextLink>
         </li>
       ))}
     </ul>
