@@ -1,6 +1,8 @@
 import Btn from "../UI/Btn";
 import PostPreview from "../features/PostPreview";
 import SectionHeader from "../UI/SectionHeader";
+import { supabase } from "../../lib/supabaseClient";
+import { useEffect } from "react";
 
 const SECTION_TITLE = "Latest posts";
 
@@ -35,6 +37,17 @@ const latestPosts = [
 ];
 
 export default function LatestPostsSection() {
+  async function fetchPosts() {
+    const { data, error } = await supabase.from("posts").select("*");
+
+    console.log(data);
+    console.log(error);
+  }
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
   return (
     <section className="mx-auto w-full max-w-7xl py-16">
       <SectionHeader>{SECTION_TITLE}</SectionHeader>

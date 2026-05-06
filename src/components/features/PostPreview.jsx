@@ -21,8 +21,8 @@ export default function PostPreview({ postData }) {
       <div className="flex flex-col justify-between">
         <div className="flex flex-col gap-4">
           <div className="flex gap-2">
-            {postData.tags.map((tag) => (
-              <TagLabel label={tag} />
+            {postData.tags.map((tag, index) => (
+              <TagLabel key={index} label={tag} />
             ))}
           </div>
           <span className="text-palette-green">Episode {postData.index}</span>
