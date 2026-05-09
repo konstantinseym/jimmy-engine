@@ -11,7 +11,7 @@ export default function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/posts" element={<Posts />} />
+        <Route path="/posts/:id" element={<Posts />} />
       </Routes>
       <Footer />
     </BrowserRouter>
