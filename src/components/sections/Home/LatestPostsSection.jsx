@@ -1,8 +1,8 @@
-import Btn from "../UI/Btn";
-import PostPreview from "../features/PostPreview";
-import SectionHeader from "../UI/SectionHeader";
+import Btn from "../../UI/Btn";
+import PostPreview from "../../features/PostPreview";
+import SectionHeader from "../../UI/SectionHeader";
 import { useEffect, useState } from "react";
-import { fetchLatestPosts } from "../api/postsApi";
+import { fetchLatestPosts } from "../../../api/postsApi";
 
 const SECTION_TITLE = "Latest posts";
 

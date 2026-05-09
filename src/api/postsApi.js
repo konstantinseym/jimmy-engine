@@ -1,4 +1,4 @@
-import { supabase } from "../../lib/supabaseClient";
+import { supabase } from "../lib/supabaseClient";
 
 export async function fetchLatestPosts(limit = 3) {
   const { data, error } = await supabase

@@ -1,5 +1,5 @@
-import FormContactMe from "../features/FormContactMe";
-import SectionHeader from "../UI/SectionHeader";
+import FormContactMe from "../../features/FormContactMe";
+import SectionHeader from "../../UI/SectionHeader";
 
 const SECTION_TITLE = "Contact me";
 

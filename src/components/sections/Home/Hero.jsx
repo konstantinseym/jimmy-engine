@@ -1,4 +1,4 @@
-import SocialButtons from "../UI/SocialButtons";
+import SocialButtons from "../../UI/SocialButtons";
 
 const HERO_IMAGE_PATH = "/img/001.png";
 const HERO_MESSAGE = {

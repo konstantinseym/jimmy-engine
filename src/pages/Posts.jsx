@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import SectionHeader from "../UI/SectionHeader";
+import SectionHeader from "../components/UI/SectionHeader";
 import { getOnePost } from "../api/postsApi";
 
 export default function Posts() {

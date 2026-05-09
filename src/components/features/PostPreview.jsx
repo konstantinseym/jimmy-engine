@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import Btn from "../UI/Btn";
 import TagLabel from "../UI/TagLabel";
+import { formatDate } from "../../utils/formatDate";
 
 export default function PostPreview({ postData }) {
   const navigate = useNavigate();
@@ -26,7 +27,9 @@ export default function PostPreview({ postData }) {
               <TagLabel key={index} label={tag} />
             ))}
           </div>
-          <span className="text-palette-green">{postData.created_at}</span>
+          <span className="text-palette-green">
+            {formatDate(postData.created_at)}
+          </span>
           <h3 className="text-3xl">{postData.title}</h3>
           <p className="overflow-scroll">{postData.excerpt}</p>
         </div>
