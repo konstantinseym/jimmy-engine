@@ -17,6 +17,7 @@
   --color-palette-gray: #191919;
   --color-palette-darkgray: #141414;
   --color-palette-green: #118da8;
+  --color-palette-faded: rgba(0, 0, 0, 0.5);
 
   --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
 
