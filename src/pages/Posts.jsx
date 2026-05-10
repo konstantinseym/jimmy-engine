@@ -26,7 +26,7 @@ export default function Posts() {
       <img
         className="h-full w-full rounded-lg object-cover"
         src={postData.image_url}
-        alt={postData.imge_alt}
+        alt={postData.image_alt}
       />
     </main>
   );

@@ -13,11 +13,11 @@ export default function PostPreview({ postData }) {
 
   return (
     <article className="bg-palette-darkgray my-8 flex gap-8 rounded-lg p-6">
-      <div className="aspect-square w-md">
+      <div className="aspect-square w-xs">
         <img
           className="h-full w-full rounded-lg object-cover"
           src={postData.image_url}
-          alt={postData.imge_alt}
+          alt={postData.image_alt}
         />
       </div>
       <div className="flex flex-col justify-between">

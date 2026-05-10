@@ -66,9 +66,7 @@ export default function Home() {
         onNavClick={scrollIntoView}
       />
       <main>
-        <FadeInBlock>
-          <Hero ref={heroRef} data-section="hero" />
-        </FadeInBlock>
+        <Hero ref={heroRef} data-section="hero" />
         <FadeInBlock key="postsFadeIn">
           <LatestPostsSection ref={postsRef} data-section="posts" />
         </FadeInBlock>
