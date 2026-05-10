@@ -78,7 +78,7 @@ export default function FormContactMe() {
       <ModalAlert
         isOpen={isModalOpen}
         handleClose={() => setIsModalOpen(false)}
-        message="Your message successfully sent"
+        message="Thank you for reaching out. Your message has been received successfully."
       />
     </form>
   );

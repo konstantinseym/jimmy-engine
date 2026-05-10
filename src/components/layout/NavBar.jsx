@@ -12,11 +12,11 @@ export default function NavBar({ sections, activeSection, onNavClick }) {
       {isScrolled && (
         <motion.nav
           key="min"
-          className="border-palette-green bg-palette-faded fixed top-0 left-1/2 z-10 mt-8 flex -translate-x-1/2 justify-center rounded-full border px-8 py-4 backdrop-blur-xs"
+          className="bg-palette-faded fixed top-0 left-1/2 z-10 mt-8 flex -translate-x-1/2 justify-center rounded-lg px-8 py-4 backdrop-blur-lg"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -30 }}
-          transition={DEFAULT_TRANSITION_RULES}
+          transition={DEFAULT_TRANSITION_RULES, {delay: 0.25}}
         >
           <NavLinks
             sections={sections}
