@@ -1,0 +1,26 @@
+import Btn from "./Btn";
+import { AnimatePresence, motion } from "motion/react";
+import { createPortal } from "react-dom";
+import { DEFAULT_TRANSITION_RULES } from "../../config/motion.config";
+
+export default function ModalAlert({ isOpen, handleClose, message }) {
+  return createPortal(
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={DEFAULT_TRANSITION_RULES}
+          className="fixed inset-0 z-20 flex h-full w-full items-center justify-center backdrop-blur-lg"
+        >
+          <div className="bg-palette-darkgray border-palette-green flex flex-col items-center justify-between gap-6 rounded-lg border p-6">
+            <p>{message}</p>
+            <Btn onClick={handleClose}>OK</Btn>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>,
+    document.body,
+  );
+}

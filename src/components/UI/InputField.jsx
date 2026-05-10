@@ -1,15 +1,12 @@
-import { useState } from "react";
-
-export default function InputField({ placeholder, value }) {
-  const [inputValue, setInputValue] = useState(value);
-
+export default function InputField({ name, placeholder, value, onChange }) {
   return (
     <input
       type="text"
       className="border-palette-gray bg-palette-white text-palette-black focus:border-palette-green w-sm rounded-md border-2 px-2 py-1 outline-0 transition"
+      name={name}
       placeholder={placeholder}
-      value={inputValue}
-      onChange={(e) => setInputValue(e.target.value)}
+      value={value}
+      onChange={onChange}
     />
   );
 }
