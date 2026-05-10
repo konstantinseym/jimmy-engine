@@ -1,4 +1,5 @@
 import ContactMeSection from "../components/sections/Home/ContactMeSection";
+import FadeInBlock from "../components/UI/FadeInBlock";
 import Hero from "../components/sections/Home/Hero";
 import LatestPostsSection from "../components/sections/Home/LatestPostsSection";
 import NavBar from "../components/layout/NavBar";
@@ -65,9 +66,15 @@ export default function Home() {
         onNavClick={scrollIntoView}
       />
       <main>
-        <Hero ref={heroRef} data-section="hero" />
-        <LatestPostsSection ref={postsRef} data-section="posts" />
-        <ContactMeSection ref={contactRef} data-section="contact" />
+        <FadeInBlock>
+          <Hero ref={heroRef} data-section="hero" />
+        </FadeInBlock>
+        <FadeInBlock key="postsFadeIn">
+          <LatestPostsSection ref={postsRef} data-section="posts" />
+        </FadeInBlock>
+        <FadeInBlock key="contactFormFadeIn">
+          <ContactMeSection ref={contactRef} data-section="contact" />
+        </FadeInBlock>
       </main>
     </>
   );
