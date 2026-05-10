@@ -1,12 +1,12 @@
 import Btn from "../../UI/Btn";
 import PostPreview from "../../features/PostPreview";
 import SectionHeader from "../../UI/SectionHeader";
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { fetchLatestPosts } from "../../../api/postsApi";
 
 const SECTION_TITLE = "Latest posts";
 
-export default function LatestPostsSection() {
+const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
   const [latestPosts, setLatestPosts] = useState([]);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function LatestPostsSection() {
   }, []);
 
   return (
-    <section className="mx-auto w-full max-w-7xl py-16">
+    <section ref={ref} {...props} className="mx-auto w-full max-w-7xl py-16">
       <SectionHeader>{SECTION_TITLE}</SectionHeader>
       {latestPosts.map((post) => (
         <PostPreview key={post.id} postData={post} />
@@ -27,4 +27,6 @@ export default function LatestPostsSection() {
       <Btn>Load more</Btn>
     </section>
   );
-}
+});
+
+export default LatestPostsSection;

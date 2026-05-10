@@ -1,29 +1,16 @@
-import TextLink from "../UI/TextLink";
+import BtnAsText from "../UI/BtnAsText";
 
-const NAV_LINKS = [
-  {
-    id: 1,
-    href: "#",
-    label: "Home",
-  },
-  {
-    id: 2,
-    href: "#",
-    label: "Posts",
-  },
-  {
-    id: 3,
-    href: "#",
-    label: "Contact me",
-  },
-];
-
-export default function NavLinks() {
+export default function NavLinks({ sections, activeSection, onNavClick }) {
   return (
     <ul className="flex gap-12">
-      {NAV_LINKS.map((link) => (
-        <li key={link.id}>
-          <TextLink href={link.href}>{link.label}</TextLink>
+      {sections.map((section) => (
+        <li key={section.id}>
+          <BtnAsText
+            onClick={() => onNavClick(section.ref)}
+            highlighted={section.id === activeSection}
+          >
+            {section.label}
+          </BtnAsText>
         </li>
       ))}
     </ul>

@@ -1,11 +1,12 @@
 import FormContactMe from "../../features/FormContactMe";
 import SectionHeader from "../../UI/SectionHeader";
+import { forwardRef } from "react";
 
 const SECTION_TITLE = "Contact me";
 
-export default function ContactMeSection() {
+const ContactMeSection = forwardRef(function ContactMeSection(props, ref) {
   return (
-    <section className="mx-auto w-full max-w-7xl py-16">
+    <section ref={ref} {...props} className="mx-auto w-full max-w-7xl py-16">
       <SectionHeader>{SECTION_TITLE}</SectionHeader>
       <div className="flex flex-col items-center">
         <div className="flex flex-col items-center">
@@ -16,4 +17,6 @@ export default function ContactMeSection() {
       </div>
     </section>
   );
-}
+});
+
+export default ContactMeSection;

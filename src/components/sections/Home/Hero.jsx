@@ -1,4 +1,5 @@
 import SocialButtons from "../../UI/SocialButtons";
+import { forwardRef } from "react";
 
 const HERO_IMAGE_PATH = "/img/001.png";
 const HERO_MESSAGE = {
@@ -6,9 +7,13 @@ const HERO_MESSAGE = {
   subtitle: "appreciate you stopping by",
 };
 
-export default function Hero() {
+const Hero = forwardRef(function Hero(props, ref) {
   return (
-    <header className="mx-auto flex h-screen w-full max-w-7xl gap-16 py-32">
+    <header
+      ref={ref}
+      {...props}
+      className="mx-auto flex h-screen w-full max-w-7xl gap-16 py-32"
+    >
       <div className="flex flex-1 items-center justify-center">
         <img src={HERO_IMAGE_PATH} />
       </div>
@@ -21,4 +26,6 @@ export default function Hero() {
       </div>
     </header>
   );
-}
+});
+
+export default Hero;
