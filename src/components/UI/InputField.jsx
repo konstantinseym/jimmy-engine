@@ -1,4 +1,10 @@
-export default function InputField({ name, placeholder, value, onChange }) {
+export default function InputField({
+  name,
+  placeholder,
+  value,
+  onChange,
+  maxLength,
+}) {
   return (
     <input
       type="text"
@@ -7,6 +13,7 @@ export default function InputField({ name, placeholder, value, onChange }) {
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      maxLength={maxLength}
     />
   );
 }

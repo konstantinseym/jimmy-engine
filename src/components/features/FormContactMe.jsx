@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { insertContactMessage } from "../../api/contactApi";
+import { CONTACT_VALIDATION_RULES } from "../../utils/validationRules";
 
 import Btn from "../UI/Btn";
 import InputField from "../UI/InputField";
@@ -53,18 +54,21 @@ export default function FormContactMe() {
         placeholder="your name"
         value={formValue.name}
         onChange={handleInputChange}
+        maxLength={CONTACT_VALIDATION_RULES.nameMax}
       />
       <InputField
         name="email"
         placeholder="e-mail"
         value={formValue.email}
         onChange={handleInputChange}
+        maxLength={CONTACT_VALIDATION_RULES.emailMax}
       />
       <InputTextArea
         name="message"
         placeholder="write everything you want"
         value={formValue.message}
         onChange={handleInputChange}
+        maxLength={CONTACT_VALIDATION_RULES.messageMax}
       />
       <span className="mt-4">
         <Btn type="submit" disabled={isLoading}>
