@@ -11,6 +11,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/posts/:id" element={<Posts />} />
       </Routes>
+
       <Footer />
     </BrowserRouter>
   );

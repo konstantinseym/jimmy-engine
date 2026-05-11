@@ -1,7 +1,8 @@
 import SocialButtons from "../../UI/SocialButtons";
 import { forwardRef } from "react";
 
-const HERO_IMAGE_PATH = "/img/001.png";
+const HERO_IMAGE_PATH =
+  "https://qqzxvcyqighooxucphxk.supabase.co/storage/v1/object/public/layout/001.png";
 const HERO_MESSAGE = {
   title: "Welcome here",
   subtitle: "appreciate you stopping by",

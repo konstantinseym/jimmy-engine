@@ -1,11 +1,6 @@
 @import "tailwindcss";
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-    overscroll-behavior: none;
-  }
-
   body {
     @apply bg-palette-gray text-palette-white;
   }

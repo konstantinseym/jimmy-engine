@@ -15,7 +15,7 @@ const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
-  function handleLoadMore() {
+  function loadMore() {
     setPage((prev) => prev + 1);
   }
 
@@ -58,7 +58,7 @@ const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
         )}
       </AnimatePresence>
 
-      <Btn onClick={handleLoadMore} disabled={isLoading || !hasMore}>
+      <Btn onClick={loadMore} disabled={isLoading || !hasMore}>
         Load more
       </Btn>
     </section>
