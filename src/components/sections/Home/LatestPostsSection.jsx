@@ -11,15 +11,30 @@ const SECTION_TITLE = "Latest posts";
 
 const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
   const [latestPosts, setLatestPosts] = useState([]);
+  const [page, setPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+
+  function handleLoadMore() {
+    setPage((prev) => prev + 1);
+  }
 
   useEffect(() => {
-    async function loadPosts() {
-      const data = await fetchLatestPosts();
-      setLatestPosts(data);
+    async function loadPosts(page) {
+      setIsLoading(true);
+      const data = await fetchLatestPosts(page);
+
+      if (data.length > 0) {
+        setLatestPosts((prev) => [...prev, ...data]);
+      } else {
+        setHasMore(false);
+      }
+
+      setIsLoading(false);
     }
 
-    loadPosts();
-  }, []);
+    loadPosts(page);
+  }, [page]);
 
   return (
     <section ref={ref} {...props} className="mx-auto w-full max-w-7xl py-16">
@@ -43,7 +58,9 @@ const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
         )}
       </AnimatePresence>
 
-      <Btn>Load more</Btn>
+      <Btn onClick={handleLoadMore} disabled={isLoading || !hasMore}>
+        Load more
+      </Btn>
     </section>
   );
 });
