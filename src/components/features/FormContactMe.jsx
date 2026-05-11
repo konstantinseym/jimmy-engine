@@ -72,13 +72,13 @@ export default function FormContactMe() {
       />
       <span className="mt-4">
         <Btn type="submit" disabled={isLoading}>
-          {isLoading ? "..." : "Send"}
+          {"Send"}
         </Btn>
       </span>
       <ModalAlert
         isOpen={isModalOpen}
         handleClose={() => setIsModalOpen(false)}
-        message="Thank you for reaching out. Your message has been received successfully."
+        message="Your message has been received successfully."
       />
     </form>
   );

@@ -14,8 +14,8 @@ export default function ModalAlert({ isOpen, handleClose, message }) {
           transition={DEFAULT_TRANSITION_RULES}
           className="fixed inset-0 z-20 flex h-full w-full items-center justify-center backdrop-blur-lg"
         >
-          <div className="bg-palette-faded flex flex-col items-center justify-between gap-6 rounded-lg p-6">
-            <p>{message}</p>
+          <div className="bg-palette-faded flex w-md flex-col items-center justify-between gap-6 rounded-lg p-6">
+            <p className="text-center">{message}</p>
             <Btn onClick={handleClose}>OK</Btn>
           </div>
         </motion.div>

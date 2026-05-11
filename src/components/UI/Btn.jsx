@@ -6,7 +6,7 @@ export default function Btn({
 }) {
   return (
     <input
-      className="bg-palette-green hover:bg-palette-white hover:text-palette-green w-36 cursor-pointer rounded-md py-2 transition"
+      className="bg-palette-green hover:bg-palette-white hover:text-palette-green w-36 cursor-pointer rounded-md py-2 transition disabled:cursor-not-allowed disabled:opacity-30"
       type={type}
       value={children}
       onClick={onClick}
