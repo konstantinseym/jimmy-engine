@@ -46,7 +46,7 @@ export default function FormContactMe() {
 
   return (
     <form
-      className="my-8 flex flex-col items-center gap-2 p-6"
+      className="my-8 flex flex-col items-center gap-3 p-6"
       onSubmit={handleSubmit}
     >
       <InputField

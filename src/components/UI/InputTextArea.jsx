@@ -7,7 +7,7 @@ export default function InputTextArea({
 }) {
   return (
     <textarea
-      className="border-palette-gray bg-palette-white text-palette-black focus:border-palette-green h-48 w-sm resize-none rounded-md border-2 px-2 py-1 outline-0 transition"
+      className="border-palette-gray bg-palette-white text-palette-black focus:border-palette-green h-48 w-md resize-none rounded-3xl border-2 px-3 py-3 outline-0 transition"
       name={name}
       placeholder={placeholder}
       value={value}

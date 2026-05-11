@@ -17,7 +17,7 @@ export default function Posts() {
     async function loadPost(postId) {
       const data = await getOnePost(postId);
       setPostData(data);
-      window.scroll(0, 0)
+      window.scroll(0, 0);
     }
 
     loadPost(id);
@@ -42,15 +42,18 @@ export default function Posts() {
           key="post"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={DEFAULT_TRANSITION_RULES, {delay: 0.3}}
+          transition={{ ...DEFAULT_TRANSITION_RULES, delay: 0.3 }}
           className="mx-auto w-full max-w-7xl py-32"
         >
-          <Link
-            to="/"
-            className="text-palette-green hover:text-palette-white mb-10 block transition"
-          >
-            ← Back to main
-          </Link>
+          <div className="mb-10">
+            <Link
+              to="/"
+              className="text-palette-green hover:text-palette-white transition"
+            >
+              ← Back to main
+            </Link>
+          </div>
+
           <div className="flex flex-col gap-2">
             <div className="flex gap-2">
               {postData.tags.map((tag, index) => (

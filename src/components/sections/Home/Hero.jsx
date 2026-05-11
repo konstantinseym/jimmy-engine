@@ -1,11 +1,32 @@
-import SocialButtons from "../../UI/SocialButtons";
 import { forwardRef } from "react";
+import { motion } from "motion/react";
+import { DEFAULT_TRANSITION_RULES } from "../../../config/motion.config";
 
 const HERO_IMAGE_PATH =
   "https://qqzxvcyqighooxucphxk.supabase.co/storage/v1/object/public/layout/001.png";
 const HERO_MESSAGE = {
-  title: "Welcome here",
-  subtitle: "appreciate you stopping by",
+  label: "PERSONAL BLOG",
+  title: "Notes on building, better digital things.",
+  subtitle:
+    "Thoughts on web development, design, productivity, and the small systems that make creative work feel less chaotic.",
+};
+const STATISTICS = [
+  { id: "posts", count: 3 },
+  { id: "comments", count: 12 },
+  { id: "likes", count: 34 },
+];
+
+const parentVariants = {
+  hidden: "",
+  visible: {
+    transition: { delayChildren: 0.2, staggerChildren: 0.125 },
+  },
+};
+
+const childrenVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: [0, 0.2, 0, 0, 0.3, 0.2, 0, 1] },
+  transition: { DEFAULT_TRANSITION_RULES },
 };
 
 const Hero = forwardRef(function Hero(props, ref) {
@@ -13,18 +34,52 @@ const Hero = forwardRef(function Hero(props, ref) {
     <header
       ref={ref}
       {...props}
-      className="mx-auto flex h-screen w-full max-w-7xl gap-16 py-32"
+      className="mx-auto flex h-screen w-full max-w-7xl items-center gap-16 py-32"
     >
-      <div className="flex flex-1 items-center justify-center">
-        <img src={HERO_IMAGE_PATH} />
-      </div>
-      <div className="flex flex-1 flex-col items-center justify-center gap-12">
-        <div className="flex flex-col items-center gap-2">
-          <h1 className="text-6xl font-semibold">{HERO_MESSAGE.title}</h1>
-          <p>{HERO_MESSAGE.subtitle}</p>
+      <motion.div
+        variants={parentVariants}
+        initial="hidden"
+        animate="visible"
+        className="flex gap-8"
+      >
+        <div className="flex-1">
+          <motion.img
+            variants={childrenVariants}
+            src={HERO_IMAGE_PATH}
+            className="h-auto w-auto rounded-4xl"
+          />
         </div>
-        <SocialButtons />
-      </div>
+
+        <div className="flex flex-1 flex-col items-start justify-between py-8">
+          <motion.p variants={childrenVariants} className="text-palette-green">
+            {HERO_MESSAGE.label}
+          </motion.p>
+          <motion.h1
+            variants={childrenVariants}
+            className="text-6xl font-semibold"
+          >
+            {HERO_MESSAGE.title}
+          </motion.h1>
+          <motion.h2
+            variants={childrenVariants}
+            className="text-palette-lightgray text-xl"
+          >
+            {HERO_MESSAGE.subtitle}
+          </motion.h2>
+          <div className="mt-8 flex w-full justify-around">
+            {STATISTICS.map((item) => (
+              <motion.div
+                variants={childrenVariants}
+                key={item.id}
+                className="flex flex-col items-center"
+              >
+                <h3 className="text-4xl">{item.count}</h3>
+                <p>{item.id}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
     </header>
   );
 });

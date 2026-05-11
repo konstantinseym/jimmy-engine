@@ -12,7 +12,7 @@ export default function NavBar({ sections, activeSection, onNavClick }) {
       {isScrolled && (
         <motion.nav
           key="min"
-          className="bg-palette-faded fixed top-0 left-1/2 z-10 mt-8 flex -translate-x-1/2 justify-center rounded-lg px-8 py-4 backdrop-blur-lg"
+          className="bg-palette-faded fixed top-0 left-1/2 z-10 mt-8 flex -translate-x-1/2 justify-center rounded-full px-8 py-4 backdrop-blur-xs"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -30 }}
