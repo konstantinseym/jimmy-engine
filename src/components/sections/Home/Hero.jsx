@@ -1,6 +1,5 @@
 import { forwardRef } from "react";
 import { motion } from "motion/react";
-import { DEFAULT_TRANSITION_RULES } from "../../../config/motion.config";
 
 const HERO_IMAGE_PATH =
   "https://qqzxvcyqighooxucphxk.supabase.co/storage/v1/object/public/layout/001.png";
@@ -19,14 +18,14 @@ const STATISTICS = [
 const parentVariants = {
   hidden: "",
   visible: {
-    transition: { delayChildren: 0.2, staggerChildren: 0.125 },
+    transition: { delayChildren: 0.33, staggerChildren: 0.33 },
   },
 };
 
 const childrenVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: [0, 0.2, 0, 0, 0.3, 0.2, 0, 1] },
-  transition: { DEFAULT_TRANSITION_RULES },
+  visible: { opacity: [0, 1] },
+  transition: { duration: 10 },
 };
 
 const Hero = forwardRef(function Hero(props, ref) {

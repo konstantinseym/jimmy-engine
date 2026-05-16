@@ -3,7 +3,7 @@ import FadeInBlock from "../components/UI/FadeInBlock";
 import Hero from "../components/sections/Home/Hero";
 import LatestPostsSection from "../components/sections/Home/LatestPostsSection";
 import NavBar from "../components/layout/NavBar";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function Home() {
   const heroRef = useRef(null);
@@ -12,31 +12,30 @@ export default function Home() {
 
   const [activeSection, setActiveSection] = useState("hero");
 
-  const sections = [
-    {
-      id: "hero",
-      label: "Home",
-      ref: heroRef,
-    },
-    {
-      id: "posts",
-      label: "Latest posts",
-      ref: postsRef,
-    },
-    {
-      id: "contact",
-      label: "Contact me",
-      ref: contactRef,
-    },
-  ];
+  const sections = useMemo(
+    () => [
+      {
+        id: "hero",
+        label: "Home",
+        ref: heroRef,
+      },
+      {
+        id: "posts",
+        label: "Latest posts",
+        ref: postsRef,
+      },
+      {
+        id: "contact",
+        label: "Contact me",
+        ref: contactRef,
+      },
+    ],
+    [],
+  );
 
   function scrollIntoView(ref) {
     ref.current?.scrollIntoView();
   }
-
-  useEffect(() => {
-    window.scroll(0, 0);
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -60,7 +59,7 @@ export default function Home() {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [sections]);
 
   return (
     <>
@@ -71,10 +70,10 @@ export default function Home() {
       />
       <main>
         <Hero ref={heroRef} data-section="hero" />
-        <FadeInBlock key="postsFadeIn">
+        <FadeInBlock>
           <LatestPostsSection ref={postsRef} data-section="posts" />
         </FadeInBlock>
-        <FadeInBlock key="contactFormFadeIn">
+        <FadeInBlock>
           <ContactMeSection ref={contactRef} data-section="contact" />
         </FadeInBlock>
       </main>

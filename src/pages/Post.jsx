@@ -1,23 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SectionHeader from "../components/UI/SectionHeader";
+import BtnAsText from "../components/UI/BtnAsText";
 import { getOnePost } from "../api/postsApi";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import TagLabel from "../components/UI/TagLabel";
 import { formatDate } from "../utils/formatDate";
 import { motion } from "motion/react";
 import { DEFAULT_TRANSITION_RULES } from "../config/motion.config";
 import Loader from "../components/UI/Loader";
 
-export default function Posts() {
+export default function Post() {
   const { id } = useParams();
   const [postData, setPostData] = useState();
+  const navigate = useNavigate();
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   useEffect(() => {
     async function loadPost(postId) {
       const data = await getOnePost(postId);
       setPostData(data);
-      window.scroll(0, 0);
     }
 
     loadPost(id);
@@ -46,12 +51,7 @@ export default function Posts() {
           className="mx-auto w-full max-w-7xl py-32"
         >
           <div className="mb-10">
-            <Link
-              to="/"
-              className="text-palette-green hover:text-palette-white transition"
-            >
-              ← Back to main
-            </Link>
+            <BtnAsText onClick={() => navigate(-1)}>← Back</BtnAsText>
           </div>
 
           <div className="flex flex-col gap-2">
