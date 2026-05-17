@@ -34,7 +34,7 @@ const Hero = forwardRef(function Hero(props, ref) {
     }
 
     loadContent();
-  });
+  }, []);
 
   return (
     <>
