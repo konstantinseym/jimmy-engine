@@ -38,7 +38,9 @@ const Hero = forwardRef(function Hero(props, ref) {
 
   return (
     <>
-      {content && (
+      {!content ? (
+        <div className="h-screen"></div>
+      ) : (
         <header
           ref={ref}
           {...props}

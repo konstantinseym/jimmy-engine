@@ -4,7 +4,7 @@ import { useScroll } from "../../hooks/useScroll";
 import { AnimatePresence, motion } from "motion/react";
 import { DEFAULT_TRANSITION_RULES } from "../../config/motion.config";
 
-export default function NavBar({ sections, activeSection, onNavClick }) {
+export default function NavBar({ sections, onNavClick }) {
   const isScrolled = useScroll();
 
   return (
@@ -20,7 +20,6 @@ export default function NavBar({ sections, activeSection, onNavClick }) {
         >
           <NavLinks
             sections={sections}
-            activeSection={activeSection}
             onNavClick={onNavClick}
           />
         </motion.nav>
@@ -37,7 +36,6 @@ export default function NavBar({ sections, activeSection, onNavClick }) {
           <Logo />
           <NavLinks
             sections={sections}
-            activeSection={activeSection}
             onNavClick={onNavClick}
           />
         </motion.nav>

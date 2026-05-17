@@ -1,15 +1,7 @@
-export default function BtnAsText({
-  children,
-  highlighted = false,
-  onClick,
-  type = "button",
-}) {
+export default function BtnAsText({ children, onClick, type = "button" }) {
   return (
     <input
-      className={
-        "hover:text-palette-green cursor-pointer transition " +
-        (highlighted ? "text-palette-green" : "")
-      }
+      className="hover:text-palette-green cursor-pointer transition"
       type={type}
       value={children}
       onClick={onClick}
