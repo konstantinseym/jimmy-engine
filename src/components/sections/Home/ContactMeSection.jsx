@@ -10,8 +10,10 @@ const ContactMeSection = forwardRef(function ContactMeSection(props, ref) {
       <SectionHeader>{SECTION_TITLE}</SectionHeader>
       <div className="flex flex-col items-center">
         <div className="flex flex-col items-center">
-          <p>I read every message personally.</p>
-          <p>Expect a thoughtful reply — nothing gets ignored.</p>
+          <p className="text-center">I read every message personally.</p>
+          <p className="text-center">
+            Expect a thoughtful reply — nothing gets ignored.
+          </p>
         </div>
         <FormContactMe />
       </div>

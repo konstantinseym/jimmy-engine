@@ -57,10 +57,11 @@ const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <Btn onClick={loadMore} disabled={isLoading || !hasMore}>
-        Load more
-      </Btn>
+      <div className="text-center 2xl:text-left">
+        <Btn onClick={loadMore} disabled={isLoading || !hasMore}>
+          Load more
+        </Btn>
+      </div>
     </section>
   );
 });

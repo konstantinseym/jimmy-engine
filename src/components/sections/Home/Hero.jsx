@@ -14,14 +14,13 @@ const STATISTICS = [
 const parentVariants = {
   hidden: "",
   visible: {
-    transition: { delayChildren: 0.33, staggerChildren: 0.33 },
+    transition: { delayChildren: 0.33, staggerChildren: 0.125 },
   },
 };
 
 const childrenVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: [0, 1] },
-  transition: { duration: 10 },
+  visible: { opacity: 1, transition: { duration: 1 } },
 };
 
 const Hero = forwardRef(function Hero(props, ref) {
@@ -44,23 +43,23 @@ const Hero = forwardRef(function Hero(props, ref) {
         <header
           ref={ref}
           {...props}
-          className="mx-auto flex h-screen w-full max-w-7xl items-center gap-16 py-32"
+          className="mx-auto flex min-h-screen w-full max-w-7xl items-center pt-24 lg:pt-12"
         >
           <motion.div
             variants={parentVariants}
             initial="hidden"
             animate="visible"
-            className="flex gap-8"
+            className="flex flex-col gap-8 p-8 lg:flex-row lg:gap-12"
           >
-            <div className="flex-1">
+            <div className="flex flex-1 items-center justify-center">
               <motion.img
                 variants={childrenVariants}
                 src={HERO_IMAGE_PATH}
-                className="h-auto w-auto rounded-4xl"
+                className="h-auto max-h-screen w-auto rounded-4xl"
               />
             </div>
 
-            <div className="flex flex-1 flex-col items-start justify-between py-8">
+            <div className="flex flex-1 flex-col items-start gap-4 py-8 lg:justify-between lg:gap-0">
               <motion.p
                 variants={childrenVariants}
                 className="text-palette-green"
@@ -69,13 +68,13 @@ const Hero = forwardRef(function Hero(props, ref) {
               </motion.p>
               <motion.h1
                 variants={childrenVariants}
-                className="text-6xl font-semibold"
+                className="text-3xl font-semibold lg:text-6xl"
               >
                 {content.title}
               </motion.h1>
               <motion.h2
                 variants={childrenVariants}
-                className="text-palette-lightgray text-xl"
+                className="text-palette-lightgray text-lg lg:text-xl"
               >
                 {content.subtitle}
               </motion.h2>

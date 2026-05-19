@@ -12,7 +12,7 @@ export default function PostPreview({ postData }) {
   }
 
   return (
-    <article className="bg-palette-gray my-8 flex gap-8 p-6">
+    <article className="bg-palette-gray my-8 flex flex-col items-center gap-8 p-6 lg:flex-row lg:items-start">
       <div className="aspect-square w-xs">
         <img
           className="h-full w-full rounded-lg object-cover grayscale-50"
@@ -20,7 +20,7 @@ export default function PostPreview({ postData }) {
           alt={postData.image_alt}
         />
       </div>
-      <div className="flex flex-col items-start justify-between">
+      <div className="flex flex-col items-start gap-4">
         <div className="flex flex-col gap-4">
           <div className="flex gap-2">
             {postData.tags.map((tag, index) => (
