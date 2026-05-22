@@ -13,7 +13,7 @@ export default function PostPreview({ postData }) {
 
   return (
     <article className="bg-palette-gray my-8 flex flex-col items-center gap-8 p-6 lg:flex-row lg:items-start">
-      <div className="aspect-square w-xs">
+      <div className="aspect-square max-w-xl lg:max-w-md">
         <img
           className="h-full w-full rounded-lg object-cover grayscale-50"
           src={postData.image_url}

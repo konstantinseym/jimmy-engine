@@ -1,6 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import SectionHeader from "../components/UI/SectionHeader";
 import BtnAsText from "../components/UI/BtnAsText";
 import { getOnePost } from "../api/postsApi";
 import { useNavigate } from "react-router-dom";
@@ -48,7 +47,7 @@ export default function Post() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ ...DEFAULT_TRANSITION_RULES, delay: 0.3 }}
-          className="mx-auto w-full max-w-7xl py-32"
+          className="mx-auto w-full max-w-7xl px-6 py-16"
         >
           <div className="mb-10">
             <BtnAsText onClick={() => navigate(-1)}>← Back</BtnAsText>
@@ -63,14 +62,18 @@ export default function Post() {
             <span className="text-palette-green">
               {formatDate(postData.created_at)}
             </span>
-            <SectionHeader>{postData.title}</SectionHeader>
-            <img
-              className="mx-auto h-full w-full rounded-lg object-cover"
-              src={postData.image_url}
-              alt={postData.image_alt}
-            />
-            <div className="my-12 ml-24 w-4xl">
-              <p className="text-lg leading-8">{postData.content}</p>
+            <h3 className="py-6 text-3xl">{postData.title}</h3>
+            <div className="aspect-square max-w-xl lg:aspect-auto lg:max-w-4xl">
+              <img
+                className="mx-auto h-full w-full rounded-lg object-cover"
+                src={postData.image_url}
+                alt={postData.image_alt}
+              />
+            </div>
+            <div className="my-12 max-w-4xl">
+              <p className="text-md leading-8 lg:pl-12 lg:text-lg">
+                {postData.content}
+              </p>
             </div>
           </div>
         </motion.main>

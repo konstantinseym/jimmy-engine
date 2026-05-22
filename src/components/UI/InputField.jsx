@@ -8,7 +8,7 @@ export default function InputField({
   return (
     <input
       type="text"
-      className="border-palette-gray bg-palette-white text-palette-black focus:border-palette-green h-12 w-full max-w-sm rounded-full border-4 px-3 outline-0 transition"
+      className="bg-palette-white text-palette-black focus:border-palette-green border-palette-gray h-12 w-full max-w-sm rounded-full border-4 px-5 outline-0 transition"
       name={name}
       placeholder={placeholder}
       value={value}

@@ -49,7 +49,7 @@ const Hero = forwardRef(function Hero(props, ref) {
             variants={parentVariants}
             initial="hidden"
             animate="visible"
-            className="flex flex-col gap-8 p-8 lg:flex-row lg:gap-12"
+            className="flex flex-col p-8 lg:flex-row lg:gap-12"
           >
             <div className="flex flex-1 items-center justify-center">
               <motion.img
@@ -74,7 +74,7 @@ const Hero = forwardRef(function Hero(props, ref) {
               </motion.h1>
               <motion.h2
                 variants={childrenVariants}
-                className="text-palette-lightgray text-lg lg:text-xl"
+                className="text-palette-lightgray text-md lg:text-xl"
               >
                 {content.subtitle}
               </motion.h2>
