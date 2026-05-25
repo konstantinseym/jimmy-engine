@@ -70,7 +70,7 @@ const Hero = forwardRef(function Hero(props, ref) {
                 variants={childrenVariants}
                 className="text-3xl font-semibold lg:text-6xl"
               >
-                {content.title}
+                {content.title} test
               </motion.h1>
               <motion.h2
                 variants={childrenVariants}
