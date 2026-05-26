@@ -1,15 +1,9 @@
 import { forwardRef, useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { getContent } from "../../../api/contentApi";
+import { getContent, getStats } from "../../../api/contentApi";
 
 const HERO_IMAGE_PATH =
   "https://qqzxvcyqighooxucphxk.supabase.co/storage/v1/object/public/layout/001.png";
-
-const STATISTICS = [
-  { id: "posts", count: 3 },
-  { id: "comments", count: 12 },
-  { id: "likes", count: 34 },
-];
 
 const parentVariants = {
   hidden: "",
@@ -25,11 +19,15 @@ const childrenVariants = {
 
 const Hero = forwardRef(function Hero(props, ref) {
   const [content, setContent] = useState(null);
+  const [stats, setStats] = useState({ posts: 0, comments: 0, likes: 0 });
 
   useEffect(() => {
     async function loadContent() {
-      const data = await getContent();
-      setContent(data);
+      const contentData = await getContent();
+      setContent(contentData);
+
+      const statsData = await getStats();
+      setStats(statsData);
     }
 
     loadContent();
@@ -79,16 +77,27 @@ const Hero = forwardRef(function Hero(props, ref) {
                 {content.subtitle}
               </motion.h2>
               <div className="mt-8 flex w-full justify-around">
-                {STATISTICS.map((item) => (
-                  <motion.div
-                    variants={childrenVariants}
-                    key={item.id}
-                    className="flex flex-col items-center"
-                  >
-                    <h3 className="text-4xl">{item.count}</h3>
-                    <p>{item.id}</p>
-                  </motion.div>
-                ))}
+                <motion.div
+                  variants={childrenVariants}
+                  className="flex flex-col items-center"
+                >
+                  <h3 className="text-4xl">{stats.posts}</h3>
+                  <p>posts</p>
+                </motion.div>
+                <motion.div
+                  variants={childrenVariants}
+                  className="flex flex-col items-center"
+                >
+                  <h3 className="text-4xl">{stats.comments}</h3>
+                  <p>comments</p>
+                </motion.div>
+                <motion.div
+                  variants={childrenVariants}
+                  className="flex flex-col items-center"
+                >
+                  <h3 className="text-4xl">{stats.likes}</h3>
+                  <p>likes</p>
+                </motion.div>
               </div>
             </div>
           </motion.div>
