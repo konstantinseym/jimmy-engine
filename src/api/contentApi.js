@@ -10,3 +10,11 @@ export async function getContent() {
 
   return data;
 }
+
+export async function getStats() {
+  const { data, error } = await supabase.rpc("get_site_stats");
+
+  if (error) console.log(error);
+
+  return data;
+}
