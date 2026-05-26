@@ -1,6 +1,7 @@
 import { forwardRef, useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { getContent, getStats } from "../../../api/contentApi";
+import Loader from "../../UI/Loader";
 
 const HERO_IMAGE_PATH =
   "https://qqzxvcyqighooxucphxk.supabase.co/storage/v1/object/public/layout/001.png";
@@ -86,7 +87,7 @@ const Hero = forwardRef(function Hero(props, ref) {
                   className="flex flex-col items-center"
                 >
                   <h3 className="text-4xl">
-                    {stats.posts ? stats.posts : "..."}
+                    {stats.posts ? stats.posts : <Loader />}
                   </h3>
                   <p>posts</p>
                 </motion.div>
@@ -95,7 +96,7 @@ const Hero = forwardRef(function Hero(props, ref) {
                   className="flex flex-col items-center"
                 >
                   <h3 className="text-4xl">
-                    {stats.comments ? stats.comments : "..."}
+                    {stats.comments ? stats.comments : <Loader />}
                   </h3>
                   <p>comments</p>
                 </motion.div>
@@ -104,7 +105,7 @@ const Hero = forwardRef(function Hero(props, ref) {
                   className="flex flex-col items-center"
                 >
                   <h3 className="text-4xl">
-                    {stats.likes ? stats.likes : "..."}
+                    {stats.likes ? stats.likes : <Loader />}
                   </h3>
                   <p>likes</p>
                 </motion.div>
