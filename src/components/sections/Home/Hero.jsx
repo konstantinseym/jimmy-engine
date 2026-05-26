@@ -19,7 +19,11 @@ const childrenVariants = {
 
 const Hero = forwardRef(function Hero(props, ref) {
   const [content, setContent] = useState(null);
-  const [stats, setStats] = useState({ posts: 0, comments: 0, likes: 0 });
+  const [stats, setStats] = useState({
+    posts: null,
+    comments: null,
+    likes: null,
+  });
 
   useEffect(() => {
     async function loadContent() {
@@ -81,21 +85,27 @@ const Hero = forwardRef(function Hero(props, ref) {
                   variants={childrenVariants}
                   className="flex flex-col items-center"
                 >
-                  <h3 className="text-4xl">{stats.posts}</h3>
+                  <h3 className="text-4xl">
+                    {stats.posts ? stats.posts : "..."}
+                  </h3>
                   <p>posts</p>
                 </motion.div>
                 <motion.div
                   variants={childrenVariants}
                   className="flex flex-col items-center"
                 >
-                  <h3 className="text-4xl">{stats.comments}</h3>
+                  <h3 className="text-4xl">
+                    {stats.comments ? stats.comments : "..."}
+                  </h3>
                   <p>comments</p>
                 </motion.div>
                 <motion.div
                   variants={childrenVariants}
                   className="flex flex-col items-center"
                 >
-                  <h3 className="text-4xl">{stats.likes}</h3>
+                  <h3 className="text-4xl">
+                    {stats.likes ? stats.likes : "..."}
+                  </h3>
                   <p>likes</p>
                 </motion.div>
               </div>
