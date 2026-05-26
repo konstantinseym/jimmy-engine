@@ -7,7 +7,7 @@ export default function Loader() {
   return (
     <AnimatePresence>
       <motion.div
-        className="flex w-full justify-center"
+        className="flex w-full justify-center py-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
