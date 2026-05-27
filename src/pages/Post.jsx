@@ -77,7 +77,7 @@ export default function Post() {
               </p>
             </div>
           </div>
-          <PostComments />
+          <PostComments postId={id} />
         </motion.main>
       )}
     </>

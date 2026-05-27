@@ -36,7 +36,5 @@ export async function getComments(id) {
 
   if (error) console.log(error);
 
-  console.log(data);
-
   return data;
 }
