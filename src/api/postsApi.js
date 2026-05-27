@@ -27,3 +27,16 @@ export async function getOnePost(id) {
 
   return data;
 }
+
+export async function getComments(id) {
+  const { data, error } = await supabase
+    .from("comments")
+    .select("id, content, created_at")
+    .eq("post_id", id);
+
+  if (error) console.log(error);
+
+  console.log(data);
+
+  return data;
+}
