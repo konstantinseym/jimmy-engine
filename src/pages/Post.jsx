@@ -8,6 +8,7 @@ import { formatDate } from "../utils/formatDate";
 import { motion } from "motion/react";
 import { DEFAULT_TRANSITION_RULES } from "../config/motion.config";
 import Loader from "../components/UI/Loader";
+import PostComments from "../components/layout/PostComments";
 
 export default function Post() {
   const { id } = useParams();
@@ -76,6 +77,7 @@ export default function Post() {
               </p>
             </div>
           </div>
+          <PostComments />
         </motion.main>
       )}
     </>
