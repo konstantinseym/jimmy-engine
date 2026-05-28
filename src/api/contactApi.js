@@ -10,5 +10,6 @@ export async function insertContactMessage(message) {
       reply: null,
     },
   ]);
+
   if (error) console.log(error);
 }

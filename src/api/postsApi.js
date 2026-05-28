@@ -38,3 +38,11 @@ export async function getComments(id) {
 
   return data;
 }
+
+export async function postComment(postId, content) {
+  const { error } = await supabase
+    .from("comments")
+    .insert([{ content: content, post_id: postId }]);
+
+  if (error) console.log(error);
+}
