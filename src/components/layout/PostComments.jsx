@@ -17,16 +17,19 @@ export default function PostComments({ postId }) {
 
   if (comments) {
     return (
-      <div>
-        <div className="flex items-center justify-center gap-1">
+      <div className="flex flex-col items-center">
+        <form className="mb-4 flex w-full items-center justify-center gap-1">
           <InputField placeholder="write smth..." />
-          <Btn>Post</Btn>
-        </div>
+          <Btn type="submit">Post</Btn>
+        </form>
 
         {comments.map((comment) => (
-          <p key={comment.id}>
-            {comment.content} ///// {comment.created_at}
-          </p>
+          <div className="mt-2 flex max-w-md flex-col" key={comment.id}>
+            <p className="text-sm">{comment.content}</p>
+            <p className="text-palette-lightgray text-right text-xs">
+              {comment.created_at}
+            </p>
+          </div>
         ))}
       </div>
     );
