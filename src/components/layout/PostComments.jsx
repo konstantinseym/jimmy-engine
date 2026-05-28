@@ -4,6 +4,7 @@ import Btn from "../UI/Btn";
 import InputField from "../UI/InputField";
 import { postComment } from "../../api/postsApi";
 import { COMMENT_VALIDATION_RULES } from "../../utils/validationRules";
+import { formatDate } from "../../utils/formatDate";
 
 export default function PostComments({ postId }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -65,7 +66,7 @@ export default function PostComments({ postId }) {
           >
             <p className="text-sm">{comment.content}</p>
             <p className="text-palette-lightgray text-right text-xs">
-              {comment.created_at}
+              {formatDate(comment.created_at)}
             </p>
           </div>
         ))}
