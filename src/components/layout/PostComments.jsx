@@ -59,7 +59,10 @@ export default function PostComments({ postId }) {
         </form>
 
         {comments.map((comment) => (
-          <div className="mt-2 flex max-w-md flex-col" key={comment.id}>
+          <div
+            className="mt-4 flex w-full max-w-md flex-col gap-1 px-6 lg:px-12"
+            key={comment.id}
+          >
             <p className="text-sm">{comment.content}</p>
             <p className="text-palette-lightgray text-right text-xs">
               {comment.created_at}
