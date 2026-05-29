@@ -1,5 +1,5 @@
 import { getComments } from "../../api/postsApi";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Btn from "../UI/Btn";
 import InputField from "../UI/InputField";
 import { postComment } from "../../api/postsApi";
@@ -14,10 +14,10 @@ export default function PostComments({ postId }) {
   const inputRef = useRef(null);
   const lastCommentRef = useRef(null);
 
-  async function loadComments() {
+  const loadComments = useCallback(async () => {
     const data = await getComments(postId);
     setComments(data);
-  }
+  }, [postId]);
 
   function handleInputChange(e) {
     setCommentInputValue(e.target.value);
@@ -44,7 +44,7 @@ export default function PostComments({ postId }) {
 
   useEffect(() => {
     loadComments();
-  }, []);
+  }, [loadComments]);
 
   if (comments) {
     return (
