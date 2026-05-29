@@ -1,5 +1,5 @@
 import { getComments } from "../../api/postsApi";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Btn from "../UI/Btn";
 import InputField from "../UI/InputField";
 import { postComment } from "../../api/postsApi";
@@ -10,6 +10,8 @@ export default function PostComments({ postId }) {
   const [isLoading, setIsLoading] = useState(false);
   const [comments, setComments] = useState();
   const [commentInputValue, setCommentInputValue] = useState("");
+
+  const inputRef = useRef(null);
 
   async function loadComments() {
     const data = await getComments(postId);
@@ -30,6 +32,7 @@ export default function PostComments({ postId }) {
       await postComment(postId, normalizedData);
       await loadComments();
       setCommentInputValue("");
+      inputRef.current?.blur();
     } catch (err) {
       console.error(err);
     } finally {
@@ -49,6 +52,7 @@ export default function PostComments({ postId }) {
           onSubmit={handlePostComment}
         >
           <InputField
+            ref={inputRef}
             placeholder="write smth..."
             value={commentInputValue}
             onChange={handleInputChange}
