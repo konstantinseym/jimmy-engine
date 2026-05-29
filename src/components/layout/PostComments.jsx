@@ -1,5 +1,5 @@
 import { getComments } from "../../api/postsApi";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import Btn from "../UI/Btn";
 import InputField from "../UI/InputField";
 import { postComment } from "../../api/postsApi";
@@ -8,16 +8,11 @@ import { formatDate } from "../../utils/formatDate";
 
 export default function PostComments({ postId }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [comments, setComments] = useState();
+  const [comments, setComments] = useState([]);
   const [commentInputValue, setCommentInputValue] = useState("");
 
   const inputRef = useRef(null);
   const lastCommentRef = useRef(null);
-
-  const loadComments = useCallback(async () => {
-    const data = await getComments(postId);
-    setComments(data);
-  }, [postId]);
 
   function handleInputChange(e) {
     setCommentInputValue(e.target.value);
@@ -30,8 +25,8 @@ export default function PostComments({ postId }) {
 
     try {
       setIsLoading(true);
-      await postComment(postId, normalizedData);
-      await loadComments();
+      const newComment = await postComment(postId, normalizedData);
+      setComments((prev) => [...prev, newComment]);
       setCommentInputValue("");
       inputRef.current?.blur();
       lastCommentRef.current?.scrollIntoView();
@@ -43,40 +38,44 @@ export default function PostComments({ postId }) {
   }
 
   useEffect(() => {
-    void loadComments();
-  }, [loadComments]);
+    async function loadComments() {
+      const data = await getComments(postId);
+      setComments(data);
+    }
 
-  if (comments)
-    return (
-      <div className="flex flex-col items-center">
-        <form
-          className="mb-4 flex w-full items-center justify-center gap-1"
-          onSubmit={handlePostComment}
+    loadComments();
+  }, [postId]);
+
+  return (
+    <div className="flex flex-col items-center">
+      <form
+        className="mb-4 flex w-full items-center justify-center gap-1"
+        onSubmit={handlePostComment}
+      >
+        <InputField
+          ref={inputRef}
+          placeholder="write smth..."
+          value={commentInputValue}
+          onChange={handleInputChange}
+          maxLength={COMMENT_VALIDATION_RULES.max}
+        />
+        <Btn type="submit" disabled={isLoading}>
+          Post
+        </Btn>
+      </form>
+
+      {comments.map((comment, index) => (
+        <div
+          ref={index === comments.length - 1 ? lastCommentRef : null}
+          className="mt-4 flex w-full max-w-md flex-col gap-1 px-6 lg:px-12"
+          key={comment.id}
         >
-          <InputField
-            ref={inputRef}
-            placeholder="write smth..."
-            value={commentInputValue}
-            onChange={handleInputChange}
-            maxLength={COMMENT_VALIDATION_RULES.max}
-          />
-          <Btn type="submit" disabled={isLoading}>
-            Post
-          </Btn>
-        </form>
-
-        {comments.map((comment, index) => (
-          <div
-            ref={index === comments.length - 1 ? lastCommentRef : null}
-            className="mt-4 flex w-full max-w-md flex-col gap-1 px-6 lg:px-12"
-            key={comment.id}
-          >
-            <p className="text-sm">{comment.content}</p>
-            <p className="text-palette-lightgray text-right text-xs">
-              {formatDate(comment.created_at)}
-            </p>
-          </div>
-        ))}
-      </div>
-    );
+          <p className="text-sm">{comment.content}</p>
+          <p className="text-palette-lightgray text-right text-xs">
+            {formatDate(comment.created_at)}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
 }

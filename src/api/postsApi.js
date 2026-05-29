@@ -40,9 +40,13 @@ export async function getComments(id) {
 }
 
 export async function postComment(postId, content) {
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("comments")
-    .insert([{ content: content, post_id: postId }]);
+    .insert([{ content: content, post_id: postId }])
+    .select()
+    .single();
 
   if (error) console.log(error);
+
+  return data;
 }
