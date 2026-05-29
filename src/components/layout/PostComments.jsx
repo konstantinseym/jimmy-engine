@@ -38,12 +38,10 @@ export default function PostComments({ postId }) {
   }
 
   useEffect(() => {
-    async function loadComments() {
+    (async () => {
       const data = await getComments(postId);
       setComments(data);
-    }
-
-    loadComments();
+    })();
   }, [postId]);
 
   return (
