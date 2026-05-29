@@ -12,6 +12,7 @@ export default function PostComments({ postId }) {
   const [commentInputValue, setCommentInputValue] = useState("");
 
   const inputRef = useRef(null);
+  const lastCommentRef = useRef(null);
 
   async function loadComments() {
     const data = await getComments(postId);
@@ -33,6 +34,7 @@ export default function PostComments({ postId }) {
       await loadComments();
       setCommentInputValue("");
       inputRef.current?.blur();
+      lastCommentRef.current?.scrollIntoView();
     } catch (err) {
       console.error(err);
     } finally {
@@ -63,8 +65,9 @@ export default function PostComments({ postId }) {
           </Btn>
         </form>
 
-        {comments.map((comment) => (
+        {comments.map((comment, index) => (
           <div
+            ref={index === comments.length - 1 ? lastCommentRef : null}
             className="mt-4 flex w-full max-w-md flex-col gap-1 px-6 lg:px-12"
             key={comment.id}
           >
