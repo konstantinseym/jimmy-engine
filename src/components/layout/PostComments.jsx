@@ -43,10 +43,10 @@ export default function PostComments({ postId }) {
   }
 
   useEffect(() => {
-    loadComments();
+    void loadComments();
   }, [loadComments]);
 
-  if (comments) {
+  if (comments)
     return (
       <div className="flex flex-col items-center">
         <form
@@ -79,7 +79,4 @@ export default function PostComments({ postId }) {
         ))}
       </div>
     );
-  }
-
-  return;
 }
