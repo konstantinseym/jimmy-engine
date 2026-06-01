@@ -31,7 +31,7 @@ export default function PostPreview({ postData }) {
             {formatDate(postData.created_at)}
           </span>
           <h3 className="text-3xl">{postData.title}</h3>
-          <p className="overflow-scroll">{postData.excerpt}</p>
+          <p>{postData.excerpt}</p>
         </div>
         <Btn onClick={openPost}>Read full</Btn>
       </div>
