@@ -7,3 +7,10 @@ export const SLOW_TRANSITION_RULES = {
   duration: 1,
   ease: "easeInOut",
 };
+
+export const LAYOUT_TRANSITION_RULES = {
+  type: "spring",
+  stiffness: 350,
+  damping: 45,
+  mass: 0.8,
+};

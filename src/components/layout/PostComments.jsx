@@ -5,6 +5,11 @@ import InputField from "../UI/InputField";
 import { postComment } from "../../api/postsApi";
 import { COMMENT_VALIDATION_RULES } from "../../utils/validationRules";
 import { formatDate } from "../../utils/formatDate";
+import { motion } from "motion/react";
+import {
+  LAYOUT_TRANSITION_RULES,
+  SLOW_TRANSITION_RULES,
+} from "../../config/motion.config";
 
 export default function PostComments({ postId }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -73,21 +78,31 @@ export default function PostComments({ postId }) {
         </Btn>
       </form>
 
-      {comments.map((comment, index) => (
-        <div
-          ref={index === comments.length - 1 ? lastCommentRef : null}
-          className="my-4 flex w-full max-w-md flex-col gap-1 px-6 lg:px-12"
-          key={comment.id}
-        >
-          <p className="text-sm">{comment.content}</p>
-          <p className="text-palette-lightgray text-right text-xs">
-            {formatDate(comment.created_at)}
-          </p>
-        </div>
-      ))}
-      <Btn onClick={loadMore} disabled={!hasMore}>
-        load more
-      </Btn>
+      <motion.div
+        className="flex flex-col items-center"
+        layout
+        transition={LAYOUT_TRANSITION_RULES}
+      >
+        {comments.map((comment, index) => (
+          <motion.div
+            layout
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={SLOW_TRANSITION_RULES}
+            ref={index === comments.length - 1 ? lastCommentRef : null}
+            className="my-4 flex w-full max-w-md flex-col gap-1 px-6 lg:px-12"
+            key={comment.id}
+          >
+            <p className="text-sm">{comment.content}</p>
+            <p className="text-palette-lightgray text-right text-xs">
+              {formatDate(comment.created_at)}
+            </p>
+          </motion.div>
+        ))}
+        <Btn onClick={loadMore} disabled={!hasMore}>
+          load more
+        </Btn>
+      </motion.div>
     </div>
   );
 }
