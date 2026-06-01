@@ -10,9 +10,15 @@ export default function PostComments({ postId }) {
   const [isLoading, setIsLoading] = useState(false);
   const [comments, setComments] = useState([]);
   const [commentInputValue, setCommentInputValue] = useState("");
+  const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
 
   const inputRef = useRef(null);
   const lastCommentRef = useRef(null);
+
+  function loadMore() {
+    setPage((prev) => prev + 1);
+  }
 
   function handleInputChange(e) {
     setCommentInputValue(e.target.value);
@@ -39,10 +45,15 @@ export default function PostComments({ postId }) {
 
   useEffect(() => {
     (async () => {
-      const data = await getComments(postId);
-      setComments(data);
+      const data = await getComments(postId, page);
+
+      if (data.length > 0) {
+        setComments((prev) => [...prev, ...data]);
+      } else {
+        setHasMore(false);
+      }
     })();
-  }, [postId]);
+  }, [postId, page]);
 
   return (
     <div className="flex flex-col items-center">
@@ -65,7 +76,7 @@ export default function PostComments({ postId }) {
       {comments.map((comment, index) => (
         <div
           ref={index === comments.length - 1 ? lastCommentRef : null}
-          className="mt-4 flex w-full max-w-md flex-col gap-1 px-6 lg:px-12"
+          className="my-4 flex w-full max-w-md flex-col gap-1 px-6 lg:px-12"
           key={comment.id}
         >
           <p className="text-sm">{comment.content}</p>
@@ -74,6 +85,9 @@ export default function PostComments({ postId }) {
           </p>
         </div>
       ))}
+      <Btn onClick={loadMore} disabled={!hasMore}>
+        load more
+      </Btn>
     </div>
   );
 }

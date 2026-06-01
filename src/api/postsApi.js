@@ -8,10 +8,11 @@ export async function fetchLatestPosts(page) {
     .from("posts")
     .select("id, image_url, image_alt, tags, title, excerpt, created_at")
     .order("id", { ascending: false })
-    .limit(1)
     .range(from, to);
 
   if (error) console.log(error);
+
+  console.log(JSON.stringify(data));
 
   return data;
 }
@@ -28,11 +29,16 @@ export async function getOnePost(id) {
   return data;
 }
 
-export async function getComments(id) {
+export async function getComments(id, page) {
+  const from = page * 3;
+  const to = from + 2;
+
   const { data, error } = await supabase
     .from("comments")
     .select("id, content, created_at")
-    .eq("post_id", id);
+    .eq("post_id", id)
+    .order("id", { ascending: true })
+    .range(from, to);
 
   if (error) console.log(error);
 
