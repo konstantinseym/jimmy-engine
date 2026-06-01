@@ -5,10 +5,7 @@ import SectionHeader from "../../UI/SectionHeader";
 import { forwardRef, useEffect, useState } from "react";
 import { fetchLatestPosts } from "../../../api/postsApi";
 import { motion } from "motion/react";
-import {
-  LAYOUT_TRANSITION_RULES,
-  SLOW_TRANSITION_RULES,
-} from "../../../config/motion.config";
+import { DEFAULT_TRANSITION_RULES } from "../../../config/motion.config";
 
 const SECTION_TITLE = "Latest posts";
 
@@ -46,22 +43,19 @@ const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
       {!latestPosts.length ? (
         <Loader key="loader" />
       ) : (
-        <motion.div
-          className="flex flex-col items-center"
-          layout
-          transition={LAYOUT_TRANSITION_RULES}
-        >
+        <div>
           {latestPosts.map((post) => (
             <motion.div
+              layout
               key={post.id}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={SLOW_TRANSITION_RULES}
+              transition={DEFAULT_TRANSITION_RULES}
             >
               <PostPreview postData={post} />
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       )}
 
       <div className="text-center 2xl:text-left">
