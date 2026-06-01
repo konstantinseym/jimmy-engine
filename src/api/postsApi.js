@@ -12,8 +12,6 @@ export async function fetchLatestPosts(page) {
 
   if (error) console.log(error);
 
-  console.log(JSON.stringify(data));
-
   return data;
 }
 
