@@ -85,7 +85,6 @@ export default function PostComments({ postId }) {
       >
         {comments.map((comment, index) => (
           <motion.div
-            layout
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={SLOW_TRANSITION_RULES}
