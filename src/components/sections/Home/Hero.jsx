@@ -54,12 +54,18 @@ const Hero = forwardRef(function Hero(props, ref) {
         animate="visible"
         className="flex flex-col p-8 lg:flex-row lg:gap-12"
       >
-        <div className="flex flex-1 items-center justify-center">
+        <div className="relative flex flex-1 items-center justify-center">
           <motion.img
             variants={childrenVariants}
             src={HERO_IMAGE_PATH}
             className="h-auto max-h-screen w-auto rounded-4xl"
           />
+          <motion.div
+            variants={childrenVariants}
+            className="border-palette-green absolute -bottom-3 rounded-full border px-4 py-2 backdrop-blur-xs lg:left-9"
+          >
+            <p className="text-sm">status: {metaQuery.data.status}</p>
+          </motion.div>
         </div>
 
         <div className="flex flex-1 flex-col items-start gap-4 py-8 lg:justify-between lg:gap-0">
