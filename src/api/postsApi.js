@@ -10,7 +10,7 @@ export async function getLatestPosts(page) {
     .order("id", { ascending: false })
     .range(from, to);
 
-  if (error) console.log(error);
+  if (error) throw error;
 
   return data;
 }
