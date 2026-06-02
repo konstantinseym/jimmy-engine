@@ -1,4 +1,4 @@
-import { getComments } from "../../api/postsApi";
+import { addComment, getComments } from "../../api/postsApi";
 import { useState, useRef } from "react";
 import Btn from "../UI/Btn";
 import InputField from "../UI/InputField";
@@ -6,15 +6,29 @@ import { COMMENT_VALIDATION_RULES } from "../../utils/validationRules";
 import { formatDate } from "../../utils/formatDate";
 import { motion } from "motion/react";
 import { DEFAULT_TRANSITION_RULES } from "../../config/motion.config";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 export default function PostComments({ postId }) {
+  const queryClient = useQueryClient();
+
   const commentsQuery = useInfiniteQuery({
-    queryKey: ["comments"],
+    queryKey: ["comments", postId],
     queryFn: ({ pageParam = 0 }) => getComments(postId, pageParam),
     getNextPageParam: (lastPage, allPages) => {
       if (lastPage.length === 0) return undefined;
       return allPages.length;
+    },
+  });
+
+  const addCommentMutation = useMutation({
+    mutationFn: (commentText) => addComment(postId, commentText),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["comments", postId] });
+      setCommentInputValue("");
     },
   });
 
@@ -33,7 +47,8 @@ export default function PostComments({ postId }) {
     e.preventDefault();
 
     const normalizedData = commentInputValue.trim();
-    console.log(normalizedData);
+
+    addCommentMutation.mutate(normalizedData);
   }
 
   return (
