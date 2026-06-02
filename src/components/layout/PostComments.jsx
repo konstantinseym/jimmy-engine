@@ -29,6 +29,7 @@ export default function PostComments({ postId }) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["comments", postId] });
       setCommentInputValue("");
+      inputRef.current.blur();
     },
   });
 
