@@ -62,9 +62,10 @@ const Hero = forwardRef(function Hero(props, ref) {
           />
           <motion.div
             variants={childrenVariants}
-            className="border-palette-green absolute -bottom-3 rounded-full border px-4 py-2 backdrop-blur-xs lg:left-9"
+            className="border-palette-lightgray absolute -bottom-5 left-1/5 rounded-lg border py-2 pr-8 pl-4 backdrop-blur-xs"
           >
-            <p className="text-sm">status: {metaQuery.data.status}</p>
+            <p className="text-palette-lightgray text-sm">status:</p>
+            <p className="text-sm">{metaQuery.data.status}</p>
           </motion.div>
         </div>
 
