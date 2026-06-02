@@ -2,6 +2,8 @@ import { forwardRef } from "react";
 import { motion } from "motion/react";
 import { getMeta } from "../../../api/contentApi";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../UI/Loader";
+import Error from "../../UI/Error";
 
 const HERO_IMAGE_PATH =
   "https://qqzxvcyqighooxucphxk.supabase.co/storage/v1/object/public/layout/001.png";
@@ -23,6 +25,22 @@ const Hero = forwardRef(function Hero(props, ref) {
     queryKey: ["meta"],
     queryFn: () => getMeta(),
   });
+
+  if (metaQuery.isPending) {
+    return (
+      <header className="flex min-h-screen items-center">
+        <Loader />
+      </header>
+    );
+  }
+
+  if (metaQuery.isError) {
+    return (
+      <header className="flex min-h-screen items-center">
+        <Error />
+      </header>
+    );
+  }
 
   return (
     <header
@@ -52,34 +70,34 @@ const Hero = forwardRef(function Hero(props, ref) {
             variants={childrenVariants}
             className="text-3xl font-semibold lg:text-6xl"
           >
-            {metaQuery.data?.title}
+            {metaQuery.data.title}
           </motion.h1>
           <motion.h2
             variants={childrenVariants}
             className="text-palette-lightgray text-md lg:text-xl"
           >
-            {metaQuery.data?.subtitle}
+            {metaQuery.data.subtitle}
           </motion.h2>
           <div className="mt-8 flex w-full justify-around">
             <motion.div
               variants={childrenVariants}
               className="flex flex-col items-center"
             >
-              <h3 className="text-4xl">{metaQuery.data?.posts}</h3>
+              <h3 className="text-4xl">{metaQuery.data.posts}</h3>
               <p>posts</p>
             </motion.div>
             <motion.div
               variants={childrenVariants}
               className="flex flex-col items-center"
             >
-              <h3 className="text-4xl">{metaQuery.data?.comments}</h3>
+              <h3 className="text-4xl">{metaQuery.data.comments}</h3>
               <p>comments</p>
             </motion.div>
             <motion.div
               variants={childrenVariants}
               className="flex flex-col items-center"
             >
-              <h3 className="text-4xl">{metaQuery.data?.likes}</h3>
+              <h3 className="text-4xl">{metaQuery.data.likes}</h3>
               <p>likes</p>
             </motion.div>
           </div>
