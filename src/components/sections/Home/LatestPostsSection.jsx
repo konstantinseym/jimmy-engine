@@ -2,7 +2,7 @@ import Btn from "../../UI/Btn";
 import PostPreview from "../../features/PostPreview";
 import SectionHeader from "../../UI/SectionHeader";
 import { forwardRef } from "react";
-import { fetchLatestPosts } from "../../../api/postsApi";
+import { getLatestPosts } from "../../../api/postsApi";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 const SECTION_TITLE = "Latest posts";
@@ -10,7 +10,7 @@ const SECTION_TITLE = "Latest posts";
 const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
   const postsQuery = useInfiniteQuery({
     queryKey: ["posts"],
-    queryFn: ({ pageParam = 0 }) => fetchLatestPosts(pageParam),
+    queryFn: ({ pageParam = 0 }) => getLatestPosts(pageParam),
     getNextPageParam: (lastPage, allPages) => {
       if (lastPage.length === 0) return undefined;
       return allPages.length;

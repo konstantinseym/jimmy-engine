@@ -1,25 +1,28 @@
 import { getComments } from "../../api/postsApi";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import Btn from "../UI/Btn";
 import InputField from "../UI/InputField";
-import { postComment } from "../../api/postsApi";
 import { COMMENT_VALIDATION_RULES } from "../../utils/validationRules";
 import { formatDate } from "../../utils/formatDate";
 import { motion } from "motion/react";
 import { DEFAULT_TRANSITION_RULES } from "../../config/motion.config";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 export default function PostComments({ postId }) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [comments, setComments] = useState([]);
-  const [commentInputValue, setCommentInputValue] = useState("");
-  const [page, setPage] = useState(0);
-  const [hasMore, setHasMore] = useState(true);
+  const commentsQuery = useInfiniteQuery({
+    queryKey: ["comments"],
+    queryFn: ({ pageParam = 0 }) => getComments(postId, pageParam),
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage.length === 0) return undefined;
+      return allPages.length;
+    },
+  });
 
+  const [commentInputValue, setCommentInputValue] = useState("");
   const inputRef = useRef(null);
-  const lastCommentRef = useRef(null);
 
   function loadMore() {
-    setPage((prev) => prev + 1);
+    commentsQuery.fetchNextPage();
   }
 
   function handleInputChange(e) {
@@ -30,32 +33,8 @@ export default function PostComments({ postId }) {
     e.preventDefault();
 
     const normalizedData = commentInputValue.trim();
-
-    try {
-      setIsLoading(true);
-      const newComment = await postComment(postId, normalizedData);
-      setComments((prev) => [...prev, newComment]);
-      setCommentInputValue("");
-      inputRef.current?.blur();
-      lastCommentRef.current?.scrollIntoView();
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
+    console.log(normalizedData);
   }
-
-  useEffect(() => {
-    (async () => {
-      const data = await getComments(postId, page);
-
-      if (data.length > 0) {
-        setComments((prev) => [...prev, ...data]);
-      } else {
-        setHasMore(false);
-      }
-    })();
-  }, [postId, page]);
 
   return (
     <div className="flex flex-col items-center">
@@ -70,17 +49,14 @@ export default function PostComments({ postId }) {
           onChange={handleInputChange}
           maxLength={COMMENT_VALIDATION_RULES.max}
         />
-        <Btn type="submit" disabled={isLoading}>
-          Post
-        </Btn>
+        <Btn type="submit">Post</Btn>
       </form>
 
-      {comments.map((comment, index) => (
+      {(commentsQuery.data?.pages?.flat() || []).map((comment) => (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={DEFAULT_TRANSITION_RULES}
-          ref={index === comments.length - 1 ? lastCommentRef : null}
           className="my-4 flex w-full max-w-md flex-col gap-1 px-6 lg:px-12"
           key={comment.id}
         >
@@ -90,9 +66,7 @@ export default function PostComments({ postId }) {
           </p>
         </motion.div>
       ))}
-      <Btn onClick={loadMore} disabled={!hasMore}>
-        load more
-      </Btn>
+      <Btn onClick={loadMore}>load more</Btn>
     </div>
   );
 }

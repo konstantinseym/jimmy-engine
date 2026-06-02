@@ -1,6 +1,6 @@
 import { supabase } from "../lib/supabaseClient";
 
-export async function fetchLatestPosts(page) {
+export async function getLatestPosts(page) {
   const from = page;
   const to = page;
 
