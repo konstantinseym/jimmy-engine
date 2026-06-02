@@ -4,13 +4,13 @@ import Btn from "../UI/Btn";
 import InputField from "../UI/InputField";
 import { COMMENT_VALIDATION_RULES } from "../../utils/validationRules";
 import { formatDate } from "../../utils/formatDate";
-import { motion } from "motion/react";
-import { DEFAULT_TRANSITION_RULES } from "../../config/motion.config";
 import {
   useInfiniteQuery,
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
+import Loader from "../UI/Loader";
+import Error from "../UI/Error";
 
 export default function PostComments({ postId }) {
   const queryClient = useQueryClient();
@@ -18,6 +18,7 @@ export default function PostComments({ postId }) {
   const commentsQuery = useInfiniteQuery({
     queryKey: ["comments", postId],
     queryFn: ({ pageParam = 0 }) => getComments(postId, pageParam),
+    retry: false,
     getNextPageParam: (lastPage, allPages) => {
       if (lastPage.length === 0) return undefined;
       return allPages.length;
@@ -44,12 +45,19 @@ export default function PostComments({ postId }) {
     setCommentInputValue(e.target.value);
   }
 
-  async function handlePostComment(e) {
+  function handlePostComment(e) {
     e.preventDefault();
-
     const normalizedData = commentInputValue.trim();
-
+    if (!normalizedData) return;
     addCommentMutation.mutate(normalizedData);
+  }
+
+  if (commentsQuery.isLoading) {
+    return <Loader />;
+  }
+
+  if (commentsQuery.isError) {
+    return <Error />;
   }
 
   return (
@@ -65,14 +73,13 @@ export default function PostComments({ postId }) {
           onChange={handleInputChange}
           maxLength={COMMENT_VALIDATION_RULES.max}
         />
-        <Btn type="submit">Post</Btn>
+        <Btn type="submit" disabled={addCommentMutation.isPending}>
+          Post
+        </Btn>
       </form>
 
-      {(commentsQuery.data?.pages?.flat() || []).map((comment) => (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={DEFAULT_TRANSITION_RULES}
+      {commentsQuery.data.pages.flat().map((comment) => (
+        <div
           className="my-4 flex w-full max-w-md flex-col gap-1 px-6 lg:px-12"
           key={comment.id}
         >
@@ -80,9 +87,16 @@ export default function PostComments({ postId }) {
           <p className="text-palette-lightgray text-right text-xs">
             {formatDate(comment.created_at)}
           </p>
-        </motion.div>
+        </div>
       ))}
-      <Btn onClick={loadMore}>load more</Btn>
+      <Btn
+        onClick={loadMore}
+        disabled={
+          !commentsQuery.hasNextPage || commentsQuery.isFetchingNextPage
+        }
+      >
+        load more
+      </Btn>
     </div>
   );
 }
