@@ -3,6 +3,7 @@ import Hero from "../components/sections/Home/Hero";
 import LatestPostsSection from "../components/sections/Home/LatestPostsSection";
 import NavBar from "../components/layout/NavBar";
 import { useRef } from "react";
+import PageWrapper from "../components/UI/PageWrapper";
 
 export default function Home() {
   const heroRef = useRef(null);
@@ -32,7 +33,7 @@ export default function Home() {
   }
 
   return (
-    <>
+    <PageWrapper>
       <NavBar sections={sections} onNavClick={scrollIntoView} />
       <main>
         <Hero ref={heroRef} />
@@ -41,6 +42,6 @@ export default function Home() {
           <ContactMeSection ref={contactRef} />
         </div>
       </main>
-    </>
+    </PageWrapper>
   );
 }
