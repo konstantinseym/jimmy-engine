@@ -36,8 +36,10 @@ export default function Home() {
       <NavBar sections={sections} onNavClick={scrollIntoView} />
       <main>
         <Hero ref={heroRef} />
-        <LatestPostsSection ref={postsRef} />
-        <ContactMeSection ref={contactRef} />
+        <div className="bg-palette-gray w-full">
+          <LatestPostsSection ref={postsRef} />
+          <ContactMeSection ref={contactRef} />
+        </div>
       </main>
     </>
   );

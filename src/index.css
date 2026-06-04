@@ -2,7 +2,7 @@
 
 @layer base {
   body {
-    @apply bg-palette-gray text-palette-white;
+    @apply bg-palette-darkgray text-palette-white;
   }
 }
 

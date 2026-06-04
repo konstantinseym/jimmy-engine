@@ -4,6 +4,7 @@ import { getMeta } from "../../../api/contentApi";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../UI/Loader";
 import Error from "../../UI/Error";
+import MotionShapes from "../../layout/MotionShapes";
 
 const HERO_IMAGE_PATH =
   "https://qqzxvcyqighooxucphxk.supabase.co/storage/v1/object/public/layout/001.png";
@@ -48,6 +49,10 @@ const Hero = forwardRef(function Hero(props, ref) {
       {...props}
       className="mx-auto flex min-h-screen w-full max-w-7xl items-center pt-24 lg:pt-12"
     >
+      <motion.div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <MotionShapes />
+      </motion.div>
+
       <motion.div
         variants={parentVariants}
         initial="hidden"
