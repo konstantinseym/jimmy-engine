@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../../UI/Loader";
 import Error from "../../UI/Error";
 import MotionShapes from "../../layout/MotionShapes";
-import { SLOW_TRANSITION_RULES } from "../../../config/motion.config";
+import { FADE_TRANSITION_RULES } from "../../../config/motion.config";
 
 const HERO_IMAGE_PATH =
   "https://qqzxvcyqighooxucphxk.supabase.co/storage/v1/object/public/layout/001.png";
@@ -28,108 +28,112 @@ const Hero = forwardRef(function Hero(props, ref) {
     queryFn: () => getMeta(),
   });
 
-  if (metaQuery.isPending) {
-    return (
-      <AnimatePresence>
+  return (
+    <AnimatePresence mode="wait">
+      {metaQuery.isPending ? (
         <motion.header
+          key="loader"
+          className="flex min-h-screen items-center"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={FADE_TRANSITION_RULES}
+        >
+          <Loader />
+        </motion.header>
+      ) : metaQuery.isError ? (
+        <motion.header
+          key="error"
           className="flex min-h-screen items-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={SLOW_TRANSITION_RULES}
+          transition={FADE_TRANSITION_RULES}
         >
-          <Loader />
+          <Error />
         </motion.header>
-      </AnimatePresence>
-    );
-  }
-
-  if (metaQuery.isError) {
-    return (
-      <header className="flex min-h-screen items-center">
-        <Error />
-      </header>
-    );
-  }
-
-  return (
-    <header
-      ref={ref}
-      {...props}
-      className="mx-auto flex min-h-screen w-full max-w-7xl items-center pt-24 lg:pt-12"
-    >
-      <motion.div
-        className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={SLOW_TRANSITION_RULES}
-      >
-        <MotionShapes />
-      </motion.div>
-
-      <motion.div
-        variants={parentVariants}
-        initial="hidden"
-        animate="visible"
-        className="flex flex-col p-8 lg:flex-row lg:gap-12"
-      >
-        <div className="relative flex flex-1 items-center justify-center">
-          <motion.img
-            variants={childrenVariants}
-            src={HERO_IMAGE_PATH}
-            className="h-auto max-h-screen w-auto rounded-4xl"
-          />
-          <motion.div
-            variants={childrenVariants}
-            className="border-palette-lightgray absolute -bottom-5 left-1/5 rounded-lg border py-2 pr-8 pl-4 backdrop-blur-xs"
-          >
-            <p className="text-palette-lightgray text-sm">status:</p>
-            <p className="text-sm">{metaQuery.data.status}</p>
-          </motion.div>
-        </div>
-
-        <div className="flex flex-1 flex-col items-start gap-4 py-8 lg:justify-between lg:gap-0">
-          <motion.p variants={childrenVariants} className="text-palette-green">
-            PERSONAL BLOG
-          </motion.p>
-          <motion.h1
-            variants={childrenVariants}
-            className="text-3xl font-semibold lg:text-6xl"
-          >
-            {metaQuery.data.title}
-          </motion.h1>
-          <motion.h2
-            variants={childrenVariants}
-            className="text-palette-lightgray text-md lg:text-xl"
-          >
-            {metaQuery.data.subtitle}
-          </motion.h2>
-          <div className="mt-8 flex w-full justify-around">
-            <motion.div
-              variants={childrenVariants}
-              className="flex flex-col items-center"
-            >
-              <h3 className="text-4xl">{metaQuery.data.posts}</h3>
-              <p>posts</p>
-            </motion.div>
-            <motion.div
-              variants={childrenVariants}
-              className="flex flex-col items-center"
-            >
-              <h3 className="text-4xl">{metaQuery.data.comments}</h3>
-              <p>comments</p>
-            </motion.div>
-            <motion.div
-              variants={childrenVariants}
-              className="flex flex-col items-center"
-            >
-              <h3 className="text-4xl">{metaQuery.data.likes}</h3>
-              <p>likes</p>
-            </motion.div>
+      ) : (
+        <motion.header
+          key="header"
+          ref={ref}
+          {...props}
+          className="mx-auto flex min-h-screen w-full max-w-7xl items-center pt-24 lg:pt-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={FADE_TRANSITION_RULES}
+        >
+          <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+            <MotionShapes />
           </div>
-        </div>
-      </motion.div>
-    </header>
+
+          <motion.div
+            variants={parentVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col p-8 lg:flex-row lg:gap-12"
+          >
+            <div className="relative flex flex-1 items-center justify-center">
+              <motion.img
+                variants={childrenVariants}
+                src={HERO_IMAGE_PATH}
+                className="h-auto max-h-screen w-auto rounded-4xl"
+              />
+              <motion.div
+                variants={childrenVariants}
+                className="border-palette-lightgray absolute -bottom-5 left-1/5 rounded-lg border py-2 pr-8 pl-4 backdrop-blur-xs"
+              >
+                <p className="text-palette-lightgray text-sm">status:</p>
+                <p className="text-sm">{metaQuery.data.status}</p>
+              </motion.div>
+            </div>
+
+            <div className="flex flex-1 flex-col items-start gap-4 py-8 lg:justify-between lg:gap-0">
+              <motion.p
+                variants={childrenVariants}
+                className="text-palette-green"
+              >
+                PERSONAL BLOG
+              </motion.p>
+              <motion.h1
+                variants={childrenVariants}
+                className="text-3xl font-semibold lg:text-6xl"
+              >
+                {metaQuery.data.title}
+              </motion.h1>
+              <motion.h2
+                variants={childrenVariants}
+                className="text-palette-lightgray text-md lg:text-xl"
+              >
+                {metaQuery.data.subtitle}
+              </motion.h2>
+              <div className="mt-8 flex w-full justify-around">
+                <motion.div
+                  variants={childrenVariants}
+                  className="flex flex-col items-center"
+                >
+                  <h3 className="text-4xl">{metaQuery.data.posts}</h3>
+                  <p>posts</p>
+                </motion.div>
+                <motion.div
+                  variants={childrenVariants}
+                  className="flex flex-col items-center"
+                >
+                  <h3 className="text-4xl">{metaQuery.data.comments}</h3>
+                  <p>comments</p>
+                </motion.div>
+                <motion.div
+                  variants={childrenVariants}
+                  className="flex flex-col items-center"
+                >
+                  <h3 className="text-4xl">{metaQuery.data.likes}</h3>
+                  <p>likes</p>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.header>
+      )}
+    </AnimatePresence>
   );
 });
 

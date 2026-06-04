@@ -2,7 +2,7 @@ import Logo from "../UI/Logo";
 import NavLinks from "./NavLinks";
 import { useScroll } from "../../hooks/useScroll";
 import { AnimatePresence, motion } from "motion/react";
-import { DEFAULT_TRANSITION_RULES } from "../../config/motion.config";
+import { MOTION_TRANSITION_RULES } from "../../config/motion.config";
 
 export default function NavBar({ sections, onNavClick }) {
   const isScrolled = useScroll();
@@ -16,7 +16,7 @@ export default function NavBar({ sections, onNavClick }) {
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -30 }}
-          transition={DEFAULT_TRANSITION_RULES}
+          transition={MOTION_TRANSITION_RULES}
         >
           <NavLinks sections={sections} onNavClick={onNavClick} />
         </motion.nav>
@@ -28,7 +28,7 @@ export default function NavBar({ sections, onNavClick }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={DEFAULT_TRANSITION_RULES}
+          transition={MOTION_TRANSITION_RULES}
         >
           <Logo />
           <NavLinks sections={sections} onNavClick={onNavClick} />

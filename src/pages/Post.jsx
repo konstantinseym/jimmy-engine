@@ -5,8 +5,8 @@ import { getOnePost } from "../api/postsApi";
 import { useNavigate } from "react-router-dom";
 import TagLabel from "../components/UI/TagLabel";
 import { formatDate } from "../utils/formatDate";
-import { motion } from "motion/react";
-import { DEFAULT_TRANSITION_RULES } from "../config/motion.config";
+import { AnimatePresence, motion } from "motion/react";
+import { FADE_TRANSITION_RULES } from "../config/motion.config";
 import Loader from "../components/UI/Loader";
 import PostComments from "../components/layout/PostComments";
 
@@ -29,25 +29,25 @@ export default function Post() {
   }, [id]);
 
   return (
-    <>
-      {!postData && (
+    <AnimatePresence mode="wait">
+      {!postData ? (
         <motion.div
           key="loader"
           className="flex min-h-screen items-center"
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
-          transition={DEFAULT_TRANSITION_RULES}
+          exit={{ opacity: 0 }}
+          transition={FADE_TRANSITION_RULES}
         >
           <Loader />
         </motion.div>
-      )}
-
-      {postData && (
+      ) : (
         <motion.main
           key="post"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ ...DEFAULT_TRANSITION_RULES, delay: 0.3 }}
+          exit={{ opacity: 0 }}
+          transition={FADE_TRANSITION_RULES}
           className="mx-auto w-full max-w-7xl px-6 py-16"
         >
           <div className="mb-10">
@@ -80,6 +80,6 @@ export default function Post() {
           <PostComments postId={id} />
         </motion.main>
       )}
-    </>
+    </AnimatePresence>
   );
 }
