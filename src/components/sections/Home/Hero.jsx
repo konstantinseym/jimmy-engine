@@ -1,10 +1,11 @@
 import { forwardRef } from "react";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { getMeta } from "../../../api/contentApi";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../UI/Loader";
 import Error from "../../UI/Error";
 import MotionShapes from "../../layout/MotionShapes";
+import { SLOW_TRANSITION_RULES } from "../../../config/motion.config";
 
 const HERO_IMAGE_PATH =
   "https://qqzxvcyqighooxucphxk.supabase.co/storage/v1/object/public/layout/001.png";
@@ -29,9 +30,17 @@ const Hero = forwardRef(function Hero(props, ref) {
 
   if (metaQuery.isPending) {
     return (
-      <header className="flex min-h-screen items-center">
-        <Loader />
-      </header>
+      <AnimatePresence>
+        <motion.header
+          className="flex min-h-screen items-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={SLOW_TRANSITION_RULES}
+        >
+          <Loader />
+        </motion.header>
+      </AnimatePresence>
     );
   }
 
@@ -49,7 +58,12 @@ const Hero = forwardRef(function Hero(props, ref) {
       {...props}
       className="mx-auto flex min-h-screen w-full max-w-7xl items-center pt-24 lg:pt-12"
     >
-      <motion.div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <motion.div
+        className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={SLOW_TRANSITION_RULES}
+      >
         <MotionShapes />
       </motion.div>
 
