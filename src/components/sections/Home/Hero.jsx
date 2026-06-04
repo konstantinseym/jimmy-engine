@@ -62,7 +62,7 @@ const Hero = forwardRef(function Hero(props, ref) {
           exit={{ opacity: 0 }}
           transition={FADE_TRANSITION_RULES}
         >
-          <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+          <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
             <MotionShapes />
           </div>
 
