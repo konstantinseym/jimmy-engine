@@ -12,7 +12,10 @@ import {
 import Loader from "../UI/Loader";
 import Error from "../UI/Error";
 import { AnimatePresence, motion } from "motion/react";
-import { FADE_TRANSITION_RULES } from "../../config/motion.config";
+import {
+  FADE_TRANSITION_RULES,
+  MOTION_TRANSITION_RULES,
+} from "../../config/motion.config";
 
 export default function PostComments({ postId }) {
   const queryClient = useQueryClient();
@@ -97,24 +100,30 @@ export default function PostComments({ postId }) {
           </form>
 
           {commentsQuery.data.pages.flat().map((comment) => (
-            <div
-              className="my-4 flex w-full max-w-md flex-col gap-1 px-6 lg:px-12"
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ ...FADE_TRANSITION_RULES, delay: 0.3 }}
               key={comment.id}
+              className="my-4 flex w-full max-w-md flex-col gap-1 px-6 lg:px-12"
             >
               <p className="text-sm">{comment.content}</p>
               <p className="text-palette-lightgray text-right text-xs">
                 {formatDate(comment.created_at)}
               </p>
-            </div>
+            </motion.div>
           ))}
-          <Btn
-            onClick={loadMore}
-            disabled={
-              !commentsQuery.hasNextPage || commentsQuery.isFetchingNextPage
-            }
-          >
-            load more
-          </Btn>
+
+          <motion.div layout="position" transition={MOTION_TRANSITION_RULES}>
+            <Btn
+              onClick={loadMore}
+              disabled={
+                !commentsQuery.hasNextPage || commentsQuery.isFetchingNextPage
+              }
+            >
+              load more
+            </Btn>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

@@ -11,7 +11,7 @@ const HERO_IMAGE_PATH =
   "https://qqzxvcyqighooxucphxk.supabase.co/storage/v1/object/public/layout/001.png";
 
 const parentVariants = {
-  hidden: "",
+  hidden: {},
   visible: {
     transition: { delayChildren: 0.33, staggerChildren: 0.125 },
   },

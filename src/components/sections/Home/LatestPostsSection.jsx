@@ -6,6 +6,11 @@ import { getLatestPosts } from "../../../api/postsApi";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import Loader from "../../UI/Loader";
 import Error from "../../UI/Error";
+import { motion } from "motion/react";
+import {
+  FADE_TRANSITION_RULES,
+  MOTION_TRANSITION_RULES,
+} from "../../../config/motion.config";
 
 const SECTION_TITLE = "Latest posts";
 
@@ -46,17 +51,28 @@ const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
       <SectionHeader>{SECTION_TITLE}</SectionHeader>
 
       {postsQuery.data.pages.flat().map((post) => (
-        <PostPreview key={post.id} postData={post} />
+        <motion.div
+          key={post.id}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ ...FADE_TRANSITION_RULES, delay: 0.3 }}
+        >
+          <PostPreview postData={post} />
+        </motion.div>
       ))}
 
-      <div className="text-center 2xl:text-left">
+      <motion.div
+        layout="position"
+        transition={MOTION_TRANSITION_RULES}
+        className="text-center"
+      >
         <Btn
           onClick={loadMore}
           disabled={!postsQuery.hasNextPage || postsQuery.isFetchingNextPage}
         >
           Load more
         </Btn>
-      </div>
+      </motion.div>
     </section>
   );
 });
