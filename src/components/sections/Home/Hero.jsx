@@ -34,7 +34,6 @@ const Hero = forwardRef(function Hero(props, ref) {
         <motion.header
           key="loader"
           className="flex min-h-screen items-center"
-          initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={FADE_TRANSITION_RULES}
         >
@@ -46,7 +45,6 @@ const Hero = forwardRef(function Hero(props, ref) {
           className="flex min-h-screen items-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
           transition={FADE_TRANSITION_RULES}
         >
           <Error />
@@ -59,7 +57,6 @@ const Hero = forwardRef(function Hero(props, ref) {
           className="mx-auto flex min-h-screen w-full max-w-7xl items-center pt-24 lg:pt-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
           transition={FADE_TRANSITION_RULES}
         >
           <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">

@@ -41,6 +41,16 @@ export default function Post() {
           >
             <Loader />
           </motion.div>
+        ) : postQuery.isError ? (
+          <motion.div
+            key="error"
+            className="flex min-h-screen items-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={FADE_TRANSITION_RULES}
+          >
+            <Loader />
+          </motion.div>
         ) : (
           <motion.main
             key="post"
@@ -52,7 +62,6 @@ export default function Post() {
             <div className="mb-10">
               <BtnAsText onClick={navigateBack}>← Back</BtnAsText>
             </div>
-
             <div className="flex flex-col gap-2">
               <div className="flex gap-2">
                 {postQuery.data.tags.map((tag, index) => (
