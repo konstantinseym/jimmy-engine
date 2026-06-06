@@ -5,14 +5,14 @@ export default function PostContent({ content }) {
     <article className="overflow-hidden">
       <ReactMarcdown
         components={{
-          h1: ({ children }) => <h2 className="py-6 text-3xl">{children}</h2>,
+          h1: ({ children }) => <h2 className="my-8 text-3xl">{children}</h2>,
 
           h2: ({ children }) => (
-            <h3 className="pt-4 pb-2 text-2xl">{children}</h3>
+            <h3 className="mt-6 mb-4 text-2xl">{children}</h3>
           ),
 
           h3: ({ children }) => (
-            <h4 className="pt-2 pb-1 text-xl">{children}</h4>
+            <h4 className="mt-4 mb-2 text-xl">{children}</h4>
           ),
 
           p: ({ children }) => <p className="">{children}</p>,
@@ -32,27 +32,29 @@ export default function PostContent({ content }) {
             </a>
           ),
 
-          ul: ({ children }) => <ul className="pb-2 pl-4">{children}</ul>,
+          ul: ({ children }) => <ul className="mb-2 ml-4">{children}</ul>,
 
-          ol: ({ children }) => <ol className="pb-2 pl-4">{children}</ol>,
+          ol: ({ children }) => <ol className="mb-2 ml-4">{children}</ol>,
 
           li: ({ children }) => <li className="">{children}</li>,
 
           blockquote: ({ children }) => (
-            <blockquote className="border-palette-green border pb-2 pl-4">
+            <blockquote className="border-palette-green my-4 ml-4 rounded-lg border p-4">
               {children}
             </blockquote>
           ),
 
-          img: ({ src, alt }) => <img src={src} alt={alt} className="" />,
-
-          hr: () => <p className="text-red-500" />,
-
-          code: ({ children }) => (
-            <code className="text-red-500">{children}</code>
+          img: ({ src, alt }) => (
+            <img
+              src={src}
+              alt={alt}
+              className="my-4 aspect-square rounded-lg object-cover lg:aspect-5/2"
+            />
           ),
 
-          pre: ({ children }) => <pre className="text-red-500">{children}</pre>,
+          code: ({ children }) => (
+            <code className="bg-palette-lightgray">{children}</code>
+          ),
         }}
       >
         {content}

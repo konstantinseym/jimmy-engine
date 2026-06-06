@@ -59,7 +59,7 @@ const Hero = forwardRef(function Hero(props, ref) {
           animate={{ opacity: 1 }}
           transition={FADE_TRANSITION_RULES}
         >
-          <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          <div className="pointer-events-none fixed top-0 left-0 -z-10 h-full w-full overflow-hidden">
             <MotionShapes />
           </div>
 
@@ -84,7 +84,7 @@ const Hero = forwardRef(function Hero(props, ref) {
               </motion.div>
             </div>
 
-            <div className="flex flex-1 flex-col items-start justify-between py-8">
+            <div className="flex flex-1 flex-col items-start gap-4 py-8 lg:justify-between">
               <motion.p
                 variants={childrenVariants}
                 className="text-palette-green"

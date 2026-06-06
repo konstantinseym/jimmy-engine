@@ -73,14 +73,12 @@ export default function Post() {
                 {formatDate(postQuery.data.created_at)}
               </span>
               <h1 className="py-6 text-3xl">{postQuery.data.title}</h1>
-              <div className="aspect-square max-w-xl lg:aspect-auto lg:max-w-4xl">
-                <img
-                  className="mx-auto h-full w-full rounded-lg object-cover"
-                  src={postQuery.data.image_url}
-                  alt={postQuery.data.image_alt}
-                />
-              </div>
-              <div className="my-12 overflow-hidden">
+              <img
+                className="aspect-square rounded-lg object-cover lg:aspect-5/2"
+                src={postQuery.data.image_url}
+                alt={postQuery.data.image_alt}
+              />
+              <div className="my-12 lg:mr-36 lg:ml-24">
                 <PostContent content={postQuery.data.content} />
               </div>
             </div>
