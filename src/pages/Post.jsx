@@ -11,6 +11,7 @@ import Loader from "../components/UI/Loader";
 import PostComments from "../components/layout/PostComments";
 import PageWrapper from "../components/UI/PageWrapper";
 import { useQuery } from "@tanstack/react-query";
+import PostContent from "../components/features/PostContent";
 
 export default function Post() {
   const { id } = useParams();
@@ -71,7 +72,7 @@ export default function Post() {
               <span className="text-palette-green">
                 {formatDate(postQuery.data.created_at)}
               </span>
-              <h3 className="py-6 text-3xl">{postQuery.data.title}</h3>
+              <h1 className="py-6 text-3xl">{postQuery.data.title}</h1>
               <div className="aspect-square max-w-xl lg:aspect-auto lg:max-w-4xl">
                 <img
                   className="mx-auto h-full w-full rounded-lg object-cover"
@@ -79,10 +80,8 @@ export default function Post() {
                   alt={postQuery.data.image_alt}
                 />
               </div>
-              <div className="my-12 max-w-4xl">
-                <p className="text-md leading-8 lg:pl-12 lg:text-lg">
-                  {postQuery.data.content}
-                </p>
+              <div className="my-12 overflow-hidden">
+                <PostContent content={postQuery.data.content} />
               </div>
             </div>
             <PostComments postId={id} />

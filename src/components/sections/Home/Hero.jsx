@@ -84,7 +84,7 @@ const Hero = forwardRef(function Hero(props, ref) {
               </motion.div>
             </div>
 
-            <div className="flex flex-1 flex-col items-start gap-4 py-8 lg:justify-between lg:gap-0">
+            <div className="flex flex-1 flex-col items-start justify-between py-8">
               <motion.p
                 variants={childrenVariants}
                 className="text-palette-green"
