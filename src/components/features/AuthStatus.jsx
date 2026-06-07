@@ -44,28 +44,27 @@ export default function AuthStatus() {
   }
 
   return (
-    <div className="flex h-24 flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center">
       {isLoading ? (
         <p>Checking authorization...</p>
       ) : !user ? (
-        <BtnAsText onClick={signIn}>Login with Google</BtnAsText>
+        <BtnAsText onClick={signIn}>Login via Google</BtnAsText>
       ) : (
         <div className="flex items-center justify-center gap-4">
           {user.user_metadata.avatar_url && (
             <img
               src={user.user_metadata.avatar_url}
               alt=""
-              className="h-16 rounded-full"
+              className="h-8 rounded-full"
             />
           )}
           <p>
-            Hello,{" "}
             {user.user_metadata.full_name ||
               user.user_metadata.name ||
               user.email}
           </p>
 
-          <BtnAsText onClick={signOut}>Sign out</BtnAsText>
+          <BtnAsText onClick={signOut}>Log out</BtnAsText>
         </div>
       )}
     </div>

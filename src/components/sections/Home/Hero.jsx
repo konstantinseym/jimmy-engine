@@ -54,7 +54,7 @@ const Hero = forwardRef(function Hero(props, ref) {
           key="header"
           ref={ref}
           {...props}
-          className="mx-auto flex min-h-screen w-full max-w-7xl items-center pt-24 lg:pt-12"
+          className="mx-auto flex min-h-screen w-full max-w-7xl items-center pt-30 lg:pt-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={FADE_TRANSITION_RULES}
@@ -84,7 +84,7 @@ const Hero = forwardRef(function Hero(props, ref) {
               </motion.div>
             </div>
 
-            <div className="flex flex-1 flex-col items-start gap-4 py-8 lg:justify-between">
+            <div className="flex flex-1 flex-col items-start gap-2 py-8 lg:justify-between">
               <motion.p
                 variants={childrenVariants}
                 className="text-palette-green"

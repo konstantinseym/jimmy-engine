@@ -4,7 +4,6 @@ import LatestPostsSection from "../components/sections/Home/LatestPostsSection";
 import NavBar from "../components/layout/NavBar";
 import { useRef } from "react";
 import PageWrapper from "../components/UI/PageWrapper";
-import AuthStatus from "../components/features/AuthStatus";
 
 export default function Home() {
   const heroRef = useRef(null);
@@ -39,7 +38,6 @@ export default function Home() {
       <main>
         <Hero ref={heroRef} />
         <div className="bg-palette-gray w-full">
-          <AuthStatus />
           <LatestPostsSection ref={postsRef} />
           <ContactMeSection ref={contactRef} />
         </div>

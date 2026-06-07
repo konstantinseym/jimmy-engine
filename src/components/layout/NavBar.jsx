@@ -3,6 +3,7 @@ import NavLinks from "./NavLinks";
 import { useScroll } from "../../hooks/useScroll";
 import { AnimatePresence, motion } from "motion/react";
 import { MOTION_TRANSITION_RULES } from "../../config/motion.config";
+import AuthStatus from "../features/AuthStatus";
 
 export default function NavBar({ sections, onNavClick }) {
   const isScrolled = useScroll();
@@ -24,7 +25,7 @@ export default function NavBar({ sections, onNavClick }) {
       {!isScrolled && (
         <motion.nav
           key="max"
-          className="fixed top-7 z-10 flex w-full flex-col items-center gap-4 lg:top-0 lg:left-1/2 lg:max-w-7xl lg:-translate-x-1/2 lg:flex-row lg:justify-between lg:px-12 lg:py-12"
+          className="fixed top-7 z-10 flex w-full flex-col items-center gap-3 lg:top-0 lg:left-1/2 lg:max-w-7xl lg:-translate-x-1/2 lg:flex-row lg:justify-between lg:px-12 lg:py-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -32,6 +33,7 @@ export default function NavBar({ sections, onNavClick }) {
         >
           <Logo />
           <NavLinks sections={sections} onNavClick={onNavClick} />
+          <AuthStatus />
         </motion.nav>
       )}
     </AnimatePresence>
