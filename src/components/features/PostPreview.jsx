@@ -13,14 +13,14 @@ export default function PostPreview({ postData }) {
 
   return (
     <article className="bg-palette-gray my-8 flex flex-col items-center gap-8 p-6 lg:flex-row lg:items-start">
-      <div className="aspect-square max-w-xl lg:max-w-md">
+      <div className="aspect-square max-w-xl flex-2 lg:max-w-md">
         <img
           className="h-full w-full rounded-lg object-cover grayscale-50"
           src={postData.image_url}
           alt={postData.image_alt}
         />
       </div>
-      <div className="flex flex-col items-start gap-4">
+      <div className="flex flex-3 flex-col items-start gap-4">
         <div className="flex flex-col gap-4">
           <div className="flex gap-2">
             {postData.tags.map((tag, index) => (

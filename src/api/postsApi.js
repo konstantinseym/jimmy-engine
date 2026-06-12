@@ -1,8 +1,8 @@
 import { supabase } from "../lib/supabaseClient";
 
 export async function getLatestPosts(page) {
-  const from = page;
-  const to = page;
+  const from = page * 3;
+  const to = from + 2;
 
   const { data, error } = await supabase
     .from("posts")
