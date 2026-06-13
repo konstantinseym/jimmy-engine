@@ -16,8 +16,12 @@ import {
   FADE_TRANSITION_RULES,
   MOTION_TRANSITION_RULES,
 } from "../../config/motion.config";
+import { useAuth } from "../../context/authContext";
+import BtnAsText from "../UI/BtnAsText";
 
 export default function PostComments({ postId }) {
+  const { isAuthenticated, signIn } = useAuth();
+
   const queryClient = useQueryClient();
 
   const commentsQuery = useInfiniteQuery({
@@ -56,6 +60,7 @@ export default function PostComments({ postId }) {
     if (!normalizedData) return;
     addCommentMutation.mutate(normalizedData);
   }
+
   return (
     <AnimatePresence mode="wait">
       {commentsQuery.isPending ? (
@@ -83,21 +88,28 @@ export default function PostComments({ postId }) {
           animate={{ opacity: 1 }}
           transition={FADE_TRANSITION_RULES}
         >
-          <form
-            className="mb-4 flex w-full items-center justify-center gap-1"
-            onSubmit={handlePostComment}
-          >
-            <InputField
-              ref={inputRef}
-              placeholder="write smth..."
-              value={commentInputValue}
-              onChange={handleInputChange}
-              maxLength={COMMENT_VALIDATION_RULES.max}
-            />
-            <Btn type="submit" disabled={addCommentMutation.isPending}>
-              Post
-            </Btn>
-          </form>
+          {isAuthenticated ? (
+            <form
+              className="mb-4 flex w-full items-center justify-center gap-1"
+              onSubmit={handlePostComment}
+            >
+              <InputField
+                ref={inputRef}
+                placeholder="write smth..."
+                value={commentInputValue}
+                onChange={handleInputChange}
+                maxLength={COMMENT_VALIDATION_RULES.max}
+              />
+              <Btn type="submit" disabled={addCommentMutation.isPending}>
+                Post
+              </Btn>
+            </form>
+          ) : (
+            <div className="my-4 text-center">
+              <BtnAsText onClick={signIn}>Login via Google</BtnAsText>{" "}
+              <p>to leave yout comment</p>
+            </div>
+          )}
 
           {commentsQuery.data.pages.flat().map((comment) => (
             <motion.div
