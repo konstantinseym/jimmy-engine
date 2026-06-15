@@ -119,6 +119,7 @@ export default function PostComments({ postId }) {
               key={comment.id}
               className="my-4 flex w-full max-w-md flex-col gap-1 px-6 lg:px-12"
             >
+              <p className="text-palette-lightgray">{comment.user_name}</p>
               <p className="text-sm">{comment.content}</p>
               <p className="text-palette-lightgray text-right text-xs">
                 {formatDate(comment.created_at)}

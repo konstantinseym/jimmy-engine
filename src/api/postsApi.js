@@ -28,29 +28,25 @@ export async function getOnePost(id) {
 }
 
 export async function getComments(id, page) {
-  const from = page * 3;
-  const to = from + 2;
+  const { data, error } = await supabase.rpc("get_comments", {
+    p_post_id: id,
+    p_page: page,
+  });
 
-  const { data, error } = await supabase
-    .from("comments")
-    .select("id, content, created_at")
-    .eq("post_id", id)
-    .order("id", { ascending: true })
-    .range(from, to);
+  if (error) throw error;
 
-  if (error) console.log(error);
+  console.log(data);
 
   return data;
 }
 
 export async function addComment(postId, content) {
-  const { data, error } = await supabase
-    .from("comments")
-    .insert([{ content: content, post_id: postId }])
-    .select()
-    .single();
+  const { data, error } = await supabase.rpc("add_comment", {
+    p_post_id: postId,
+    p_content: content,
+  });
 
-  if (error) console.log(error);
+  if (error) throw error;
 
   return data;
 }
