@@ -12,6 +12,7 @@ import PostComments from "../components/layout/PostComments";
 import PageWrapper from "../components/UI/PageWrapper";
 import { useQuery } from "@tanstack/react-query";
 import PostContent from "../components/features/PostContent";
+import AppLink from "../components/UI/AppLink";
 
 export default function Post() {
   const { id } = useParams();
@@ -82,6 +83,21 @@ export default function Post() {
                 <PostContent content={postQuery.data.content} />
               </div>
             </div>
+
+            <div className="flex flex-col gap-4">
+              {postQuery.data.previous_post && (
+                <AppLink to={"/posts/" + postQuery.data.previous_post.id}>
+                  Previous post: {postQuery.data.previous_post.title}
+                </AppLink>
+              )}
+
+              {postQuery.data.next_post && (
+                <AppLink to={"/posts/" + postQuery.data.next_post.id}>
+                  Next post: {postQuery.data.next_post.title}
+                </AppLink>
+              )}
+            </div>
+
             <PostComments postId={id} />
           </motion.main>
         )}

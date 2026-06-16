@@ -16,13 +16,9 @@ export async function getLatestPosts(page) {
 }
 
 export async function getOnePost(id) {
-  const { data, error } = await supabase
-    .from("posts")
-    .select("id, image_url, image_alt, tags, title, content, created_at")
-    .eq("id", id)
-    .single();
+  const { data, error } = await supabase.rpc("get_one_post", { p_post_id: id });
 
-  if (error) console.log(error);
+  if (error) throw error;
 
   return data;
 }
