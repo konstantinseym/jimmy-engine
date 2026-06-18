@@ -1,14 +1,9 @@
 import { supabase } from "../lib/supabaseClient";
 
 export async function getLatestPosts(page) {
-  const from = page * 3;
-  const to = from + 2;
-
-  const { data, error } = await supabase
-    .from("posts")
-    .select("id, image_url, image_alt, tags, title, excerpt, created_at")
-    .order("id", { ascending: false })
-    .range(from, to);
+  const { data, error } = await supabase.rpc("get_latest_posts", {
+    p_page: page,
+  });
 
   if (error) throw error;
 
@@ -30,8 +25,6 @@ export async function getComments(id, page) {
   });
 
   if (error) throw error;
-
-  console.log(data);
 
   return data;
 }

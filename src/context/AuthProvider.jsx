@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
     async function getUser() {
       const { data, error } = await supabase.auth.getUser();
 
-      if (error) console.log(error);
+      if (error) throw error;
 
       setUser(data.user);
       setIsLoading(false);
@@ -31,7 +31,7 @@ export function AuthProvider({ children }) {
   async function signIn() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: window.location.origin },
+      options: { redirectTo: window.location.href },
     });
 
     if (error) console.log(error);

@@ -18,7 +18,7 @@ export default function Home() {
     },
     {
       id: "posts",
-      label: "Latest posts",
+      label: "Latest",
       ref: postsRef,
     },
     {

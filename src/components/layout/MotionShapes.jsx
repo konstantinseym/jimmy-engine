@@ -25,8 +25,8 @@ export default function MotionShapes() {
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(360 208) rotate(90) scale(360)"
             >
-              <stop stop-color="#A85A11" />
-              <stop offset="1" stop-opacity="0" />
+              <stop stopColor="#A85A11" />
+              <stop offset="1" stopOpacity="0" />
             </radialGradient>
           </defs>
         </svg>
@@ -64,14 +64,10 @@ export default function MotionShapes() {
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(360 364.5) rotate(90) scale(364.5 360)"
             >
-              <stop stop-opacity="0" />
-              <stop
-                offset="0.322115"
-                stop-color="#345148"
-                stop-opacity="0.28"
-              />
-              <stop offset="0.591346" stop-color="#3D2915" stop-opacity="0.5" />
-              <stop offset="1" stop-opacity="0" />
+              <stop stopOpacity="0" />
+              <stop offset="0.322115" stopColor="#345148" stopOpacity="0.28" />
+              <stop offset="0.591346" stopColor="#3D2915" stopOpacity="0.5" />
+              <stop offset="1" stopOpacity="0" />
             </radialGradient>
           </defs>
         </svg>

@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import BtnAsText from "../components/UI/BtnAsText";
 import { getOnePost } from "../api/postsApi";
@@ -13,8 +13,11 @@ import PageWrapper from "../components/UI/PageWrapper";
 import { useQuery } from "@tanstack/react-query";
 import PostContent from "../components/features/PostContent";
 import AppLink from "../components/UI/AppLink";
+import AuthStatus from "../components/features/AuthStatus";
 
 export default function Post() {
+  const commentsRef = useRef(null);
+
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -26,10 +29,6 @@ export default function Post() {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
-
-  function navigateBack() {
-    navigate(-1);
-  }
 
   return (
     <PageWrapper>
@@ -61,8 +60,13 @@ export default function Post() {
             transition={FADE_TRANSITION_RULES}
             className="mx-auto w-full max-w-7xl px-6 py-16"
           >
-            <div className="mb-10">
-              <BtnAsText onClick={navigateBack}>← Back</BtnAsText>
+            <div className="mb-10 flex gap-4">
+              <BtnAsText onClick={() => navigate(-1)}>← Back</BtnAsText>
+              <BtnAsText onClick={() => navigate("/")}>Home</BtnAsText>
+              <BtnAsText onClick={() => commentsRef.current.scrollIntoView()}>
+                Comments
+              </BtnAsText>
+              <AuthStatus />
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex gap-2">
@@ -98,7 +102,9 @@ export default function Post() {
               )}
             </div>
 
-            <PostComments postId={id} />
+            <div ref={commentsRef}>
+              <PostComments postId={id} />
+            </div>
           </motion.main>
         )}
       </AnimatePresence>
