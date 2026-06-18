@@ -39,3 +39,13 @@ export async function addComment(postId, content) {
 
   return data;
 }
+
+export async function toggleLike(postId) {
+  const { data, error } = await supabase.rpc("toggle_like", {
+    p_post_id: postId,
+  });
+
+  if (error) throw error;
+
+  return data;
+}

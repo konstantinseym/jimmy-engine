@@ -38,7 +38,11 @@ export default function PostPreview({ postData }) {
         </div>
         <Btn onClick={openPost}>Read full</Btn>
         <CommentLabel count={postData.comments_count} />
-        <LikeLabel count={postData.likes_count} />
+        <LikeLabel
+          count={postData.likes_count}
+          postId={postData.id}
+          isLiked={postData.is_liked_by_me}
+        />
       </div>
     </article>
   );
