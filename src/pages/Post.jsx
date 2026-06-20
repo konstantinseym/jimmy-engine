@@ -14,8 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 import PostContent from "../components/features/PostContent";
 import AppLink from "../components/UI/AppLink";
 import AuthStatus from "../components/features/AuthStatus";
-import LikeLabel from "../components/UI/LikeLabel";
-import CommentLabel from "../components/UI/CommentLabel";
+import Like from "../components/UI/Like";
 
 export default function Post() {
   const commentsRef = useRef(null);
@@ -90,12 +89,7 @@ export default function Post() {
               </div>
             </div>
 
-            <LikeLabel
-              count={postQuery.data.likes_count}
-              postId={postQuery.data.id}
-              isLiked={postQuery.data.is_liked_by_me}
-            />
-            <CommentLabel count={postQuery.data.comments_count} />
+            <Like postId={postQuery.data.id} />
 
             <div className="flex flex-col gap-4">
               {postQuery.data.previous_post && (

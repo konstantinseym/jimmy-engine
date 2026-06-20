@@ -4,9 +4,6 @@ import Btn from "../UI/Btn";
 import TagLabel from "../UI/TagLabel";
 import { formatDate } from "../../utils/formatDate";
 
-import CommentLabel from "../UI/CommentLabel";
-import LikeLabel from "../UI/LikeLabel";
-
 export default function PostPreview({ postData }) {
   const navigate = useNavigate();
 
@@ -37,12 +34,10 @@ export default function PostPreview({ postData }) {
           <p>{postData.excerpt}</p>
         </div>
         <Btn onClick={openPost}>Read full</Btn>
-        <CommentLabel count={postData.comments_count} />
-        <LikeLabel
-          count={postData.likes_count}
-          postId={postData.id}
-          isLiked={postData.is_liked_by_me}
-        />
+        <p>
+          has {postData.comments_count} comments and {postData.likes_count}{" "}
+          likes
+        </p>
       </div>
     </article>
   );
