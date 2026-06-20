@@ -7,11 +7,14 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../../UI/Loader";
 import Error from "../../UI/Error";
 import { AnimatePresence, motion } from "motion/react";
+import { useNavigate } from "react-router-dom";
 import { FADE_TRANSITION_RULES } from "../../../config/motion.config";
 
 const SECTION_TITLE = "Latest posts";
 
 const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
+  const navigate = useNavigate();
+
   const postsQuery = useQuery({
     queryKey: ["posts"],
     queryFn: () => getLatestPosts(),
@@ -60,7 +63,7 @@ const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
                 <PostPreview postData={post} />
               </motion.div>
             ))}
-            <Btn>View all</Btn>
+            <Btn onClick={() => navigate("/posts")}>View all</Btn>
           </motion.div>
         )}
       </AnimatePresence>
