@@ -3,30 +3,19 @@ import PostPreview from "../../features/PostPreview";
 import SectionHeader from "../../UI/SectionHeader";
 import { forwardRef } from "react";
 import { getLatestPosts } from "../../../api/postsApi";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import Loader from "../../UI/Loader";
 import Error from "../../UI/Error";
 import { AnimatePresence, motion } from "motion/react";
-import {
-  FADE_TRANSITION_RULES,
-  MOTION_TRANSITION_RULES,
-} from "../../../config/motion.config";
+import { FADE_TRANSITION_RULES } from "../../../config/motion.config";
 
 const SECTION_TITLE = "Latest posts";
 
 const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
-  const postsQuery = useInfiniteQuery({
+  const postsQuery = useQuery({
     queryKey: ["posts"],
-    queryFn: ({ pageParam = 0 }) => getLatestPosts(pageParam),
-    getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.length === 0) return undefined;
-      return allPages.length;
-    },
+    queryFn: () => getLatestPosts(),
   });
-
-  function loadMore() {
-    postsQuery.fetchNextPage();
-  }
 
   return (
     <section
@@ -61,7 +50,7 @@ const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
             animate={{ opacity: 1 }}
             transition={FADE_TRANSITION_RULES}
           >
-            {postsQuery.data.pages.flat().map((post) => (
+            {postsQuery.data.map((post) => (
               <motion.div
                 key={post.id}
                 initial={{ opacity: 0 }}
@@ -71,21 +60,7 @@ const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
                 <PostPreview postData={post} />
               </motion.div>
             ))}
-
-            <motion.div
-              layout="position"
-              transition={MOTION_TRANSITION_RULES}
-              className="text-center"
-            >
-              <Btn
-                onClick={loadMore}
-                disabled={
-                  !postsQuery.hasNextPage || postsQuery.isFetchingNextPage
-                }
-              >
-                Load more
-              </Btn>
-            </motion.div>
+            <Btn>View all</Btn>
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,9 +1,7 @@
 import { supabase } from "../lib/supabaseClient";
 
-export async function getLatestPosts(page) {
-  const { data, error } = await supabase.rpc("get_latest_posts", {
-    p_page: page,
-  });
+export async function getLatestPosts() {
+  const { data, error } = await supabase.rpc("get_latest");
 
   if (error) throw error;
 
@@ -11,7 +9,7 @@ export async function getLatestPosts(page) {
 }
 
 export async function getOnePost(id) {
-  const { data, error } = await supabase.rpc("get_one_post", { p_post_id: id });
+  const { data, error } = await supabase.rpc("get_post", { p_post_id: id });
 
   if (error) throw error;
 
