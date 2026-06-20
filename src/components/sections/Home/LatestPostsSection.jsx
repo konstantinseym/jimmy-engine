@@ -54,14 +54,7 @@ const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
             transition={FADE_TRANSITION_RULES}
           >
             {postsQuery.data.map((post) => (
-              <motion.div
-                key={post.id}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ ...FADE_TRANSITION_RULES, delay: 0.3 }}
-              >
-                <PostPreview postData={post} />
-              </motion.div>
+              <PostPreview key={post.id} postData={post} />
             ))}
             <Btn onClick={() => navigate("/posts")}>View all</Btn>
           </motion.div>

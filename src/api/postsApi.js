@@ -16,6 +16,18 @@ export async function getOnePost(id) {
   return data;
 }
 
+export async function getPosts({ page = 0, tag = null, search = null }) {
+  const { data, error } = await supabase.rpc("get_posts", {
+    p_page: page,
+    p_tag: tag,
+    p_search: search,
+  });
+
+  if (error) throw error;
+
+  return data;
+}
+
 export async function getComments(id, page) {
   const { data, error } = await supabase.rpc("get_comments", {
     p_post_id: id,

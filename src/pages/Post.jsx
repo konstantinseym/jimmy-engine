@@ -51,7 +51,7 @@ export default function Post() {
             animate={{ opacity: 1 }}
             transition={FADE_TRANSITION_RULES}
           >
-            <Loader />
+            <Error />
           </motion.div>
         ) : (
           <motion.main
