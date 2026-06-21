@@ -1,15 +1,17 @@
 import { supabase } from "../lib/supabaseClient";
 
-export async function insertContactMessage(message, user) {
-  const { error } = await supabase.from("messages").insert([
-    {
-      name: user.user_metadata.full_name || user.user_metadata.name,
-      email: user.email,
-      message: message,
-      status: "unread",
-      reply: null,
-    },
-  ]);
+export async function getRequestStatus() {
+  const { data, error } = await supabase.rpc("get_request_status");
 
-  if (error) console.log(error);
+  if (error) throw error;
+
+  return data;
+}
+
+export async function postRequest(request) {
+  const { data, error } = await supabase.rpc("post_user_request", { request });
+
+  if (error) throw error;
+
+  return data;
 }

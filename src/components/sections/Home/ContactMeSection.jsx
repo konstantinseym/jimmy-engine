@@ -3,11 +3,26 @@ import SectionHeader from "../../UI/SectionHeader";
 import { forwardRef } from "react";
 import { useAuth } from "../../../context/authContext";
 import BtnAsText from "../../UI/BtnAsText";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getRequestStatus, postRequest } from "../../../api/contactApi";
 
 const SECTION_TITLE = "Contact me";
 
 const ContactMeSection = forwardRef(function ContactMeSection(props, ref) {
-  const { isAuthenticated, signIn, user } = useAuth();
+  const { isAuthenticated, signIn } = useAuth();
+
+  const queryClient = useQueryClient();
+
+  const requestQuery = useQuery({
+    queryKey: ["request"],
+    queryFn: getRequestStatus,
+    enabled: isAuthenticated,
+  });
+
+  const requestMutation = useMutation({
+    mutationFn: (message) => postRequest(message),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["request"] }),
+  });
 
   return (
     <section ref={ref} {...props} className="mx-auto w-full max-w-7xl py-16">
@@ -16,18 +31,20 @@ const ContactMeSection = forwardRef(function ContactMeSection(props, ref) {
         <div className="flex flex-col items-center px-2">
           <p className="text-center">I read every message personally.</p>
           <p className="text-center">
-            Expect a thoughtful reply
-            {user ? " on " + user.email : " on email"}.
+            Expect a thoughtful reply. It will apper right here.
           </p>
+
+          {!isAuthenticated ? (
+            <div className="mt-12 text-center">
+              <p>But please sign in first</p>
+              <BtnAsText onClick={signIn}>Login via Google</BtnAsText>
+            </div>
+          ) : !requestQuery.data?.has_request ? (
+            <FormContactMe onSubmit={requestMutation.mutate} />
+          ) : (
+            <p>Your request sent, wait</p>
+          )}
         </div>
-        {isAuthenticated ? (
-          <FormContactMe />
-        ) : (
-          <div className="mt-12 text-center">
-            <p>But please sign in first</p>
-            <BtnAsText onClick={signIn}>Login via Google</BtnAsText>
-          </div>
-        )}
       </div>
     </section>
   );
