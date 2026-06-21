@@ -41,11 +41,14 @@ const ContactMeSection = forwardRef(function ContactMeSection(props, ref) {
             </div>
           ) : !requestQuery.data?.has_request ? (
             <FormContactMe onSubmit={requestMutation.mutate} />
-          ) : (
+          ) : !requestQuery.data?.has_reply ? (
             <p>Your request sent, wait</p>
+          ) : (
+            <p>Your reply: {requestQuery.data.reply_text}</p>
           )}
         </div>
       </div>
+      <p>{JSON.stringify(requestQuery.data)}</p>
     </section>
   );
 });
