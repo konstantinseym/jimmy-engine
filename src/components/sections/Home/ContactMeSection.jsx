@@ -4,7 +4,11 @@ import { forwardRef } from "react";
 import { useAuth } from "../../../context/authContext";
 import BtnAsText from "../../UI/BtnAsText";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getRequestStatus, postRequest } from "../../../api/contactApi";
+import {
+  getRequestStatus,
+  postRequest,
+  resolveRequest,
+} from "../../../api/contactApi";
 
 const SECTION_TITLE = "Contact me";
 
@@ -21,6 +25,11 @@ const ContactMeSection = forwardRef(function ContactMeSection(props, ref) {
 
   const requestMutation = useMutation({
     mutationFn: (message) => postRequest(message),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["request"] }),
+  });
+
+  const resolveMutation = useMutation({
+    mutationFn: resolveRequest,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["request"] }),
   });
 
@@ -42,9 +51,15 @@ const ContactMeSection = forwardRef(function ContactMeSection(props, ref) {
           ) : !requestQuery.data?.has_request ? (
             <FormContactMe onSubmit={requestMutation.mutate} />
           ) : !requestQuery.data?.has_reply ? (
-            <p>Your request sent, wait</p>
+            <div>
+              <p>Your request sent, wait</p>
+              <BtnAsText onClick={resolveMutation.mutate}>resolve</BtnAsText>
+            </div>
           ) : (
-            <p>Your reply: {requestQuery.data.reply_text}</p>
+            <div>
+              <p>Your reply: {requestQuery.data.reply_text}</p>
+              <BtnAsText onClick={resolveMutation.mutate}>resolve</BtnAsText>
+            </div>
           )}
         </div>
       </div>

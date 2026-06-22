@@ -15,3 +15,11 @@ export async function postRequest(request) {
 
   return data;
 }
+
+export async function resolveRequest() {
+  const { data, error } = await supabase.rpc("resolve_request");
+
+  if (error) throw error;
+
+  return data;
+}
