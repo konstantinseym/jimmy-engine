@@ -7,16 +7,16 @@ export function AuthProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function getUser() {
-      const { data, error } = await supabase.auth.getUser();
+    async function getSession() {
+      const { data, error } = await supabase.auth.getSession();
 
       if (error) throw error;
 
-      setUser(data.user);
+      setUser(data?.session?.user ?? null);
       setIsLoading(false);
     }
 
-    getUser();
+    getSession();
 
     const { data } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
@@ -29,18 +29,30 @@ export function AuthProvider({ children }) {
   }, []);
 
   async function signIn() {
+    setIsLoading(true);
+
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: window.location.href },
+      options: {
+        redirectTo: window.location.origin + window.location.pathname,
+      },
     });
 
-    if (error) console.log(error);
+    if (error) {
+      setIsLoading(false);
+      throw error;
+    }
   }
 
   async function signOut() {
+    setIsLoading(true);
+
     const { error } = await supabase.auth.signOut();
 
-    if (error) console.log(error);
+    if (error) {
+      setIsLoading(false);
+      throw error;
+    }
   }
 
   const value = {
