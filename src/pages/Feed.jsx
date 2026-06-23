@@ -1,8 +1,8 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import PageWrapper from "../components/UI/PageWrapper";
-import { useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import BtnAsText from "../components/UI/BtnAsText";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getPosts } from "../api/postsApi";
 import { AnimatePresence, motion } from "motion/react";
 import { FADE_TRANSITION_RULES } from "../config/motion.config";
@@ -15,7 +15,9 @@ import { useDebounced } from "../hooks/useDebounced";
 export default function Feed() {
   const navigate = useNavigate();
 
-  const [search, setSearch] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialSearch = searchParams.get("search") ?? "";
+  const [search, setSearch] = useState(initialSearch);
   const debouncedSearch = useDebounced(search, 1000);
 
   const postsQuery = useInfiniteQuery({
@@ -33,6 +35,14 @@ export default function Feed() {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    if (debouncedSearch) {
+      setSearchParams({ search: debouncedSearch }, { replace: true });
+    } else {
+      setSearchParams({}, { replace: true });
+    }
+  }, [debouncedSearch, setSearchParams]);
 
   return (
     <PageWrapper>
