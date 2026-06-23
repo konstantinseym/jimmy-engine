@@ -10,20 +10,20 @@ import { useLayoutEffect } from "react";
 import Loader from "../components/UI/Loader";
 import Error from "../components/UI/Error";
 import InputField from "../components/UI/InputField";
+import { useDebounced } from "../hooks/useDebounced";
 
 export default function Feed() {
   const navigate = useNavigate();
 
-  const [selectedTag, setSelectedTag] = useState("");
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounced(search, 1000);
 
   const postsQuery = useInfiniteQuery({
-    queryKey: ["posts", { tag: selectedTag, search }],
+    queryKey: ["posts", { debouncedSearch }],
     queryFn: ({ pageParam = 0 }) =>
       getPosts({
         page: pageParam,
-        tag: selectedTag,
-        search,
+        search: debouncedSearch,
       }),
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.length === 3 ? allPages.length : undefined;
@@ -36,13 +36,8 @@ export default function Feed() {
 
   return (
     <PageWrapper>
-      <p>Tags search:</p>
-      <InputField
-        value={selectedTag}
-        onChange={(e) => setSelectedTag(e.target.value)}
-      />
-      <p>Simple search:</p>
       <InputField value={search} onChange={(e) => setSearch(e.target.value)} />
+      <p>{debouncedSearch}</p>
       <AnimatePresence mode="wait">
         {postsQuery.isPending ? (
           <motion.div
