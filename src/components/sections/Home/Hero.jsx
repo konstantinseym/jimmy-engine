@@ -6,6 +6,7 @@ import Loader from "../../UI/Loader";
 import Error from "../../UI/Error";
 import MotionShapes from "../../layout/MotionShapes";
 import { FADE_TRANSITION_RULES } from "../../../config/motion.config";
+import GlassContainer from "../../UI/GlassContainer";
 
 const HERO_IMAGE_PATH =
   "https://qqzxvcyqighooxucphxk.supabase.co/storage/v1/object/public/layout/001.png";
@@ -54,7 +55,7 @@ const Hero = forwardRef(function Hero(props, ref) {
           key="header"
           ref={ref}
           {...props}
-          className="relative"
+          className="relative pt-20 lg:pt-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={FADE_TRANSITION_RULES}
@@ -65,7 +66,7 @@ const Hero = forwardRef(function Hero(props, ref) {
           </div>
 
           {/* WRAPPER FOR HERO CONTENT */}
-          <div className="mx-auto flex min-h-screen w-full max-w-7xl items-center pt-30 lg:pt-12">
+          <div className="mx-auto flex min-h-screen w-full max-w-7xl items-center">
             <motion.div
               variants={parentVariants}
               initial="hidden"
@@ -81,10 +82,12 @@ const Hero = forwardRef(function Hero(props, ref) {
                 />
                 <motion.div
                   variants={childrenVariants}
-                  className="border-palette-lightgray absolute bottom-5 left-7 rounded-lg border py-2 pr-8 pl-4 backdrop-blur-xs"
+                  className="absolute bottom-5 left-7"
                 >
-                  <p className="text-palette-lightgray text-sm">status:</p>
-                  <p className="text-sm">{metaQuery.data.status}</p>
+                  <GlassContainer addClassName="py-2 pr-8 pl-4">
+                    <p className="text-palette-lightgray text-sm">status:</p>
+                    <p className="text-sm">{metaQuery.data.status}</p>
+                  </GlassContainer>
                 </motion.div>
               </div>
 

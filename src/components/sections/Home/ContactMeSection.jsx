@@ -63,7 +63,6 @@ const ContactMeSection = forwardRef(function ContactMeSection(props, ref) {
           )}
         </div>
       </div>
-      <p>{JSON.stringify(requestQuery.data)}</p>
     </section>
   );
 });

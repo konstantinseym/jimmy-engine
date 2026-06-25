@@ -5,13 +5,13 @@ export default function AuthStatus() {
   const { user, isLoading, isAuthenticated, signIn, signOut } = useAuth();
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center text-xs">
       {isLoading ? (
         <p>Checking authorization...</p>
       ) : !isAuthenticated ? (
         <BtnAsText onClick={signIn}>Login via Google</BtnAsText>
       ) : (
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex items-center justify-center gap-2">
           {user.user_metadata.avatar_url && (
             <img
               src={user.user_metadata.avatar_url}

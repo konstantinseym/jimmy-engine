@@ -4,41 +4,38 @@ import LatestPostsSection from "../components/sections/Home/LatestPostsSection";
 import NavBar from "../components/layout/NavBar";
 import { useRef } from "react";
 import PageWrapper from "../components/UI/PageWrapper";
+import BtnAsText from "../components/UI/BtnAsText";
 
 export default function Home() {
   const heroRef = useRef(null);
-  const postsRef = useRef(null);
+  const latestRef = useRef(null);
   const contactRef = useRef(null);
-
-  const sections = [
-    {
-      id: "home",
-      label: "Home",
-      ref: heroRef,
-    },
-    {
-      id: "posts",
-      label: "Latest",
-      ref: postsRef,
-    },
-    {
-      id: "contact",
-      label: "Contact me",
-      ref: contactRef,
-    },
-  ];
-
-  function scrollIntoView(ref) {
-    ref.current.scrollIntoView();
-  }
 
   return (
     <PageWrapper>
-      <NavBar sections={sections} onNavClick={scrollIntoView} />
+      <NavBar>
+        <ul className="flex gap-8">
+          <li>
+            <BtnAsText onClick={() => heroRef.current.scrollIntoView()}>
+              Home
+            </BtnAsText>
+          </li>
+          <li>
+            <BtnAsText onClick={() => latestRef.current.scrollIntoView()}>
+              Latest
+            </BtnAsText>
+          </li>
+          <li>
+            <BtnAsText onClick={() => contactRef.current.scrollIntoView()}>
+              Contact me
+            </BtnAsText>
+          </li>
+        </ul>
+      </NavBar>
       <main>
         <Hero ref={heroRef} />
         <div className="bg-palette-gray w-full">
-          <LatestPostsSection ref={postsRef} />
+          <LatestPostsSection ref={latestRef} />
           <ContactMeSection ref={contactRef} />
         </div>
       </main>

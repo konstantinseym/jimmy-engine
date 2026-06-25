@@ -13,8 +13,8 @@ import PageWrapper from "../components/UI/PageWrapper";
 import { useQuery } from "@tanstack/react-query";
 import PostContent from "../components/features/PostContent";
 import AppLink from "../components/UI/AppLink";
-import AuthStatus from "../components/features/AuthStatus";
 import Like from "../components/UI/Like";
+import NavBar from "../components/layout/NavBar";
 
 export default function Post() {
   const commentsRef = useRef(null);
@@ -33,6 +33,21 @@ export default function Post() {
 
   return (
     <PageWrapper>
+      <NavBar>
+        <ul className="flex gap-8">
+          <li>
+            <BtnAsText onClick={() => navigate(-1)}>← Back</BtnAsText>
+          </li>
+          <li>
+            <BtnAsText onClick={() => navigate("/")}>Home</BtnAsText>
+          </li>
+          <li>
+            <BtnAsText onClick={() => commentsRef.current.scrollIntoView()}>
+              Comments
+            </BtnAsText>
+          </li>
+        </ul>
+      </NavBar>
       <AnimatePresence mode="wait">
         {postQuery.isPending ? (
           <motion.div
@@ -59,50 +74,44 @@ export default function Post() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={FADE_TRANSITION_RULES}
-            className="mx-auto w-full max-w-7xl px-6 py-16"
+            className="mx-auto w-full max-w-7xl px-6 pt-40 lg:pt-30"
           >
-            <div className="mb-10 flex gap-4">
-              <BtnAsText onClick={() => navigate(-1)}>← Back</BtnAsText>
-              <BtnAsText onClick={() => navigate("/")}>Home</BtnAsText>
-              <BtnAsText onClick={() => commentsRef.current.scrollIntoView()}>
-                Comments
-              </BtnAsText>
-              <AuthStatus />
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex gap-2">
-                {postQuery.data.tags.map((tag, index) => (
-                  <TagLabel key={index} label={tag} />
-                ))}
+            <div>
+              <div className="flex flex-col gap-2">
+                <div className="flex gap-2">
+                  {postQuery.data.tags.map((tag, index) => (
+                    <TagLabel key={index} label={tag} />
+                  ))}
+                </div>
+                <span className="text-palette-green">
+                  {formatDate(postQuery.data.created_at)}
+                </span>
+                <h1 className="py-6 text-3xl">{postQuery.data.title}</h1>
+                <img
+                  className="aspect-square rounded-lg object-cover lg:aspect-5/2"
+                  src={postQuery.data.image_url}
+                  alt={postQuery.data.image_alt}
+                />
+                <div className="my-12 lg:mr-36 lg:ml-24">
+                  <PostContent content={postQuery.data.content} />
+                </div>
               </div>
-              <span className="text-palette-green">
-                {formatDate(postQuery.data.created_at)}
-              </span>
-              <h1 className="py-6 text-3xl">{postQuery.data.title}</h1>
-              <img
-                className="aspect-square rounded-lg object-cover lg:aspect-5/2"
-                src={postQuery.data.image_url}
-                alt={postQuery.data.image_alt}
-              />
-              <div className="my-12 lg:mr-36 lg:ml-24">
-                <PostContent content={postQuery.data.content} />
+
+              <Like postId={postQuery.data.id} />
+
+              <div className="flex flex-col gap-4">
+                {postQuery.data.previous_post && (
+                  <AppLink to={"/posts/" + postQuery.data.previous_post.id}>
+                    Previous post: {postQuery.data.previous_post.title}
+                  </AppLink>
+                )}
+
+                {postQuery.data.next_post && (
+                  <AppLink to={"/posts/" + postQuery.data.next_post.id}>
+                    Next post: {postQuery.data.next_post.title}
+                  </AppLink>
+                )}
               </div>
-            </div>
-
-            <Like postId={postQuery.data.id} />
-
-            <div className="flex flex-col gap-4">
-              {postQuery.data.previous_post && (
-                <AppLink to={"/posts/" + postQuery.data.previous_post.id}>
-                  Previous post: {postQuery.data.previous_post.title}
-                </AppLink>
-              )}
-
-              {postQuery.data.next_post && (
-                <AppLink to={"/posts/" + postQuery.data.next_post.id}>
-                  Next post: {postQuery.data.next_post.title}
-                </AppLink>
-              )}
             </div>
 
             <div ref={commentsRef}>

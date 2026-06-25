@@ -11,6 +11,7 @@ import Loader from "../components/UI/Loader";
 import Error from "../components/UI/Error";
 import InputField from "../components/UI/InputField";
 import { useDebounced } from "../hooks/useDebounced";
+import NavBar from "../components/layout/NavBar";
 
 export default function Feed() {
   const navigate = useNavigate();
@@ -46,8 +47,23 @@ export default function Feed() {
 
   return (
     <PageWrapper>
-      <InputField value={search} onChange={(e) => setSearch(e.target.value)} />
-      <p>{debouncedSearch}</p>
+      <NavBar>
+        <ul className="flex items-center gap-8">
+          <li>
+            <BtnAsText onClick={() => navigate(-1)}>← Back</BtnAsText>
+          </li>
+          <li>
+            <BtnAsText onClick={() => navigate("/")}>Home</BtnAsText>
+          </li>
+          <li>
+            <InputField
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="search..."
+            />
+          </li>
+        </ul>
+      </NavBar>
       <AnimatePresence mode="wait">
         {postsQuery.isPending ? (
           <motion.div
@@ -74,12 +90,8 @@ export default function Feed() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={FADE_TRANSITION_RULES}
-            className="mx-auto w-full max-w-7xl px-6 py-16"
+            className="mx-auto w-full max-w-7xl px-6 pt-40 lg:pt-30"
           >
-            <div>FEED</div>
-            <BtnAsText onClick={() => navigate(-1)}>Back</BtnAsText>
-            <BtnAsText onClick={() => navigate("/")}>Home</BtnAsText>
-
             <div className="flex flex-col gap-12">
               {postsQuery.data.pages.flat().map((post) => (
                 <div key={post.id}>
