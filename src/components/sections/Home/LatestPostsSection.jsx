@@ -1,5 +1,6 @@
 import Btn from "../../UI/Btn";
-import PostPreview from "../../features/PostPreview";
+import LastPostPreview from "../../features/LastPostPreview";
+import MiniPostPreview from "../../features/MiniPostPreview";
 import SectionHeader from "../../UI/SectionHeader";
 import { forwardRef } from "react";
 import { getLatestPosts } from "../../../api/postsApi";
@@ -10,7 +11,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
 import { FADE_TRANSITION_RULES } from "../../../config/motion.config";
 
-const SECTION_TITLE = "Latest posts";
+const SECTION_TITLE = "Latest";
 
 const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
   const navigate = useNavigate();
@@ -53,10 +54,26 @@ const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
             animate={{ opacity: 1 }}
             transition={FADE_TRANSITION_RULES}
           >
-            {postsQuery.data.map((post) => (
-              <PostPreview key={post.id} postData={post} />
-            ))}
-            <Btn onClick={() => navigate("/posts")}>View all</Btn>
+            <LastPostPreview
+              key={postsQuery.data[0].id}
+              postData={postsQuery.data[0]}
+            />
+
+            <div className="flex flex-col lg:flex-row">
+              <MiniPostPreview
+                key={postsQuery.data[1].id}
+                postData={postsQuery.data[1]}
+              />
+
+              <MiniPostPreview
+                key={postsQuery.data[2].id}
+                postData={postsQuery.data[2]}
+              />
+            </div>
+
+            <div className="my-12 text-center">
+              <Btn onClick={() => navigate("/posts")}>View all</Btn>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

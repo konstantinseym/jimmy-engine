@@ -2,7 +2,7 @@ import FormContactMe from "../../features/FormContactMe";
 import SectionHeader from "../../UI/SectionHeader";
 import { forwardRef } from "react";
 import { useAuth } from "../../../context/authContext";
-import BtnAsText from "../../UI/BtnAsText";
+import Btn from "../../UI/Btn";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   getRequestStatus,
@@ -46,19 +46,25 @@ const ContactMeSection = forwardRef(function ContactMeSection(props, ref) {
           {!isAuthenticated ? (
             <div className="mt-12 text-center">
               <p>But please sign in first</p>
-              <BtnAsText onClick={signIn}>Login via Google</BtnAsText>
+              <Btn variant="text" onClick={signIn}>
+                Login via Google
+              </Btn>
             </div>
           ) : !requestQuery.data?.has_request ? (
             <FormContactMe onSubmit={requestMutation.mutate} />
           ) : !requestQuery.data?.has_reply ? (
             <div>
               <p>Your request sent, wait</p>
-              <BtnAsText onClick={resolveMutation.mutate}>resolve</BtnAsText>
+              <Btn variant="text" onClick={resolveMutation.mutate}>
+                resolve
+              </Btn>
             </div>
           ) : (
             <div>
               <p>Your reply: {requestQuery.data.reply_text}</p>
-              <BtnAsText onClick={resolveMutation.mutate}>resolve</BtnAsText>
+              <Btn variant="text" onClick={resolveMutation.mutate}>
+                resolve
+              </Btn>
             </div>
           )}
         </div>

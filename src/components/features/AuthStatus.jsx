@@ -1,5 +1,5 @@
 import { useAuth } from "../../context/authContext";
-import BtnAsText from "../UI/BtnAsText";
+import Btn from "../UI/Btn";
 
 export default function AuthStatus() {
   const { user, isLoading, isAuthenticated, signIn, signOut } = useAuth();
@@ -9,7 +9,9 @@ export default function AuthStatus() {
       {isLoading ? (
         <p>Checking authorization...</p>
       ) : !isAuthenticated ? (
-        <BtnAsText onClick={signIn}>Login via Google</BtnAsText>
+        <Btn variant="text" onClick={signIn}>
+          Login via Google
+        </Btn>
       ) : (
         <div className="flex items-center justify-center gap-2">
           {user.user_metadata.avatar_url && (
@@ -25,7 +27,9 @@ export default function AuthStatus() {
               user.email}
           </p>
 
-          <BtnAsText onClick={signOut}>Log out</BtnAsText>
+          <Btn variant="text" onClick={signOut}>
+            Log out
+          </Btn>
         </div>
       )}
     </div>

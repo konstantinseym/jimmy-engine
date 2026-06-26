@@ -1,7 +1,7 @@
 import { addComment, getComments } from "../../api/postsApi";
 import { useState, useRef } from "react";
 import Btn from "../UI/Btn";
-import InputField from "../UI/InputField";
+
 import { COMMENT_VALIDATION_RULES } from "../../utils/validationRules";
 import { formatDate } from "../../utils/formatDate";
 import {
@@ -17,7 +17,6 @@ import {
   MOTION_TRANSITION_RULES,
 } from "../../config/motion.config";
 import { useAuth } from "../../context/authContext";
-import BtnAsText from "../UI/BtnAsText";
 
 export default function PostComments({ postId }) {
   const { isAuthenticated, signIn } = useAuth();
@@ -93,20 +92,22 @@ export default function PostComments({ postId }) {
               className="mb-4 flex w-full items-center justify-center gap-1"
               onSubmit={handlePostComment}
             >
-              <InputField
+              {/* <InputField
                 ref={inputRef}
                 placeholder="write smth..."
                 value={commentInputValue}
                 onChange={handleInputChange}
                 maxLength={COMMENT_VALIDATION_RULES.max}
-              />
+              /> */}
               <Btn type="submit" disabled={addCommentMutation.isPending}>
                 Post
               </Btn>
             </form>
           ) : (
             <div className="my-4 text-center">
-              <BtnAsText onClick={signIn}>Login via Google</BtnAsText>{" "}
+              <Btn variant="text" onClick={signIn}>
+                Login via Google
+              </Btn>{" "}
               <p>to leave yout comment</p>
             </div>
           )}

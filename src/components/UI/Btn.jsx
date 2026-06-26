@@ -1,10 +1,16 @@
-export default function Btn({ children, onClick, disabled = false }) {
+export default function Btn({
+  variant = "pill",
+  children,
+  onClick,
+  disabled = false,
+}) {
+  const variantClass =
+    variant === "pill"
+      ? "w-min-32 text-palette-white border-palette-green/50 hover:border-palette-green cursor-pointer rounded-full border px-4 py-2 transition disabled:cursor-not-allowed disabled:opacity-30"
+      : "hover:text-palette-green cursor-pointer transition";
+
   return (
-    <button
-      className="hover:bg-palette-white w-min-32 text-palette-black bg-palette-green cursor-pointer rounded-full px-4 py-2 transition disabled:cursor-not-allowed disabled:opacity-30"
-      onClick={onClick}
-      disabled={disabled}
-    >
+    <button className={variantClass} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   );

@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import PageWrapper from "../components/UI/PageWrapper";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import BtnAsText from "../components/UI/BtnAsText";
+import Btn from "../components/UI/Btn";
 import { useEffect, useState } from "react";
 import { getPosts } from "../api/postsApi";
 import { AnimatePresence, motion } from "motion/react";
@@ -9,7 +9,7 @@ import { FADE_TRANSITION_RULES } from "../config/motion.config";
 import { useLayoutEffect } from "react";
 import Loader from "../components/UI/Loader";
 import Error from "../components/UI/Error";
-import InputField from "../components/UI/InputField";
+import SearchField from "../components/UI/SearchField";
 import { useDebounced } from "../hooks/useDebounced";
 import NavBar from "../components/layout/NavBar";
 
@@ -50,13 +50,12 @@ export default function Feed() {
       <NavBar>
         <ul className="flex items-center gap-8">
           <li>
-            <BtnAsText onClick={() => navigate(-1)}>← Back</BtnAsText>
+            <Btn variant="text" onClick={() => navigate("/")}>
+              Home
+            </Btn>
           </li>
           <li>
-            <BtnAsText onClick={() => navigate("/")}>Home</BtnAsText>
-          </li>
-          <li>
-            <InputField
+            <SearchField
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="search..."

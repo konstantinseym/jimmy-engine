@@ -1,0 +1,15 @@
+export default function MiniComment({ width }) {
+  return (
+    <svg
+      width={width}
+      viewBox="0 0 62 62"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M62 31C62 37.5509 60.968 41.4942 57.5 46.5C56.324 48.1974 61.983 59.572 60.5 61C58.975 62.4685 46.7999 57.3662 45 58.5C40.2218 61.5099 37.0643 62 31 62C13.8792 62 0 48.1208 0 31C0 13.8792 13.8792 0 31 0C48.1208 0 62 13.8792 62 31Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}

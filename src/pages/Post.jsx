@@ -1,10 +1,10 @@
 import { useLayoutEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import BtnAsText from "../components/UI/BtnAsText";
+import Btn from "../components/UI/Btn";
 import { getOnePost } from "../api/postsApi";
 import { useNavigate } from "react-router-dom";
 import TagLabel from "../components/UI/TagLabel";
-import { formatDate } from "../utils/formatDate";
+import TimeStamp from "../components/UI/TimeStamp";
 import { AnimatePresence, motion } from "motion/react";
 import { FADE_TRANSITION_RULES } from "../config/motion.config";
 import Loader from "../components/UI/Loader";
@@ -36,15 +36,22 @@ export default function Post() {
       <NavBar>
         <ul className="flex gap-8">
           <li>
-            <BtnAsText onClick={() => navigate(-1)}>← Back</BtnAsText>
+            <Btn variant="text" onClick={() => navigate(-1)}>
+              ← Back
+            </Btn>
           </li>
           <li>
-            <BtnAsText onClick={() => navigate("/")}>Home</BtnAsText>
+            <Btn variant="text" onClick={() => navigate("/")}>
+              Home
+            </Btn>
           </li>
           <li>
-            <BtnAsText onClick={() => commentsRef.current.scrollIntoView()}>
+            <Btn
+              variant="text"
+              onClick={() => commentsRef.current.scrollIntoView()}
+            >
               Comments
-            </BtnAsText>
+            </Btn>
           </li>
         </ul>
       </NavBar>
@@ -83,9 +90,7 @@ export default function Post() {
                     <TagLabel key={index} label={tag} />
                   ))}
                 </div>
-                <span className="text-palette-green">
-                  {formatDate(postQuery.data.created_at)}
-                </span>
+                <TimeStamp time={postQuery.data.created_at} />
                 <h1 className="py-6 text-3xl">{postQuery.data.title}</h1>
                 <img
                   className="aspect-square rounded-lg object-cover lg:aspect-5/2"

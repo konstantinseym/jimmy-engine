@@ -53,7 +53,7 @@ export default function PostContent({ content }) {
           ),
 
           code: ({ children }) => (
-            <code className="bg-palette-lightgray">{children}</code>
+            <code className="bg-palette-gray">{children}</code>
           ),
         }}
       >
