@@ -4,57 +4,63 @@ export default function MotionShapes() {
   return (
     <div>
       <motion.div
-        className="absolute right-0 z-20"
-        animate={{ scale: [1.5, 2, 1.5, 2, 1.5], y: [0, -120, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-0 right-0"
+        animate={{
+          x: [0, 80, -40, 60, 0],
+          y: [0, -60, 40, -80, 0],
+          scale: [1, 1.3, 0.8, 1.2, 1],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut",
+          times: [0, 0.25, 0.5, 0.75, 1],
+        }}
       >
         <svg
-          width="601"
-          height="568"
-          viewBox="0 0 601 568"
+          className="h-[200vh] min-h-180 w-[200vw] min-w-180"
+          viewBox="0 0 720 720"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <circle cx="360" cy="208" r="360" fill="url(#paint0_radial_1_1)" />
+          <circle cx="360" cy="360" r="360" fill="url(#paint0_radial_2_2)" />
           <defs>
             <radialGradient
-              id="paint0_radial_1_1"
+              id="paint0_radial_2_2"
               cx="0"
               cy="0"
               r="1"
               gradientUnits="userSpaceOnUse"
-              gradientTransform="translate(360 208) rotate(90) scale(360)"
+              gradientTransform="translate(360 360) rotate(90) scale(360)"
             >
-              <stop stopColor="#A85A11" />
-              <stop offset="1" stopOpacity="0" />
+              <stop stopColor="#392D33" />
+              <stop offset="1" stopColor="#392D33" stopOpacity="0" />
             </radialGradient>
           </defs>
         </svg>
       </motion.div>
-
       <motion.div
-        className="absolute -bottom-75 -left-75 z-10"
+        className="absolute bottom-0 left-0"
         animate={{
-          scale: [1.5, 2.5, 1.5],
-          x: [0, 300, 200, 300, 0],
-          y: [0, -250, -30, -280, 0],
+          x: [0, -60, 80, -40, 0],
+          y: [0, 40, -80, 60, 0],
+          scale: [1, 0.7, 1.4, 0.9, 1],
         }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        transition={{
+          duration: 25,
+          repeat: Infinity,
+          ease: "easeInOut",
+          times: [0, 0.3, 0.5, 0.7, 1],
+          delay: 3,
+        }}
       >
         <svg
-          width="720"
-          height="729"
-          viewBox="0 0 720 729"
+          className="h-[200vh] min-h-180 w-[200vw] min-w-180"
+          viewBox="0 0 720 720"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <ellipse
-            cx="360"
-            cy="364.5"
-            rx="360"
-            ry="364.5"
-            fill="url(#paint0_radial_1_3)"
-          />
+          <circle cx="360" cy="360" r="360" fill="url(#paint0_radial_1_3)" />
           <defs>
             <radialGradient
               id="paint0_radial_1_3"
@@ -62,12 +68,10 @@ export default function MotionShapes() {
               cy="0"
               r="1"
               gradientUnits="userSpaceOnUse"
-              gradientTransform="translate(360 364.5) rotate(90) scale(364.5 360)"
+              gradientTransform="translate(360 360) rotate(90) scale(360)"
             >
-              <stop stopOpacity="0" />
-              <stop offset="0.322115" stopColor="#345148" stopOpacity="0.28" />
-              <stop offset="0.591346" stopColor="#3D2915" stopOpacity="0.5" />
-              <stop offset="1" stopOpacity="0" />
+              <stop stopColor="#5E5531" />
+              <stop offset="1" stopColor="#5E5531" stopOpacity="0" />
             </radialGradient>
           </defs>
         </svg>

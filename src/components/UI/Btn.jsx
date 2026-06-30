@@ -6,8 +6,8 @@ export default function Btn({
 }) {
   const variantClass =
     variant === "pill"
-      ? "w-min-32 text-palette-white border-palette-green/50 hover:border-palette-green cursor-pointer rounded-full border px-4 py-2 transition disabled:cursor-not-allowed disabled:opacity-30"
-      : "hover:text-palette-green cursor-pointer transition";
+      ? "w-min-32 text-palette-white border-accent/50 hover:border-accent cursor-pointer rounded-full border px-4 py-2 transition disabled:cursor-not-allowed disabled:opacity-30"
+      : "hover:text-accent cursor-pointer transition";
 
   return (
     <button className={variantClass} onClick={onClick} disabled={disabled}>

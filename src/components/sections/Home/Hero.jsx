@@ -55,7 +55,7 @@ const Hero = forwardRef(function Hero(props, ref) {
           key="header"
           ref={ref}
           {...props}
-          className="relative pt-20 lg:pt-0"
+          className="relative pt-10 lg:pt-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={FADE_TRANSITION_RULES}
@@ -71,7 +71,7 @@ const Hero = forwardRef(function Hero(props, ref) {
               variants={parentVariants}
               initial="hidden"
               animate="visible"
-              className="flex flex-col p-8 lg:flex-row lg:gap-12"
+              className="mx-4 flex flex-col lg:flex-row lg:gap-12"
             >
               {/* FLEXBOX HERO CONTENT */}
               <div className="relative flex flex-1 items-center justify-center">
@@ -84,50 +84,47 @@ const Hero = forwardRef(function Hero(props, ref) {
                   variants={childrenVariants}
                   className="absolute bottom-5 left-7"
                 >
-                  <GlassContainer addClassName="py-2 pr-8 pl-4">
-                    <p className="text-palette-lightgray text-sm">status:</p>
-                    <p className="text-sm">{metaQuery.data.status}</p>
+                  <GlassContainer addClassName="py-2 pr-8 pl-4 text-sm rounded-full">
+                    <p className="text-text-muted">status:</p>
+                    <p>{metaQuery.data.status}</p>
                   </GlassContainer>
                 </motion.div>
               </div>
 
-              <div className="flex flex-1 flex-col items-start gap-2 py-8 lg:justify-between">
-                <motion.p
-                  variants={childrenVariants}
-                  className="text-palette-green"
-                >
+              <div className="flex flex-1 flex-col items-start gap-2 px-4 py-8 lg:justify-between">
+                <motion.p variants={childrenVariants} className="text-accent">
                   PERSONAL BLOG
                 </motion.p>
-                <motion.h1
+                <motion.p
                   variants={childrenVariants}
                   className="text-3xl font-semibold lg:text-6xl"
                 >
                   {metaQuery.data.title}
-                </motion.h1>
-                <motion.h2
+                </motion.p>
+                <motion.h1
                   variants={childrenVariants}
-                  className="text-palette-lightgray text-md lg:text-xl"
+                  className="text-text-muted text-md lg:text-xl"
                 >
                   {metaQuery.data.subtitle}
-                </motion.h2>
+                </motion.h1>
                 <div className="mt-8 flex w-full justify-around">
                   <motion.div
                     variants={childrenVariants}
-                    className="flex flex-col items-center"
+                    className="flex flex-col items-center gap-1"
                   >
                     <h3 className="text-4xl">{metaQuery.data.posts}</h3>
                     <p>posts</p>
                   </motion.div>
                   <motion.div
                     variants={childrenVariants}
-                    className="flex flex-col items-center"
+                    className="flex flex-col items-center gap-1"
                   >
                     <h3 className="text-4xl">{metaQuery.data.comments}</h3>
                     <p>comments</p>
                   </motion.div>
                   <motion.div
                     variants={childrenVariants}
-                    className="flex flex-col items-center"
+                    className="flex flex-col items-center gap-1"
                   >
                     <h3 className="text-4xl">{metaQuery.data.likes}</h3>
                     <p>likes</p>

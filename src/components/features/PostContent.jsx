@@ -26,7 +26,7 @@ export default function PostContent({ content }) {
               href={href}
               target="_blank"
               rel="noreferrer"
-              className="hover:text-palette-green underline transition"
+              className="hover:text-accent underline transition"
             >
               {children}
             </a>
@@ -39,7 +39,7 @@ export default function PostContent({ content }) {
           li: ({ children }) => <li className="">{children}</li>,
 
           blockquote: ({ children }) => (
-            <blockquote className="border-palette-green my-4 ml-4 rounded-lg border p-4">
+            <blockquote className="border-accent my-4 ml-4 rounded-lg border p-4">
               {children}
             </blockquote>
           ),
@@ -53,7 +53,7 @@ export default function PostContent({ content }) {
           ),
 
           code: ({ children }) => (
-            <code className="bg-palette-gray">{children}</code>
+            <code className="bg-surface">{children}</code>
           ),
         }}
       >

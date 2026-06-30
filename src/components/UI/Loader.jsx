@@ -9,7 +9,7 @@ export default function Loader() {
         {DOTS.map((dot) => (
           <motion.div
             key={dot}
-            className="bg-palette-green h-2 w-2 rounded-full"
+            className="bg-accent h-2 w-2 rounded-full"
             animate={{
               scale: [1, 0.5],
             }}

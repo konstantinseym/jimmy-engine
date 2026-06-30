@@ -3,11 +3,11 @@ import Calendar from "./svg/Calendar";
 
 export default function TimeStamp({ time }) {
   return (
-    <div className="flex items-start gap-2">
-      <span className="text-palette-green">
+    <div className="text-accent flex items-start gap-2 text-xs lg:text-sm">
+      <div className="hidden lg:block">
         <Calendar width="18" />
-      </span>
-      <span className="text-palette-green">{formatDate(time)}</span>
+      </div>
+      <p>{formatDate(time)}</p>
     </div>
   );
 }

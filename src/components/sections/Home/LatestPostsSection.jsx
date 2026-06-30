@@ -25,7 +25,7 @@ const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
     <section
       ref={ref}
       {...props}
-      className="mx-auto min-h-92 w-full max-w-7xl py-16"
+      className="mx-auto min-h-screen w-full max-w-7xl pt-32"
     >
       <SectionHeader>{SECTION_TITLE}</SectionHeader>
 
@@ -59,17 +59,25 @@ const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
               postData={postsQuery.data[0]}
             />
 
-            <div className="flex flex-col lg:flex-row">
-              <MiniPostPreview
-                key={postsQuery.data[1].id}
-                postData={postsQuery.data[1]}
-              />
+            {postsQuery.data.length > 1 ? (
+              <div className="flex flex-col lg:flex-row">
+                <MiniPostPreview
+                  key={postsQuery.data[1].id}
+                  postData={postsQuery.data[1]}
+                />
 
-              <MiniPostPreview
-                key={postsQuery.data[2].id}
-                postData={postsQuery.data[2]}
-              />
-            </div>
+                {postsQuery.data.length > 2 ? (
+                  <MiniPostPreview
+                    key={postsQuery.data[2].id}
+                    postData={postsQuery.data[2]}
+                  />
+                ) : (
+                  <></>
+                )}
+              </div>
+            ) : (
+              <></>
+            )}
 
             <div className="my-12 text-center">
               <Btn onClick={() => navigate("/posts")}>View all</Btn>

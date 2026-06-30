@@ -1,19 +1,24 @@
-import FormContactMe from "../../features/FormContactMe";
-import SectionHeader from "../../UI/SectionHeader";
 import { forwardRef } from "react";
-import { useAuth } from "../../../context/authContext";
-import Btn from "../../UI/Btn";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { AnimatePresence, motion } from "motion/react";
+
 import {
   getRequestStatus,
   postRequest,
   resolveRequest,
 } from "../../../api/contactApi";
+import { useAuth } from "../../../context/authContext";
+import ContactForm from "../../features/contact-me-features/ContactForm";
+import { FADE_TRANSITION_RULES } from "../../../config/motion.config";
+import RequestThread from "../../features/contact-me-features/RequestThread";
+import GlassContainer from "../../UI/GlassContainer";
+import LoginBtn from "../../UI/LoginBtn";
+import SectionHeader from "../../UI/SectionHeader";
 
 const SECTION_TITLE = "Contact me";
 
 const ContactMeSection = forwardRef(function ContactMeSection(props, ref) {
-  const { isAuthenticated, signIn } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   const queryClient = useQueryClient();
 
@@ -34,41 +39,67 @@ const ContactMeSection = forwardRef(function ContactMeSection(props, ref) {
   });
 
   return (
-    <section ref={ref} {...props} className="mx-auto w-full max-w-7xl py-16">
+    <section
+      ref={ref}
+      {...props}
+      className="mx-auto min-h-screen w-full max-w-7xl pt-32"
+    >
       <SectionHeader>{SECTION_TITLE}</SectionHeader>
-      <div className="flex flex-col items-center">
-        <div className="flex flex-col items-center px-2">
-          <p className="text-center">I read every message personally.</p>
-          <p className="text-center">
-            Expect a thoughtful reply. It will apper right here.
-          </p>
-
+      <GlassContainer addClassName="mx-4 flex min-h-[50vh] flex-col rounded-4xl text-center">
+        <AnimatePresence mode="wait">
           {!isAuthenticated ? (
-            <div className="mt-12 text-center">
-              <p>But please sign in first</p>
-              <Btn variant="text" onClick={signIn}>
-                Login via Google
-              </Btn>
-            </div>
+            <motion.div
+              key="login"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={FADE_TRANSITION_RULES}
+              className="flex flex-1 flex-col items-center justify-center"
+            >
+              <LoginBtn />
+            </motion.div>
           ) : !requestQuery.data?.has_request ? (
-            <FormContactMe onSubmit={requestMutation.mutate} />
+            <motion.div
+              key="form"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={FADE_TRANSITION_RULES}
+              className="mx-5 my-7 flex flex-1 flex-col items-center justify-center lg:m-8"
+            >
+              <ContactForm onSubmit={requestMutation.mutate} />
+            </motion.div>
           ) : !requestQuery.data?.has_reply ? (
-            <div>
-              <p>Your request sent, wait</p>
-              <Btn variant="text" onClick={resolveMutation.mutate}>
-                resolve
-              </Btn>
-            </div>
+            <motion.div
+              key="requesst"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={FADE_TRANSITION_RULES}
+              className="mx-5 my-7 flex flex-1 flex-col items-center justify-center lg:m-8"
+            >
+              <RequestThread
+                request={requestQuery.data.request_text}
+                onDeleteRequest={resolveMutation.mutate}
+              />
+            </motion.div>
           ) : (
-            <div>
-              <p>Your reply: {requestQuery.data.reply_text}</p>
-              <Btn variant="text" onClick={resolveMutation.mutate}>
-                resolve
-              </Btn>
-            </div>
+            <motion.div
+              key="answer"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={FADE_TRANSITION_RULES}
+              className="mx-5 my-7 flex flex-1 flex-col items-center justify-center lg:m-8"
+            >
+              <RequestThread
+                request={requestQuery.data.request_text}
+                reply={requestQuery.data.reply_text}
+                onDeleteRequest={resolveMutation.mutate}
+              />
+            </motion.div>
           )}
-        </div>
-      </div>
+        </AnimatePresence>
+      </GlassContainer>
     </section>
   );
 });

@@ -43,7 +43,7 @@ export default function Home() {
       </NavBar>
       <main>
         <Hero ref={heroRef} />
-        <div className="bg-palette-gray w-full">
+        <div className="bg-surface w-full">
           <LatestPostsSection ref={latestRef} />
           <ContactMeSection ref={contactRef} />
         </div>

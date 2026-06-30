@@ -1,24 +1,24 @@
 import { useAuth } from "../../context/authContext";
 import Btn from "../UI/Btn";
+import LoginBtn from "../UI/LoginBtn";
+import Logout from "../UI/svg/Logout";
 
 export default function AuthStatus() {
-  const { user, isLoading, isAuthenticated, signIn, signOut } = useAuth();
+  const { user, isLoading, isAuthenticated, signOut } = useAuth();
 
   return (
     <div className="flex flex-col items-center justify-center text-xs">
       {isLoading ? (
         <p>Checking authorization...</p>
       ) : !isAuthenticated ? (
-        <Btn variant="text" onClick={signIn}>
-          Login via Google
-        </Btn>
+        <LoginBtn />
       ) : (
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-4">
           {user.user_metadata.avatar_url && (
             <img
               src={user.user_metadata.avatar_url}
               alt=""
-              className="h-8 rounded-full"
+              className="hidden h-8 rounded-full lg:block"
             />
           )}
           <p>
@@ -28,7 +28,7 @@ export default function AuthStatus() {
           </p>
 
           <Btn variant="text" onClick={signOut}>
-            Log out
+            <Logout width="16" />
           </Btn>
         </div>
       )}
