@@ -103,7 +103,7 @@ const Hero = forwardRef(function Hero(props, ref) {
                 </motion.p>
                 <motion.h1
                   variants={childrenVariants}
-                  className="text-text-muted text-md lg:text-xl"
+                  className="text-text-muted text-base font-normal lg:text-xl"
                 >
                   {metaQuery.data.subtitle}
                 </motion.h1>

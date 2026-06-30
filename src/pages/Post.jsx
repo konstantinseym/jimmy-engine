@@ -15,6 +15,7 @@ import PostContent from "../components/features/PostContent";
 import AppLink from "../components/UI/AppLink";
 import Like from "../components/UI/Like";
 import NavBar from "../components/layout/NavBar";
+import GlassContainer from "../components/UI/GlassContainer";
 
 export default function Post() {
   const commentsRef = useRef(null);
@@ -81,46 +82,51 @@ export default function Post() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={FADE_TRANSITION_RULES}
-            className="mx-auto w-full max-w-7xl px-6 pt-40 lg:pt-30"
+            className="relative mx-auto w-full max-w-7xl pt-32 pb-8"
           >
-            <div>
-              <div className="flex flex-col gap-2">
+            <img
+              className="fixed inset-0 -z-10 h-full w-full object-cover opacity-20 blur-md"
+              src={postQuery.data.image_url}
+              alt={postQuery.data.image_alt}
+            />
+
+            <div className="mx-4 flex flex-col gap-6">
+              <div className="flex items-center justify-between">
                 <div className="flex gap-2">
                   {postQuery.data.tags.map((tag, index) => (
                     <TagLabel key={index} label={tag} />
                   ))}
                 </div>
                 <TimeStamp time={postQuery.data.created_at} />
-                <h1 className="py-6 text-3xl">{postQuery.data.title}</h1>
-                <img
-                  className="aspect-square rounded-lg object-cover lg:aspect-5/2"
-                  src={postQuery.data.image_url}
-                  alt={postQuery.data.image_alt}
-                />
-                <div className="my-12 lg:mr-36 lg:ml-24">
-                  <PostContent content={postQuery.data.content} />
-                </div>
               </div>
+              <h1 className="mt-4">{postQuery.data.title}</h1>
 
-              <Like postId={postQuery.data.id} />
+              <GlassContainer addClassName="lg:mr-36 lg:ml-24 p-5 lg:p-8 rounded-4xl">
+                <PostContent content={postQuery.data.content} />
+                <div className="mt-4 flex justify-end">
+                  <Like postId={postQuery.data.id} />
+                </div>
+              </GlassContainer>
 
-              <div className="flex flex-col gap-4">
-                {postQuery.data.previous_post && (
+              <div className="flex flex-col gap-4 lg:flex-row lg:justify-between">
+                {postQuery.data.previous_post ? (
                   <AppLink to={"/posts/" + postQuery.data.previous_post.id}>
-                    Previous post: {postQuery.data.previous_post.title}
+                    Previous: {postQuery.data.previous_post.title}
                   </AppLink>
+                ) : (
+                  <div></div>
                 )}
 
                 {postQuery.data.next_post && (
                   <AppLink to={"/posts/" + postQuery.data.next_post.id}>
-                    Next post: {postQuery.data.next_post.title}
+                    Next: {postQuery.data.next_post.title}
                   </AppLink>
                 )}
               </div>
-            </div>
 
-            <div ref={commentsRef}>
-              <PostComments postId={id} />
+              <div ref={commentsRef}>
+                <PostComments postId={id} />
+              </div>
             </div>
           </motion.main>
         )}

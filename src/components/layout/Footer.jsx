@@ -9,6 +9,7 @@ export default function Footer() {
         <Logo />
       </div>
       <div className="text-text-muted flex flex-col items-start gap-2 text-sm">
+        <p className="text-palette-white">NAVIGATION</p>
         <AppLink to="/">Home</AppLink>
         <AppLink to="/posts">Posts</AppLink>
         <TextLink href="https://qqzxvcyqighooxucphxk.supabase.co/storage/v1/object/public/docs/privacy-commitment.pdf">

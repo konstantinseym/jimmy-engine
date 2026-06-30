@@ -1,8 +1,10 @@
 import { addComment, getComments } from "../../api/postsApi";
 import { useState, useRef } from "react";
 import Btn from "../UI/Btn";
+import LoadMore from "../UI/svg/LoadMore";
+import Send from "../UI/svg/Send";
 
-import { COMMENT_VALIDATION_RULES } from "../../utils/validationRules";
+// import { COMMENT_VALIDATION_RULES } from "../../utils/validationRules";
 import { formatDate } from "../../utils/formatDate";
 import {
   useInfiniteQuery,
@@ -18,8 +20,10 @@ import {
 } from "../../config/motion.config";
 import { useAuth } from "../../context/authContext";
 
+import LoginBtn from "../UI/LoginBtn";
+
 export default function PostComments({ postId }) {
-  const { isAuthenticated, signIn } = useAuth();
+  const { isAuthenticated, user } = useAuth();
 
   const queryClient = useQueryClient();
 
@@ -89,26 +93,38 @@ export default function PostComments({ postId }) {
         >
           {isAuthenticated ? (
             <form
-              className="mb-4 flex w-full items-center justify-center gap-1"
+              className="relative mb-4 w-full max-w-xl"
               onSubmit={handlePostComment}
             >
-              {/* <InputField
+              {user.user_metadata.avatar_url && (
+                <img
+                  src={user.user_metadata.avatar_url}
+                  alt=""
+                  className="absolute top-2 left-2 h-8 rounded-full"
+                />
+              )}
+
+              <input
                 ref={inputRef}
+                type="text"
+                className="text-palette-white focus:border-accent border-accent/50 h-12 w-full rounded-full border px-12 py-3 outline-0 transition"
                 placeholder="write smth..."
                 value={commentInputValue}
                 onChange={handleInputChange}
-                maxLength={COMMENT_VALIDATION_RULES.max}
-              /> */}
-              <Btn type="submit" disabled={addCommentMutation.isPending}>
-                Post
-              </Btn>
+              />
+              <div className="text-palette-white/70 absolute top-2 right-2">
+                <Btn
+                  type="submit"
+                  variant="text"
+                  disabled={addCommentMutation.isPending}
+                >
+                  <Send width="32" />
+                </Btn>
+              </div>
             </form>
           ) : (
             <div className="my-4 text-center">
-              <Btn variant="text" onClick={signIn}>
-                Login via Google
-              </Btn>{" "}
-              <p>to leave yout comment</p>
+              <LoginBtn />
             </div>
           )}
 
@@ -118,7 +134,7 @@ export default function PostComments({ postId }) {
               animate={{ opacity: 1 }}
               transition={{ ...FADE_TRANSITION_RULES, delay: 0.3 }}
               key={comment.id}
-              className="my-4 flex w-full max-w-md flex-col gap-1 px-6 lg:px-12"
+              className="mb-4 flex w-full max-w-xl flex-col gap-1 px-6 lg:px-12"
             >
               <p className="text-text-muted text-xs">{comment.user_name}</p>
               <p className="text-sm">{comment.content}</p>
@@ -131,11 +147,12 @@ export default function PostComments({ postId }) {
           <motion.div layout="position" transition={MOTION_TRANSITION_RULES}>
             <Btn
               onClick={loadMore}
+              variant="text"
               disabled={
                 !commentsQuery.hasNextPage || commentsQuery.isFetchingNextPage
               }
             >
-              load more
+              <LoadMore width="24" />
             </Btn>
           </motion.div>
         </motion.div>
