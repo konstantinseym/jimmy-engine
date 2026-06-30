@@ -1,10 +1,8 @@
 import { addComment, getComments } from "../../api/postsApi";
 import { useState, useRef } from "react";
 import Btn from "../UI/Btn";
-import LoadMore from "../UI/svg/LoadMore";
 import Send from "../UI/svg/Send";
-
-// import { COMMENT_VALIDATION_RULES } from "../../utils/validationRules";
+import { useInView } from "react-intersection-observer";
 import { formatDate } from "../../utils/formatDate";
 import {
   useInfiniteQuery,
@@ -14,10 +12,7 @@ import {
 import Loader from "../UI/Loader";
 import Error from "../UI/Error";
 import { AnimatePresence, motion } from "motion/react";
-import {
-  FADE_TRANSITION_RULES,
-  MOTION_TRANSITION_RULES,
-} from "../../config/motion.config";
+import { FADE_TRANSITION_RULES } from "../../config/motion.config";
 import { useAuth } from "../../context/authContext";
 
 import LoginBtn from "../UI/LoginBtn";
@@ -49,9 +44,19 @@ export default function PostComments({ postId }) {
   const [commentInputValue, setCommentInputValue] = useState("");
   const inputRef = useRef(null);
 
-  function loadMore() {
-    commentsQuery.fetchNextPage();
-  }
+  const { ref } = useInView({
+    threshold: 0.1,
+    triggerOnce: false,
+    onChange: (inView) => {
+      if (
+        inView &&
+        commentsQuery.hasNextPage &&
+        !commentsQuery.isFetchingNextPage
+      ) {
+        commentsQuery.fetchNextPage();
+      }
+    },
+  });
 
   function handleInputChange(e) {
     setCommentInputValue(e.target.value);
@@ -144,17 +149,7 @@ export default function PostComments({ postId }) {
             </motion.div>
           ))}
 
-          <motion.div layout="position" transition={MOTION_TRANSITION_RULES}>
-            <Btn
-              onClick={loadMore}
-              variant="text"
-              disabled={
-                !commentsQuery.hasNextPage || commentsQuery.isFetchingNextPage
-              }
-            >
-              <LoadMore width="24" />
-            </Btn>
-          </motion.div>
+          <div ref={ref} />
         </motion.div>
       )}
     </AnimatePresence>
