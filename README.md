@@ -16,35 +16,35 @@ The main focus of the project is not to create a reusable blog engine, but to de
 
 ## Key Functionality
 
-* Responsive blog layout
-* Landing page with hero section
-* Blog post previews
-* Single post pages
-* Google authentication
-* Comment system
-* Paginated content loading
-* Animated route and UI transitions
-* Server-state handling with TanStack Query
-* Supabase integration with PostgreSQL and RPC functions
+- Responsive blog layout
+- Landing page with hero section
+- Blog post previews
+- Single post pages
+- Google authentication
+- Comment system
+- Paginated content loading
+- Animated route and UI transitions
+- Server-state handling with TanStack Query
+- Supabase integration with PostgreSQL and RPC functions
 
 ## Tech Stack
 
 ### Frontend
 
-* React
-* Vite
-* React Router
-* TanStack Query
-* Tailwind CSS
-* Motion for React
+- React
+- Vite
+- React Router
+- TanStack Query
+- Tailwind CSS
+- Motion for React
 
 ### Backend
 
-* Supabase
-* PostgreSQL
-* Supabase Auth
-* Supabase RPC
-* Row Level Security
+- Supabase
+- PostgreSQL
+- Supabase Auth
+- Supabase RPC
+- Row Level Security
 
 ## Architecture Focus
 

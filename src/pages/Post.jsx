@@ -108,7 +108,7 @@ export default function Post() {
                 </div>
               </GlassContainer>
 
-              <div className="flex flex-col gap-4 lg:flex-row lg:justify-between">
+              <div className="flex flex-col gap-4 py-6 lg:flex-row lg:justify-between">
                 {postQuery.data.previous_post ? (
                   <AppLink to={"/posts/" + postQuery.data.previous_post.id}>
                     Previous: {postQuery.data.previous_post.title}

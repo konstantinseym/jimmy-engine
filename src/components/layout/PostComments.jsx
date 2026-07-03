@@ -117,7 +117,7 @@ export default function PostComments({ postId }) {
                 value={commentInputValue}
                 onChange={handleInputChange}
               />
-              <div className="text-palette-white/70 absolute top-2 right-2">
+              <div className="absolute top-2 right-2">
                 <Btn
                   type="submit"
                   variant="text"
@@ -139,7 +139,7 @@ export default function PostComments({ postId }) {
               animate={{ opacity: 1 }}
               transition={{ ...FADE_TRANSITION_RULES, delay: 0.3 }}
               key={comment.id}
-              className="mb-4 flex w-full max-w-xl flex-col gap-1 px-6 lg:px-12"
+              className="flex w-full max-w-xl flex-col gap-1 px-6 lg:px-12"
             >
               <p className="text-text-muted text-xs">{comment.user_name}</p>
               <p className="text-sm">{comment.content}</p>
@@ -149,7 +149,18 @@ export default function PostComments({ postId }) {
             </motion.div>
           ))}
 
-          <div ref={ref} />
+          <div ref={ref} className="min-h-12">
+            <AnimatePresence mode="wait">
+              {commentsQuery.isFetchingNextPage && (
+                <motion.div
+                  exit={{ opacity: 0 }}
+                  transition={{ ...FADE_TRANSITION_RULES, delay: 1 }}
+                >
+                  <Loader />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

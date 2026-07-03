@@ -2,7 +2,7 @@
 
 @layer base {
   body {
-    @apply bg-background text-palette-white text-sm lg:text-base;
+    @apply text-palette-white bg-palette-black text-sm lg:text-base;
   }
 
   h1 {
@@ -32,7 +32,7 @@
 
 @theme {
   --color-palette-white: #eff9fb;
-  --color-background: #080d08;
+  --color-palette-black: #080d08;
   --color-surface: #141414;
   --color-text-muted: #5f5f5f;
   --color-accent: #1ca9c9;

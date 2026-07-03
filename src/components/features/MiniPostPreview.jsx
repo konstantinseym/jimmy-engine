@@ -37,7 +37,7 @@ export default function MiniPostPreview({ postData }) {
       <motion.div
         key={"lastPost" + postData.id}
         animate={{
-          scale: [1, 1.08, 0.95, 1],
+          scale: [1.5, 1.6, 1.4, 1.5],
           y: [0, -20, 20, 0],
           x: [0, 15, -15, 0],
           rotate: [0, 2, -2, 0],
@@ -51,7 +51,7 @@ export default function MiniPostPreview({ postData }) {
         className="absolute"
       >
         <img
-          className="aspect-square w-full object-cover opacity-10"
+          className="aspect-square w-full object-cover opacity-20"
           src={postData.image_url}
         />
       </motion.div>

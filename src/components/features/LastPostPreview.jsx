@@ -45,9 +45,9 @@ export default function LastPostPreview({ postData }) {
       </div>
       <motion.div
         key="lastPost"
-        className="absolute"
+        className="absolute top-1/2 lg:top-0"
         animate={{
-          scale: [1, 1.08, 0.95, 1],
+          scale: [1.5, 1.6, 1.4, 1.5],
           y: [0, -20, 20, 0],
           x: [0, 15, -15, 0],
           rotate: [0, 2, -2, 0],
@@ -60,7 +60,7 @@ export default function LastPostPreview({ postData }) {
         }}
       >
         <img
-          className="z-50 aspect-square w-full object-cover opacity-10"
+          className="aspect-square w-full object-cover opacity-20"
           src={postData.image_url}
         />
       </motion.div>

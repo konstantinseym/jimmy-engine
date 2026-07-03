@@ -12,6 +12,8 @@ import Error from "../components/UI/Error";
 import SearchField from "../components/UI/SearchField";
 import { useDebounced } from "../hooks/useDebounced";
 import NavBar from "../components/layout/NavBar";
+import FeedPostPreview from "../components/features/FeedPostPreview";
+import { useInView } from "react-intersection-observer";
 
 export default function Feed() {
   const navigate = useNavigate();
@@ -30,6 +32,16 @@ export default function Feed() {
       }),
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.length === 3 ? allPages.length : undefined;
+    },
+  });
+
+  const { ref } = useInView({
+    threshold: 0.1,
+    triggerOnce: false,
+    onChange: (inView) => {
+      if (inView && postsQuery.hasNextPage && !postsQuery.isFetchingNextPage) {
+        postsQuery.fetchNextPage();
+      }
     },
   });
 
@@ -89,29 +101,32 @@ export default function Feed() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={FADE_TRANSITION_RULES}
-            className="mx-auto w-full max-w-7xl px-6 pt-40 lg:pt-30"
+            className="bg-surface"
           >
-            <div className="flex flex-col gap-12">
+            <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 pt-40 sm:grid sm:grid-cols-2 md:grid-cols-3 md:gap-8 lg:gap-6 lg:pt-30">
               {postsQuery.data.pages.flat().map((post) => (
-                <div key={post.id}>
-                  <img
-                    src={post.image_url}
-                    alt={post.image_alt}
-                    className="w-32"
-                  />
-                  <p>Tags: {post.tags}</p>
-                  <p>Title: {post.title}</p>
-                  <p>Excerpt: {post.excerpt}</p>
-                  <p>Date created: {post.created_at}</p>
-                  <p>Likes: {post.likes_count}</p>
-                  <p>Comments: {post.comments_count}</p>
-                </div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={FADE_TRANSITION_RULES}
+                  key={post.id}
+                >
+                  <FeedPostPreview post={post} />
+                </motion.div>
               ))}
             </div>
-
-            <button onClick={() => postsQuery.fetchNextPage()}>
-              load more
-            </button>
+            <div ref={ref} className="flex h-24 flex-col justify-center">
+              <AnimatePresence mode="wait">
+                {postsQuery.isFetchingNextPage && (
+                  <motion.div
+                    exit={{ opacity: 0 }}
+                    transition={{ ...FADE_TRANSITION_RULES, delay: 1 }}
+                  >
+                    <Loader />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </motion.main>
         )}
       </AnimatePresence>

@@ -4,7 +4,7 @@ import AppLink from "../UI/AppLink";
 
 export default function Footer() {
   return (
-    <footer className="bg-background flex w-full justify-center pt-16 pb-8 lg:justify-around">
+    <footer className="bg-palette-black flex w-full justify-center pt-16 pb-8 lg:justify-around">
       <div className="hidden lg:block">
         <Logo />
       </div>
