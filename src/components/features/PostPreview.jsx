@@ -11,7 +11,7 @@ export default function PostPreview({ postData, expanded = false }) {
   return (
     <article className="border-palette-white/5 relative mx-4 my-4 flex flex-col overflow-hidden rounded-4xl border bg-linear-to-br from-black/5 to-black/1 shadow-[0_8px_32px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.2)] lg:flex-row">
       {expanded ? (
-        <div className="z-10 w-full lg:w-1/3">
+        <div className="z-10 w-full lg:w-1/2">
           <img
             className="aspect-square object-cover grayscale-30"
             src={postData.image_url}
@@ -22,8 +22,8 @@ export default function PostPreview({ postData, expanded = false }) {
         <></>
       )}
 
-      <div className="z-10 flex flex-col justify-around gap-4 p-8">
-        <div className="flex w-full flex-row items-center justify-between">
+      <div className="z-10 flex w-full flex-col justify-around gap-4 p-8">
+        <div className="flex flex-row items-center justify-between">
           <div className="flex gap-2">
             {postData.tags.map((tag, index) => (
               <TagLabel key={index} label={tag} />

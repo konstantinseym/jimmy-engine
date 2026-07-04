@@ -137,7 +137,8 @@ export default function Comments({ postId }) {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ ...FADE_TRANSITION_RULES, delay: 0.3 }}
+              layout="position"
+              transition={FADE_TRANSITION_RULES}
               key={comment.id}
               className="flex w-full max-w-xl flex-col gap-1 px-6 lg:px-12"
             >
