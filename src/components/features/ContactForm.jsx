@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Clock from "../../UI/svg/Clock";
-import Lock from "../../UI/svg/Lock";
-import Btn from "../../UI/Btn";
-import InputTextArea from "../../UI/InputTextArea";
-import Send from "../../UI/svg/Send";
+import Clock from "../UI/svg/Clock";
+import Lock from "../UI/svg/Lock";
+import Button from "../UI/Button";
+import TextArea from "../UI/TextArea";
+import Send from "../UI/svg/Send";
 
 export default function ContactForm({ onSubmit }) {
   const [inputValue, setInputValue] = useState("");
@@ -18,7 +18,7 @@ export default function ContactForm({ onSubmit }) {
       className="flex w-full flex-1 flex-col items-center gap-4"
       onSubmit={handleSubmit}
     >
-      <InputTextArea
+      <TextArea
         value={inputValue}
         placeholder="Write everything you want. Be respectful."
         onChange={(e) => setInputValue(e.target.value)}
@@ -35,9 +35,9 @@ export default function ContactForm({ onSubmit }) {
             <p>I usually reply within 24-48 hours.</p>
           </div>
         </div>
-        <Btn variant="text" type="submit">
+        <Button variant="text" type="submit">
           <Send width="40" />
-        </Btn>
+        </Button>
       </div>
     </form>
   );

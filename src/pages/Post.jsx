@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import Btn from "../components/UI/Btn";
+import Button from "../components/UI/Button";
 import { getOnePost } from "../api/postsApi";
 import { useNavigate } from "react-router-dom";
 import TagLabel from "../components/UI/TagLabel";
@@ -8,13 +8,13 @@ import TimeStamp from "../components/UI/TimeStamp";
 import { AnimatePresence, motion } from "motion/react";
 import { FADE_TRANSITION_RULES } from "../config/motion.config";
 import Loader from "../components/UI/Loader";
-import PostComments from "../components/layout/PostComments";
+import Comments from "../components/features/Comments";
 import PageWrapper from "../components/UI/PageWrapper";
 import { useQuery } from "@tanstack/react-query";
 import PostContent from "../components/features/PostContent";
-import AppLink from "../components/UI/AppLink";
+import RouterLink from "../components/UI/RouterLink";
 import Like from "../components/UI/Like";
-import NavBar from "../components/layout/NavBar";
+import NavBar from "../components/features/NavBar";
 import GlassContainer from "../components/UI/GlassContainer";
 
 export default function Post() {
@@ -37,22 +37,22 @@ export default function Post() {
       <NavBar>
         <ul className="flex gap-8">
           <li>
-            <Btn variant="text" onClick={() => navigate(-1)}>
+            <Button variant="text" onClick={() => navigate(-1)}>
               ← Back
-            </Btn>
+            </Button>
           </li>
           <li>
-            <Btn variant="text" onClick={() => navigate("/")}>
+            <Button variant="text" onClick={() => navigate("/")}>
               Home
-            </Btn>
+            </Button>
           </li>
           <li>
-            <Btn
+            <Button
               variant="text"
               onClick={() => commentsRef.current.scrollIntoView()}
             >
               Comments
-            </Btn>
+            </Button>
           </li>
         </ul>
       </NavBar>
@@ -110,22 +110,22 @@ export default function Post() {
 
               <div className="flex flex-col gap-4 py-6 lg:flex-row lg:justify-between">
                 {postQuery.data.previous_post ? (
-                  <AppLink to={"/posts/" + postQuery.data.previous_post.id}>
+                  <RouterLink to={"/posts/" + postQuery.data.previous_post.id}>
                     Previous: {postQuery.data.previous_post.title}
-                  </AppLink>
+                  </RouterLink>
                 ) : (
                   <div></div>
                 )}
 
                 {postQuery.data.next_post && (
-                  <AppLink to={"/posts/" + postQuery.data.next_post.id}>
+                  <RouterLink to={"/posts/" + postQuery.data.next_post.id}>
                     Next: {postQuery.data.next_post.title}
-                  </AppLink>
+                  </RouterLink>
                 )}
               </div>
 
               <div ref={commentsRef}>
-                <PostComments postId={id} />
+                <Comments postId={id} />
               </div>
             </div>
           </motion.main>

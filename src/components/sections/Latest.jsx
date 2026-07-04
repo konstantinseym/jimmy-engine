@@ -1,19 +1,18 @@
-import Btn from "../../UI/Btn";
-import LastPostPreview from "../../features/LastPostPreview";
-import MiniPostPreview from "../../features/MiniPostPreview";
-import SectionHeader from "../../UI/SectionHeader";
+import Button from "../UI/Button";
+import PostPreview from "../features/PostPreview";
+import SectionHeader from "../UI/SectionHeader";
 import { forwardRef } from "react";
-import { getLatestPosts } from "../../../api/postsApi";
+import { getLatestPosts } from "../../api/postsApi";
 import { useQuery } from "@tanstack/react-query";
-import Loader from "../../UI/Loader";
-import Error from "../../UI/Error";
+import Loader from "../UI/Loader";
+import Error from "../UI/Error";
 import { AnimatePresence, motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
-import { FADE_TRANSITION_RULES } from "../../../config/motion.config";
+import { FADE_TRANSITION_RULES } from "../../config/motion.config";
 
 const SECTION_TITLE = "Latest";
 
-const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
+const Latest = forwardRef(function Latest(props, ref) {
   const navigate = useNavigate();
 
   const postsQuery = useQuery({
@@ -54,20 +53,21 @@ const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
             animate={{ opacity: 1 }}
             transition={FADE_TRANSITION_RULES}
           >
-            <LastPostPreview
+            <PostPreview
+              expanded={true}
               key={postsQuery.data[0].id}
               postData={postsQuery.data[0]}
             />
 
             {postsQuery.data.length > 1 ? (
               <div className="flex flex-col lg:flex-row">
-                <MiniPostPreview
+                <PostPreview
                   key={postsQuery.data[1].id}
                   postData={postsQuery.data[1]}
                 />
 
                 {postsQuery.data.length > 2 ? (
-                  <MiniPostPreview
+                  <PostPreview
                     key={postsQuery.data[2].id}
                     postData={postsQuery.data[2]}
                   />
@@ -80,7 +80,7 @@ const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
             )}
 
             <div className="my-12 text-center">
-              <Btn onClick={() => navigate("/posts")}>View all</Btn>
+              <Button onClick={() => navigate("/posts")}>View all</Button>
             </div>
           </motion.div>
         )}
@@ -89,4 +89,4 @@ const LatestPostsSection = forwardRef(function LatestPostsSection(props, ref) {
   );
 });
 
-export default LatestPostsSection;
+export default Latest;

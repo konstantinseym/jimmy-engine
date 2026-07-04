@@ -1,6 +1,6 @@
 import { useAuth } from "../../context/authContext";
-import Btn from "../UI/Btn";
-import LoginBtn from "../UI/LoginBtn";
+import Button from "../UI/Button";
+import LoginButton from "../UI/LoginButton";
 import Logout from "../UI/svg/Logout";
 
 export default function AuthStatus() {
@@ -11,7 +11,7 @@ export default function AuthStatus() {
       {isLoading ? (
         <p>Checking authorization...</p>
       ) : !isAuthenticated ? (
-        <LoginBtn />
+        <LoginButton />
       ) : (
         <div className="flex items-center justify-center gap-4">
           {user.user_metadata.avatar_url && (
@@ -27,9 +27,9 @@ export default function AuthStatus() {
               user.email}
           </p>
 
-          <Btn variant="text" onClick={signOut}>
+          <Button variant="text" onClick={signOut}>
             <Logout width="16" />
-          </Btn>
+          </Button>
         </div>
       )}
     </div>

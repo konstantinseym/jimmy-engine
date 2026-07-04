@@ -1,5 +1,5 @@
 import ReactMarcdown from "react-markdown";
-import TextLink from "../UI/TextLink";
+import ExternalLink from "../UI/ExternalLink";
 
 export default function PostContent({ content }) {
   return (
@@ -19,7 +19,7 @@ export default function PostContent({ content }) {
           em: ({ children }) => <em>{children}</em>,
 
           a: ({ href, children }) => (
-            <TextLink href={href}>{children}</TextLink>
+            <ExternalLink href={href}>{children}</ExternalLink>
           ),
 
           ul: ({ children }) => <ul className="mb-2 ml-5">{children}</ul>,

@@ -1,10 +1,10 @@
-import ContactMeSection from "../components/sections/Home/ContactMeSection";
-import Hero from "../components/sections/Home/Hero";
-import LatestPostsSection from "../components/sections/Home/LatestPostsSection";
-import NavBar from "../components/layout/NavBar";
+import ContactMe from "../components/sections/ContactMe";
+import Hero from "../components/sections/Hero";
+import Latest from "../components/sections/Latest";
+import NavBar from "../components/features/NavBar";
 import { useRef } from "react";
 import PageWrapper from "../components/UI/PageWrapper";
-import Btn from "../components/UI/Btn";
+import Button from "../components/UI/Button";
 
 export default function Home() {
   const heroRef = useRef(null);
@@ -16,36 +16,36 @@ export default function Home() {
       <NavBar>
         <ul className="flex gap-8">
           <li>
-            <Btn
+            <Button
               variant="text"
               onClick={() => heroRef.current.scrollIntoView()}
             >
               Home
-            </Btn>
+            </Button>
           </li>
           <li>
-            <Btn
+            <Button
               variant="text"
               onClick={() => latestRef.current.scrollIntoView()}
             >
               Latest
-            </Btn>
+            </Button>
           </li>
           <li>
-            <Btn
+            <Button
               variant="text"
               onClick={() => contactRef.current.scrollIntoView()}
             >
               Contact me
-            </Btn>
+            </Button>
           </li>
         </ul>
       </NavBar>
       <main>
         <Hero ref={heroRef} />
         <div className="bg-surface w-full">
-          <LatestPostsSection ref={latestRef} />
-          <ContactMeSection ref={contactRef} />
+          <Latest ref={latestRef} />
+          <ContactMe ref={contactRef} />
         </div>
       </main>
     </PageWrapper>

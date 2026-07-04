@@ -6,18 +6,18 @@ import {
   getRequestStatus,
   postRequest,
   resolveRequest,
-} from "../../../api/contactApi";
-import { useAuth } from "../../../context/authContext";
-import ContactForm from "../../features/contact-me-features/ContactForm";
-import { FADE_TRANSITION_RULES } from "../../../config/motion.config";
-import RequestThread from "../../features/contact-me-features/RequestThread";
-import GlassContainer from "../../UI/GlassContainer";
-import LoginBtn from "../../UI/LoginBtn";
-import SectionHeader from "../../UI/SectionHeader";
+} from "../../api/contactApi";
+import { useAuth } from "../../context/authContext";
+import ContactForm from "../features/ContactForm";
+import { FADE_TRANSITION_RULES } from "../../config/motion.config";
+import RequestThread from "../features/RequestThread";
+import GlassContainer from "../UI/GlassContainer";
+import LoginButton from "../UI/LoginButton";
+import SectionHeader from "../UI/SectionHeader";
 
 const SECTION_TITLE = "Contact me";
 
-const ContactMeSection = forwardRef(function ContactMeSection(props, ref) {
+const ContactMe = forwardRef(function ContactMe(props, ref) {
   const { isAuthenticated } = useAuth();
 
   const queryClient = useQueryClient();
@@ -55,7 +55,7 @@ const ContactMeSection = forwardRef(function ContactMeSection(props, ref) {
               transition={FADE_TRANSITION_RULES}
               className="flex flex-1 flex-col items-center justify-center"
             >
-              <LoginBtn />
+              <LoginButton />
             </motion.div>
           ) : !requestQuery.data?.has_request ? (
             <motion.div
@@ -104,4 +104,4 @@ const ContactMeSection = forwardRef(function ContactMeSection(props, ref) {
   );
 });
 
-export default ContactMeSection;
+export default ContactMe;

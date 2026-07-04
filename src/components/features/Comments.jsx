@@ -1,6 +1,6 @@
 import { addComment, getComments } from "../../api/postsApi";
 import { useState, useRef } from "react";
-import Btn from "../UI/Btn";
+import Button from "../UI/Button";
 import Send from "../UI/svg/Send";
 import { useInView } from "react-intersection-observer";
 import { formatDate } from "../../utils/formatDate";
@@ -15,9 +15,9 @@ import { AnimatePresence, motion } from "motion/react";
 import { FADE_TRANSITION_RULES } from "../../config/motion.config";
 import { useAuth } from "../../context/authContext";
 
-import LoginBtn from "../UI/LoginBtn";
+import LoginButton from "../UI/LoginButton";
 
-export default function PostComments({ postId }) {
+export default function Comments({ postId }) {
   const { isAuthenticated, user } = useAuth();
 
   const queryClient = useQueryClient();
@@ -118,18 +118,18 @@ export default function PostComments({ postId }) {
                 onChange={handleInputChange}
               />
               <div className="absolute top-2 right-2">
-                <Btn
+                <Button
                   type="submit"
                   variant="text"
                   disabled={addCommentMutation.isPending}
                 >
                   <Send width="32" />
-                </Btn>
+                </Button>
               </div>
             </form>
           ) : (
             <div className="my-4 text-center">
-              <LoginBtn />
+              <LoginButton />
             </div>
           )}
 

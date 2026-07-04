@@ -1,4 +1,4 @@
-export default function Btn({
+export default function Button({
   variant = "pill",
   children,
   onClick,

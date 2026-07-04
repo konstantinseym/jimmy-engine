@@ -1,12 +1,12 @@
 import { forwardRef } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { getMeta } from "../../../api/contentApi";
+import { getMeta } from "../../api/contentApi";
 import { useQuery } from "@tanstack/react-query";
-import Loader from "../../UI/Loader";
-import Error from "../../UI/Error";
-import MotionShapes from "../../layout/MotionShapes";
-import { FADE_TRANSITION_RULES } from "../../../config/motion.config";
-import GlassContainer from "../../UI/GlassContainer";
+import Loader from "../UI/Loader";
+import Error from "../UI/Error";
+import MotionShapes from "../features/MotionShapes";
+import { FADE_TRANSITION_RULES } from "../../config/motion.config";
+import GlassContainer from "../UI/GlassContainer";
 
 const HERO_IMAGE_PATH =
   "https://qqzxvcyqighooxucphxk.supabase.co/storage/v1/object/public/layout/001.png";

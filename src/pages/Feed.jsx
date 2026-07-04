@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import PageWrapper from "../components/UI/PageWrapper";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import Btn from "../components/UI/Btn";
+import Button from "../components/UI/Button";
 import { useEffect, useState } from "react";
 import { getPosts } from "../api/postsApi";
 import { AnimatePresence, motion } from "motion/react";
@@ -11,8 +11,8 @@ import Loader from "../components/UI/Loader";
 import Error from "../components/UI/Error";
 import SearchField from "../components/UI/SearchField";
 import { useDebounced } from "../hooks/useDebounced";
-import NavBar from "../components/layout/NavBar";
-import FeedPostPreview from "../components/features/FeedPostPreview";
+import NavBar from "../components/features/NavBar";
+import PostPreview from "../components/features/PostPreview";
 import { useInView } from "react-intersection-observer";
 
 export default function Feed() {
@@ -62,9 +62,9 @@ export default function Feed() {
       <NavBar>
         <ul className="flex items-center gap-8">
           <li>
-            <Btn variant="text" onClick={() => navigate("/")}>
+            <Button variant="text" onClick={() => navigate("/")}>
               Home
-            </Btn>
+            </Button>
           </li>
           <li>
             <SearchField
@@ -103,7 +103,7 @@ export default function Feed() {
             transition={FADE_TRANSITION_RULES}
             className="bg-surface"
           >
-            <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 pt-40 sm:grid sm:grid-cols-2 md:grid-cols-3 md:gap-8 lg:gap-6 lg:pt-30">
+            <div className="mx-auto flex w-full max-w-7xl flex-col pt-40 lg:grid lg:grid-cols-2 lg:pt-30">
               {postsQuery.data.pages.flat().map((post) => (
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -111,7 +111,7 @@ export default function Feed() {
                   transition={FADE_TRANSITION_RULES}
                   key={post.id}
                 >
-                  <FeedPostPreview post={post} />
+                  <PostPreview postData={post} />
                 </motion.div>
               ))}
             </div>

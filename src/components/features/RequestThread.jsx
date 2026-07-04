@@ -1,5 +1,5 @@
-import Btn from "../../UI/Btn";
-import Trash from "../../UI/svg/Trash";
+import Button from "../UI/Button";
+import Trash from "../UI/svg/Trash";
 
 export default function RequestThread({
   request,
@@ -26,9 +26,9 @@ export default function RequestThread({
       )}
       <div className="flex w-full items-center justify-between lg:px-8">
         <p className="text-text-muted">Deleting can not be undone!</p>
-        <Btn variant="pill" onClick={onDeleteRequest}>
+        <Button variant="pill" onClick={onDeleteRequest}>
           <Trash width="18" />
-        </Btn>
+        </Button>
       </div>
     </div>
   );

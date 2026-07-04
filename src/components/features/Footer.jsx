@@ -1,6 +1,6 @@
 import Logo from "../UI/Logo";
-import TextLink from "../UI/TextLink";
-import AppLink from "../UI/AppLink";
+import ExternalLink from "../UI/ExternalLink";
+import RouterLink from "../UI/RouterLink";
 
 export default function Footer() {
   return (
@@ -10,11 +10,11 @@ export default function Footer() {
       </div>
       <div className="text-text-muted flex flex-col items-start gap-2 text-sm">
         <p className="text-palette-white">NAVIGATION</p>
-        <AppLink to="/">Home</AppLink>
-        <AppLink to="/posts">Posts</AppLink>
-        <TextLink href="https://qqzxvcyqighooxucphxk.supabase.co/storage/v1/object/public/docs/privacy-commitment.pdf">
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/posts">Posts</RouterLink>
+        <ExternalLink href="https://qqzxvcyqighooxucphxk.supabase.co/storage/v1/object/public/docs/privacy-commitment.pdf">
           Privacy Commitment
-        </TextLink>
+        </ExternalLink>
       </div>
     </footer>
   );
