@@ -7,7 +7,7 @@ export default function LoginButton() {
 
   return (
     <div className="text-xs">
-      <Button variant="text" onClick={signIn}>
+      <Button onClick={signIn}>
         <div className="flex items-center gap-2">
           <Ggl width="18" />
           Log In

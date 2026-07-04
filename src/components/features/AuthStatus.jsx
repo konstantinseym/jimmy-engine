@@ -27,7 +27,7 @@ export default function AuthStatus() {
               user.email}
           </p>
 
-          <Button variant="text" onClick={signOut}>
+          <Button onClick={signOut}>
             <Logout width="16" />
           </Button>
         </div>

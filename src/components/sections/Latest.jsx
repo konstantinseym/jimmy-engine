@@ -1,4 +1,4 @@
-import Button from "../UI/Button";
+import RouterLink from "../UI/RouterLink";
 import PostPreview from "../features/PostPreview";
 import SectionHeader from "../UI/SectionHeader";
 import { forwardRef } from "react";
@@ -7,14 +7,11 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../UI/Loader";
 import Error from "../UI/Error";
 import { AnimatePresence, motion } from "motion/react";
-import { useNavigate } from "react-router-dom";
 import { FADE_TRANSITION_RULES } from "../../config/motion.config";
 
 const SECTION_TITLE = "Latest";
 
 const Latest = forwardRef(function Latest(props, ref) {
-  const navigate = useNavigate();
-
   const postsQuery = useQuery({
     queryKey: ["posts"],
     queryFn: () => getLatestPosts(),
@@ -80,7 +77,7 @@ const Latest = forwardRef(function Latest(props, ref) {
             )}
 
             <div className="my-12 text-center">
-              <Button onClick={() => navigate("/posts")}>View all</Button>
+              <RouterLink to="/posts">EXPLORE ALL POSTS</RouterLink>
             </div>
           </motion.div>
         )}

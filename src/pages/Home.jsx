@@ -11,36 +11,17 @@ export default function Home() {
   const latestRef = useRef(null);
   const contactRef = useRef(null);
 
+  const navElements = [
+    <Button onClick={() => heroRef.current.scrollIntoView()}>Home</Button>,
+    <Button onClick={() => latestRef.current.scrollIntoView()}>Latest</Button>,
+    <Button onClick={() => contactRef.current.scrollIntoView()}>
+      Contact me
+    </Button>,
+  ];
+
   return (
     <PageWrapper>
-      <NavBar>
-        <ul className="flex gap-8">
-          <li>
-            <Button
-              variant="text"
-              onClick={() => heroRef.current.scrollIntoView()}
-            >
-              Home
-            </Button>
-          </li>
-          <li>
-            <Button
-              variant="text"
-              onClick={() => latestRef.current.scrollIntoView()}
-            >
-              Latest
-            </Button>
-          </li>
-          <li>
-            <Button
-              variant="text"
-              onClick={() => contactRef.current.scrollIntoView()}
-            >
-              Contact me
-            </Button>
-          </li>
-        </ul>
-      </NavBar>
+      <NavBar elements={navElements} />
       <main>
         <Hero ref={heroRef} />
         <div className="bg-surface w-full">

@@ -35,7 +35,7 @@ export default function ContactForm({ onSubmit }) {
             <p>I usually reply within 24-48 hours.</p>
           </div>
         </div>
-        <Button variant="text" type="submit">
+        <Button type="submit">
           <Send width="40" />
         </Button>
       </div>

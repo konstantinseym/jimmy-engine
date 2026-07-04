@@ -32,30 +32,17 @@ export default function Post() {
     window.scrollTo(0, 0);
   }, [id]);
 
+  const navElements = [
+    <Button onClick={() => navigate(-1)}>← Back</Button>,
+    <Button onClick={() => navigate("/")}>Home</Button>,
+    <Button onClick={() => commentsRef.current.scrollIntoView()}>
+      Comments
+    </Button>,
+  ];
+
   return (
     <PageWrapper>
-      <NavBar>
-        <ul className="flex gap-8">
-          <li>
-            <Button variant="text" onClick={() => navigate(-1)}>
-              ← Back
-            </Button>
-          </li>
-          <li>
-            <Button variant="text" onClick={() => navigate("/")}>
-              Home
-            </Button>
-          </li>
-          <li>
-            <Button
-              variant="text"
-              onClick={() => commentsRef.current.scrollIntoView()}
-            >
-              Comments
-            </Button>
-          </li>
-        </ul>
-      </NavBar>
+      <NavBar elements={navElements} />
       <AnimatePresence mode="wait">
         {postQuery.isPending ? (
           <motion.div

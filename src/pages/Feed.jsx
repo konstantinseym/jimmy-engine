@@ -57,24 +57,18 @@ export default function Feed() {
     }
   }, [debouncedSearch, setSearchParams]);
 
+  const navElements = [
+    <Button onClick={() => navigate("/")}>Home</Button>,
+    <SearchField
+      value={search}
+      onChange={(e) => setSearch(e.target.value)}
+      placeholder="search..."
+    />,
+  ];
+
   return (
     <PageWrapper>
-      <NavBar>
-        <ul className="flex items-center gap-8">
-          <li>
-            <Button variant="text" onClick={() => navigate("/")}>
-              Home
-            </Button>
-          </li>
-          <li>
-            <SearchField
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="search..."
-            />
-          </li>
-        </ul>
-      </NavBar>
+      <NavBar elements={navElements} />
       <AnimatePresence mode="wait">
         {postsQuery.isPending ? (
           <motion.div
