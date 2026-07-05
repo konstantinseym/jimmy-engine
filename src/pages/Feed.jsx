@@ -2,7 +2,6 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import PageWrapper from "../components/UI/PageWrapper";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Button from "../components/UI/Button";
-import { useEffect, useState } from "react";
 import { getPosts } from "../api/postsApi";
 import { AnimatePresence, motion } from "motion/react";
 import { FADE_TRANSITION_RULES } from "../config/motion.config";
@@ -19,9 +18,8 @@ export default function Feed() {
   const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const initialSearch = searchParams.get("search") ?? "";
-  const [search, setSearch] = useState(initialSearch);
-  const debouncedSearch = useDebounced(search, 1000);
+  const searchFromUrl = searchParams.get("search") ?? "";
+  const debouncedSearch = useDebounced(searchFromUrl, 1000);
 
   const postsQuery = useInfiniteQuery({
     queryKey: ["posts", { debouncedSearch }],
@@ -31,7 +29,7 @@ export default function Feed() {
         search: debouncedSearch,
       }),
     getNextPageParam: (lastPage, allPages) => {
-      return lastPage.length === 3 ? allPages.length : undefined;
+      return lastPage.length === 6 ? allPages.length : undefined;
     },
   });
 
@@ -49,19 +47,21 @@ export default function Feed() {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    if (debouncedSearch) {
-      setSearchParams({ search: debouncedSearch }, { replace: true });
+  function handleChangeSearch(e) {
+    const value = e.target.value;
+
+    if (value) {
+      setSearchParams({ search: value }, { replace: true });
     } else {
       setSearchParams({}, { replace: true });
     }
-  }, [debouncedSearch, setSearchParams]);
+  }
 
   const navElements = [
     <Button onClick={() => navigate("/")}>Home</Button>,
     <SearchField
-      value={search}
-      onChange={(e) => setSearch(e.target.value)}
+      value={searchFromUrl}
+      onChange={handleChangeSearch}
       placeholder="search..."
     />,
   ];
