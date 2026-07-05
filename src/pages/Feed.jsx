@@ -59,11 +59,7 @@ export default function Feed() {
 
   const navElements = [
     <Button onClick={() => navigate("/")}>Home</Button>,
-    <SearchField
-      value={searchFromUrl}
-      onChange={handleChangeSearch}
-      placeholder="search..."
-    />,
+    <SearchField value={searchFromUrl} onChange={handleChangeSearch} />,
   ];
 
   return (
