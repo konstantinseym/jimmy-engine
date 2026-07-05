@@ -120,11 +120,7 @@ export default function Comments({ postId }) {
                 maxLength={COMMENT_VALIDATION_RULES.max}
               />
               <div className="absolute top-2 right-2">
-                <Button
-                  type="submit"
-                  variant="text"
-                  disabled={addCommentMutation.isPending}
-                >
+                <Button type="submit" disabled={addCommentMutation.isPending}>
                   <Send width="32" />
                 </Button>
               </div>

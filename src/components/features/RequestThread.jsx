@@ -26,7 +26,7 @@ export default function RequestThread({
       )}
       <div className="flex w-full items-center justify-between lg:px-8">
         <p className="text-text-muted">Deleting can not be undone!</p>
-        <Button variant="pill" onClick={onDeleteRequest}>
+        <Button onClick={onDeleteRequest}>
           <Trash width="18" />
         </Button>
       </div>
