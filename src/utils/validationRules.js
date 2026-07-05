@@ -1,9 +1,9 @@
 export const CONTACT_VALIDATION_RULES = {
-  messageMin: 12,
-  messageMax: 3000,
+  min: 1,
+  max: 3000,
 };
 
 export const COMMENT_VALIDATION_RULES = {
-  man: 2,
-  max: 128,
+  min: 1,
+  max: 1500,
 };

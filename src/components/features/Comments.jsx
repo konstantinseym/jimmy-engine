@@ -14,6 +14,8 @@ import Error from "../UI/Error";
 import { AnimatePresence, motion } from "motion/react";
 import { FADE_TRANSITION_RULES } from "../../config/motion.config";
 import { useAuth } from "../../context/authContext";
+import { COMMENT_VALIDATION_RULES } from "../../utils/validationRules";
+import { validateComment } from "../../utils/validateInput";
 
 import LoginButton from "../UI/LoginButton";
 
@@ -64,9 +66,8 @@ export default function Comments({ postId }) {
 
   function handlePostComment(e) {
     e.preventDefault();
-    const normalizedData = commentInputValue.trim();
-    if (!normalizedData) return;
-    addCommentMutation.mutate(normalizedData);
+    const validatedComment = validateComment(commentInputValue);
+    if (validatedComment) addCommentMutation.mutate(validatedComment);
   }
 
   return (
@@ -116,6 +117,7 @@ export default function Comments({ postId }) {
                 placeholder="write smth..."
                 value={commentInputValue}
                 onChange={handleInputChange}
+                maxLength={COMMENT_VALIDATION_RULES.max}
               />
               <div className="absolute top-2 right-2">
                 <Button

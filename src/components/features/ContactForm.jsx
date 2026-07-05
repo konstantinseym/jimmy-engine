@@ -4,13 +4,16 @@ import Lock from "../UI/svg/Lock";
 import Button from "../UI/Button";
 import TextArea from "../UI/TextArea";
 import Send from "../UI/svg/Send";
+import { CONTACT_VALIDATION_RULES } from "../../utils/validationRules";
+import { validateMessage } from "../../utils/validateInput";
 
 export default function ContactForm({ onSubmit }) {
   const [inputValue, setInputValue] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
-    onSubmit(inputValue);
+    const validatedMessage = validateMessage(inputValue);
+    if (validatedMessage) onSubmit(validatedMessage);
   }
 
   return (
@@ -22,6 +25,7 @@ export default function ContactForm({ onSubmit }) {
         value={inputValue}
         placeholder="Write everything you want. Be respectful."
         onChange={(e) => setInputValue(e.target.value)}
+        maxLength={CONTACT_VALIDATION_RULES.max}
       />
 
       <div className="flex w-full flex-col-reverse items-center gap-2 lg:flex-row lg:justify-between">
